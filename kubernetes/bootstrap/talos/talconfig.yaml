@@ -46,7 +46,7 @@ nodes:
           - content: |-
               MONITOR ups@192.168.10.23 1 upsmon_local mypassword secondary
               SHUTDOWNCMD "/sbin/poweroff"
-            mountPath: 
+            mountPath: /usr/local/etc/nut/upsmon.conf
   - hostname: "ms2"
     ipAddress: "192.168.10.52"
     installDisk: "/dev/disk/by-id/nvme-WD_Blue_SN570_500GB_220628801124"
@@ -70,7 +70,7 @@ nodes:
           - content: |-
               MONITOR ups@192.168.10.23 1 upsmon_local mypassword secondary
               SHUTDOWNCMD "/sbin/poweroff"
-            mountPath: 
+            mountPath: /usr/local/etc/nut/upsmon.conf
   - hostname: "ms3"
     ipAddress: "192.168.10.53"
     installDiskSelector:
@@ -95,7 +95,7 @@ nodes:
           - content: |-
               MONITOR ups@192.168.10.23 1 upsmon_local mypassword secondary
               SHUTDOWNCMD "/sbin/poweroff"
-            mountPath: 
+            mountPath: /usr/local/etc/nut/upsmon.conf
 
 # Global patches
 patches:
