@@ -6,7 +6,7 @@ talosVersion: v1.9.0
 kubernetesVersion: v1.32.0
 
 clusterName: "home-kubernetes"
-endpoint: https://192.168.10.254:6443
+endpoint: https://192.168.30.254:6443
 
 clusterPodNets:
   - "10.69.0.0/16"
@@ -14,7 +14,7 @@ clusterSvcNets:
   - "10.96.0.0/16"
 
 additionalApiServerCertSans: &sans
-  - "192.168.10.254"
+  - "192.168.30.254"
   - "127.0.0.1"
 additionalMachineCertSans: *sans
 
@@ -23,79 +23,31 @@ cniConfig:
   name: none
 
 nodes:
-  - hostname: "ms1"
-    ipAddress: "192.168.10.51"
-    installDisk: "/dev/disk/by-id/nvme-CT500P1SSD8_1925E20E2038"
-    talosImageURL: factory.talos.dev/installer/743d942690991fb5b20d07e54b6d33c60b19d7918e14d61173d79e718ebc0b47
-    controlPlane: true
-    networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "58:47:ca:77:cf:38"
-        dhcp: false
-        addresses:
-          - "192.168.10.51/24"
-        routes:
-          - network: 0.0.0.0/0
-            gateway: "192.168.10.1"
-        mtu: 1500
-        vip:
-          ip: "192.168.10.254"
-    extensionServices:
-      - name: nut-client
-        configFiles:
-          - content: |-
-              MONITOR ups@192.168.10.23 1 upsmon_local mypassword secondary
-              SHUTDOWNCMD "/sbin/poweroff"
-            mountPath: /usr/local/etc/nut/upsmon.conf
-  - hostname: "ms2"
-    ipAddress: "192.168.10.52"
-    installDisk: "/dev/disk/by-id/nvme-WD_Blue_SN570_500GB_220628801124"
-    talosImageURL: factory.talos.dev/installer/743d942690991fb5b20d07e54b6d33c60b19d7918e14d61173d79e718ebc0b47
-    controlPlane: true
-    networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "58:47:ca:78:f1:34"
-        dhcp: false
-        addresses:
-          - "192.168.10.52/24"
-        routes:
-          - network: 0.0.0.0/0
-            gateway: "192.168.10.1"
-        mtu: 1500
-        vip:
-          ip: "192.168.10.254"
-    extensionServices:
-      - name: nut-client
-        configFiles:
-          - content: |-
-              MONITOR ups@192.168.10.23 1 upsmon_local mypassword secondary
-              SHUTDOWNCMD "/sbin/poweroff"
-            mountPath: /usr/local/etc/nut/upsmon.conf
   - hostname: "ms3"
-    ipAddress: "192.168.10.53"
+    ipAddress: "192.168.30.53"
     installDiskSelector:
       serial: "22061X806789"
     talosImageURL: factory.talos.dev/installer/743d942690991fb5b20d07e54b6d33c60b19d7918e14d61173d79e718ebc0b47
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
-          hardwareAddr: "58:47:ca:78:f8:4c"
+          hardwareAddr: "58:47:ca:78:f8:4d"
         dhcp: false
         addresses:
-          - "192.168.10.53/24"
+          - "192.168.30.53/24"
         routes:
           - network: 0.0.0.0/0
-            gateway: "192.168.10.1"
+            gateway: "192.168.30.1"
         mtu: 1500
         vip:
-          ip: "192.168.10.254"
+          ip: "192.168.30.254"
     extensionServices:
       - name: nut-client
         configFiles:
           - content: |-
               MONITOR ups@192.168.10.23 1 upsmon_local mypassword secondary
               SHUTDOWNCMD "/sbin/poweroff"
-            mountPath: /usr/local/etc/nut/upsmon.conf
+            mountPath: 
 
 # Global patches
 patches:
