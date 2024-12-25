@@ -1,0 +1,101 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app open-webui
+spec:
+  interval: 30m
+  timeout: 15m
+  chart:
+    spec:
+      chart: open-webui
+      version: 4.0.6
+      sourceRef:
+        kind: HelmRepository
+        name: open-webui
+        namespace: flux-system
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.kubernetes.io/worker
+              operator: In
+              values:
+              - worker
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 1
+          preference:
+            matchExpressions:
+            - key: kubernetes.io/arch
+              operator: In
+              values:
+              - arm64
+
+    ollama:
+      # -- Automatically install Ollama Helm chart from https://otwld.github.io/ollama-helm/. Use [Helm Values](https://github.com/otwld/ollama-helm/#helm-values) to configure
+      enabled: false
+
+    # -- A list of Ollama API endpoints. These can be added in lieu of automatically installing the Ollama Helm chart, or in addition to it.
+    ollamaUrls: ["http://ollama.ai.svc.cluster.local.:11434"]
+
+    extraEnvVars:
+      - name: OAUTH_PROVIDER_NAME
+        value: authentik
+      - name: ENABLE_OAUTH_SIGNUP
+        value: "true"
+      - name: OPENID_PROVIDER_URL
+        valueFrom:
+          secretKeyRef:
+            name: open-webui-secret
+            key: OPENID_PROVIDER_URL
+      - name: OAUTH_CLIENT_ID
+        valueFrom:
+          secretKeyRef:
+            name: open-webui-secret
+            key: OAUTH_CLIENT_ID
+      - name: OAUTH_CLIENT_SECRET
+        valueFrom:
+          secretKeyRef:
+            name: open-webui-secret
+            key: OAUTH_CLIENT_SECRET
+      - name: OPENID_REDIRECT_URI
+        valueFrom:
+          secretKeyRef:
+            name: open-webui-secret
+            key: OPENID_REDIRECT_URI
+    ingress:
+      enabled: true
+      class: internal
+      annotations:
+        hajimari.io/appName: "Ollama Chat"
+        hajimari.io/enable: "true"
+        hajimari.io/group: "AI"
+
+        gethomepage.dev/enabled: "true"
+        gethomepage.dev/description: "Open-Webui"
+        gethomepage.dev/group: Media
+        gethomepage.dev/icon: open-webui.png
+        gethomepage.dev/name: "Open WebUI"
+
+        nginx.ingress.kubernetes.io/rewrite-target: "/"
+        external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+      host: "open-webui.${SECRET_DOMAIN}"
+
+    persistence:
+      enabled: true
+      existingClaim: "open-webui-data"
+
+    service:
+      annotations:
