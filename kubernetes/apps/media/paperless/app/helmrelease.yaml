@@ -114,7 +114,7 @@ spec:
               DISABLE_GOOGLE_CHROME: '1'
             image:
               repository: gotenberg/gotenberg
-              tag: 8.14.1@sha256:c81f625afc869ba10819622f7e7d6d76708b2a32645b3fb74fbee610bf030465
+              tag: 8.15.1@sha256:a0009a2b6e5f7d8c806b498adfdec4555b0a4a1fdf1d64e4136a5549166509d2
             resources:
               limits:
                 memory: 30Mi
