@@ -25,10 +25,12 @@ spec:
   dependsOn:
     - name: intel-device-plugin-gpu
       namespace: kube-system
-    - name: local-path-provisioner
-      namespace: storage
-    - name: volsync
-      namespace: volsync
+#    - name: local-path-provisioner
+#      namespace: storage
+    - name: openebs
+      namespace: openebs-system
+#    - name: volsync
+#      namespace: volsync
   values:
     controllers:
       plex:
