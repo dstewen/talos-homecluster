@@ -35,34 +35,34 @@ spec:
       type: dind
     template:
       spec:
-        affinity:
-          nodeAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-              - matchExpressions:
-                - key: node-role.kubernetes.io/worker
-                  operator: In
-                  values:
-                  - worker
-            preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 1
-              preference:
-                matchExpressions:
-                - key: kubernetes.io/arch
-                  operator: In
-                  values:
-                  - arm64
-          podAntiAffinity:
-            preferredDuringSchedulingIgnoredDuringExecution:
-              - weight: 100
-                podAffinityTerm:
-                  labelSelector:
-                    matchExpressions:
-                      - key: actions.github.com/scale-set-name
-                        operator: In
-                        values:
-                          - arc-runner-set-containers-arm64
-                  topologyKey: kubernetes.io/hostname
+#        affinity:
+#          nodeAffinity:
+#            requiredDuringSchedulingIgnoredDuringExecution:
+#              nodeSelectorTerms:
+#              - matchExpressions:
+#                - key: node-role.kubernetes.io/worker
+#                  operator: In
+#                  values:
+#                  - worker
+#            preferredDuringSchedulingIgnoredDuringExecution:
+#            - weight: 1
+#              preference:
+#                matchExpressions:
+#                - key: kubernetes.io/arch
+#                  operator: In
+#                  values:
+#                  - arm64
+#          podAntiAffinity:
+#            preferredDuringSchedulingIgnoredDuringExecution:
+#              - weight: 100
+#                podAffinityTerm:
+#                  labelSelector:
+#                    matchExpressions:
+#                      - key: actions.github.com/scale-set-name
+#                        operator: In
+#                        values:
+#                          - arc-runner-set-containers-arm64
+#                  topologyKey: kubernetes.io/hostname
         containers:
           - name: runner
             image: ghcr.io/joryirving/actions-runner:2.321.0@sha256:81f64a94e65c70c676d29e1779d1cc4069665abb970803c76beb08ca234638b6
@@ -111,5 +111,5 @@ spec:
 #      name: actions-runner-controller-auth-secret
 #      valuesKey: github_app_private_key
 #      targetPath: githubConfigSecret.github_app_private_key
-    nodeSelector:
-      node-role.kubernetes.io/worker: worker
+#    nodeSelector:
+#      node-role.kubernetes.io/worker: worker
