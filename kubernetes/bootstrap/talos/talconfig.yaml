@@ -31,6 +31,13 @@ nodes:
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
+          hardwareAddr: "58:47:ca:77:cf:38"
+        ignore: true
+        # Intel VPRO
+      - deviceSelector:
+          hardwareAddr: "58:47:ca:77:cf:39"
+        ignore: true
+      - deviceSelector:
           hardwareAddr: "58:47:ca:77:cf:36"
         dhcp: false
         addresses:
@@ -47,7 +54,7 @@ nodes:
           - content: |-
               MONITOR ups@192.168.10.23 1 upsmon_local mypassword secondary
               SHUTDOWNCMD "/sbin/poweroff"
-            mountPath: 
+            mountPath: /usr/local/etc/nut/upsmon.conf
   - hostname: "ms2"
     ipAddress: "192.168.10.52"
     installDiskSelector:
@@ -55,6 +62,13 @@ nodes:
     talosImageURL: factory.talos.dev/installer/743d942690991fb5b20d07e54b6d33c60b19d7918e14d61173d79e718ebc0b47
     controlPlane: true
     networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "58:47:ca:78:f1:34"
+        ignore: true
+        # Intel VPRO
+      - deviceSelector:
+          hardwareAddr: "58:47:ca:78:f1:35"
+        ignore: true
       - deviceSelector:
           hardwareAddr: "58:47:ca:78:f1:32"
         dhcp: false
@@ -72,7 +86,7 @@ nodes:
           - content: |-
               MONITOR ups@192.168.10.23 1 upsmon_local mypassword secondary
               SHUTDOWNCMD "/sbin/poweroff"
-            mountPath: 
+            mountPath: /usr/local/etc/nut/upsmon.conf
   - hostname: "ms3"
     ipAddress: "192.168.10.53"
     installDiskSelector:
@@ -80,6 +94,13 @@ nodes:
     talosImageURL: factory.talos.dev/installer/743d942690991fb5b20d07e54b6d33c60b19d7918e14d61173d79e718ebc0b47
     controlPlane: true
     networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "58:47:ca:78:f8:4c"
+        ignore: true
+        # Intel VPRO
+      - deviceSelector:
+          hardwareAddr: "58:47:ca:78:f8:4d"
+        ignore: true
       - deviceSelector:
           hardwareAddr: "58:47:ca:78:f8:4a"
         dhcp: false
@@ -97,7 +118,7 @@ nodes:
           - content: |-
               MONITOR ups@192.168.10.23 1 upsmon_local mypassword secondary
               SHUTDOWNCMD "/sbin/poweroff"
-            mountPath: 
+            mountPath: /usr/local/etc/nut/upsmon.conf
 
 # Global patches
 patches:
