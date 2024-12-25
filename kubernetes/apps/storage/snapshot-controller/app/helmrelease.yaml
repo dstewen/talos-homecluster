@@ -1,0 +1,60 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: snapshot-controller
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: snapshot-controller
+      version: 0.2.4
+      sourceRef:
+        kind: HelmRepository
+        name: democratic-csi
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    crds: CreateReplace
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    crds: CreateReplace
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+#    volumeSnapshotClasses:
+#      - name: democratic-csi-local-hostpath
+#        driver: local-hostpath.cluster.local
+#        annotations:
+#          snapshot.storage.kubernetes.io/is-default-class: "true"
+#        deletionPolicy: Delete
+    controller:
+      revisionHistoryLimit: 3
+# Disabled as currently no workers
+#      affinity:
+#        nodeAffinity:
+#          requiredDuringSchedulingIgnoredDuringExecution:
+#            nodeSelectorTerms:
+#            - matchExpressions:
+#              - key: kubernetes.io/arch
+#                operator: In
+#                values:
+#                - arm64
+#          preferredDuringSchedulingIgnoredDuringExecution:
+#          - weight: 50
+#            preference:
+#              matchExpressions:
+#              - key: node-role.kubernetes.io/worker
+#                operator: In
+#                values:
+#                - worker
+
+#      args:
+#        enableDistributedSnapshotting: true
+#      serviceMonitor:
+#        create: true

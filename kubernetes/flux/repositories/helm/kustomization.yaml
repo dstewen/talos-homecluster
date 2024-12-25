@@ -4,13 +4,24 @@ kind: Kustomization
 resources:
   - ./1password-charts.yaml
   - ./actions-runner-controller.yaml
+  - ./authentik.yaml
+  - ./backube.yaml
   - ./bjw-s.yaml
   - ./cilium.yaml
   - ./coredns.yaml
+  - ./democratic-csi.yaml
+  - ./descheduler.yaml
   - ./external-secrets.yaml
+  - ./intel.yaml
   - ./jetstack.yaml
+  - ./k8sgpt.yaml
+  - ./kubernetes-sigs-descheduler-charts.yaml
+  - ./kubernetes-sigs-nfd.yaml
   - ./metrics-server.yaml
+  - ./ollama.yaml
+  - ./open-webui.yaml
   - ./openebs.yaml
+  - ./piraeus.yaml
   - ./postfinance.yaml
   - ./prometheus-community.yaml
   - ./spegel.yaml
