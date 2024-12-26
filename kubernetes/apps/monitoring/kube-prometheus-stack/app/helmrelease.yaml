@@ -54,23 +54,23 @@ spec:
               resources:
                 requests:
                   storage: 1Gi
-        affinity:
-          nodeAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-              - matchExpressions:
-                - key: node-role.kubernetes.io/worker
-                  operator: In
-                  values:
-                  - worker
-            preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 1
-              preference:
-                matchExpressions:
-                - key: kubernetes.io/arch
-                  operator: In
-                  values:
-                  - arm64
+#        affinity:
+#          nodeAffinity:
+#            requiredDuringSchedulingIgnoredDuringExecution:
+#              nodeSelectorTerms:
+#              - matchExpressions:
+#                - key: node-role.kubernetes.io/worker
+#                  operator: In
+#                  values:
+#                  - worker
+#            preferredDuringSchedulingIgnoredDuringExecution:
+#            - weight: 1
+#              preference:
+#                matchExpressions:
+#                - key: kubernetes.io/arch
+#                  operator: In
+#                  values:
+#                  - arm64
     kube-state-metrics:
       metricLabelsAllowlist:
         - "deployments=[*]"
@@ -123,9 +123,9 @@ spec:
     kubeControllerManager:
       enabled: true
       endpoints:
-        - 192.168.10.31
-        - 192.168.10.32
-        - 192.168.10.33
+        - 192.168.10.51
+        - 192.168.10.52
+        - 192.168.10.53
       serviceMonitor:
         metricRelabelings:
           # Remove duplicate labels provided by k3s
@@ -135,15 +135,15 @@ spec:
     kubeEtcd:
       enabled: true
       endpoints:
-        - 192.168.10.31
-        - 192.168.10.32
-        - 192.168.10.33
+        - 192.168.10.51
+        - 192.168.10.52
+        - 192.168.10.53
     kubeScheduler:
       enabled: true
       endpoints:
-        - 192.168.10.31
-        - 192.168.10.32
-        - 192.168.10.33
+        - 192.168.10.51
+        - 192.168.10.52
+        - 192.168.10.53
       serviceMonitor:
         metricRelabelings:
           # Remove duplicate labels provided by k3s
@@ -212,23 +212,23 @@ spec:
 #              name: *secret
 #              key: config
 
-        affinity:
-          nodeAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-              - matchExpressions:
-                - key: kubernetes.io/arch
-                  operator: In
-                  values:
-                  - arm64
-            preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 50
-              preference:
-                matchExpressions:
-                - key: node-role.kubernetes.io/worker
-                  operator: In
-                  values:
-                  - worker
+#        affinity:
+#          nodeAffinity:
+#            requiredDuringSchedulingIgnoredDuringExecution:
+#              nodeSelectorTerms:
+#              - matchExpressions:
+#                - key: kubernetes.io/arch
+#                  operator: In
+#                  values:
+#                  - arm64
+#            preferredDuringSchedulingIgnoredDuringExecution:
+#            - weight: 50
+#              preference:
+#                matchExpressions:
+#                - key: node-role.kubernetes.io/worker
+#                  operator: In
+#                  values:
+#                  - worker
 #    prometheusOperator:
 #      affinity:
 #        nodeAffinity:
