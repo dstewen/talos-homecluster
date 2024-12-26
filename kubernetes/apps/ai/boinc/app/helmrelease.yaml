@@ -28,16 +28,16 @@ spec:
   values:
     controllers:
       boinc:
-        pod:
-          affinity:
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                - matchExpressions:
-                  - key: node-role.kubernetes.io/worker
-                    operator: In
-                    values:
-                    - worker
+#        pod:
+#          affinity:
+#            nodeAffinity:
+#              requiredDuringSchedulingIgnoredDuringExecution:
+#                nodeSelectorTerms:
+#                - matchExpressions:
+#                  - key: node-role.kubernetes.io/worker
+#                    operator: In
+#                    values:
+#                    - worker
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
