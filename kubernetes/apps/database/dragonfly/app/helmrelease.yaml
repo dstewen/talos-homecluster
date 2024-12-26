@@ -23,7 +23,7 @@ spec:
       strategy: rollback
       retries: 3
   values:
-    defaultPodOptions:
+#    defaultPodOptions:
 #      affinity:
 #        nodeAffinity:
 #          requiredDuringSchedulingIgnoredDuringExecution:
