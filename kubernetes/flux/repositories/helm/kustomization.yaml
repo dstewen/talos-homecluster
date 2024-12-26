@@ -12,9 +12,13 @@ resources:
   - ./coredns.yaml
   - ./democratic-csi.yaml
   - ./descheduler.yaml
+  - ./external-dns.yaml
   - ./external-secrets.yaml
+  - ./grafana.yaml
+  - ./ingress-nginx.yaml
   - ./intel.yaml
   - ./jetstack.yaml
+  - ./k8s-gateway.yaml
   - ./k8sgpt.yaml
   - ./kubernetes-sigs-descheduler-charts.yaml
   - ./kubernetes-sigs-nfd.yaml
@@ -27,6 +31,3 @@ resources:
   - ./prometheus-community.yaml
   - ./spegel.yaml
   - ./stakater.yaml
-  - ./external-dns.yaml
-  - ./ingress-nginx.yaml
-  - ./k8s-gateway.yaml
