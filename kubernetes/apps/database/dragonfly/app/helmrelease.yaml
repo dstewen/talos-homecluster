@@ -24,23 +24,23 @@ spec:
       retries: 3
   values:
     defaultPodOptions:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.kubernetes.io/worker
-                operator: In
-                values:
-                - worker
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 50
-            preference:
-              matchExpressions:
-              - key: kubernetes.io/arch
-                operator: In
-                values:
-                - amd64
+#      affinity:
+#        nodeAffinity:
+#          requiredDuringSchedulingIgnoredDuringExecution:
+#            nodeSelectorTerms:
+#            - matchExpressions:
+#              - key: node-role.kubernetes.io/worker
+#                operator: In
+#                values:
+#                - worker
+#          preferredDuringSchedulingIgnoredDuringExecution:
+#          - weight: 50
+#            preference:
+#              matchExpressions:
+#              - key: kubernetes.io/arch
+#                operator: In
+#                values:
+#                - amd64
     controllers:
       dragonfly-operator:
         replicas: 1
@@ -106,8 +106,8 @@ spec:
             port: *port
           metrics:
             port: 8080
-    nodeSelector:
-      kubernetes.io/arch: amd64
+#    nodeSelector:
+#      kubernetes.io/arch: amd64
     serviceAccount:
       create: true
       name: *app
