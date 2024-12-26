@@ -11,14 +11,14 @@ ffmpeg:
   global_args: ["-hide_banner", "-loglevel", "warning"]
   hwaccel_args: preset-vaapi
 
-#detectors:
-#  coral:
-#    type: edgetpu
-#    device: pci
 detectors:
-  cpu1:
-    type: cpu
-    num_threads: 3
+  coral:
+    type: edgetpu
+    device: pci
+#detectors:
+#  cpu1:
+#    type: cpu
+#    num_threads: 3
 
 audio:
   enabled: true
