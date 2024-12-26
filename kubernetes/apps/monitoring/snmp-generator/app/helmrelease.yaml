@@ -1,0 +1,85 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: snmp-generator
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.5.1
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    defaultPodOptions:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - arm64
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 50
+            preference:
+              matchExpressions:
+              - key: node-role.kubernetes.io/worker
+                operator: In
+                values:
+                - worker
+    controllers:
+      snmp-generator:
+        initContainers:
+          init-generator:
+            image:
+              repository: quay.io/prometheus/snmp-generator
+              tag: v0.26.0@sha256:5ddcaaddd9f5516365c9350784dfe80955af16cb6ab5e49aa7124c11f074c2fe
+        containers:
+          app:
+            image:
+              repository: quay.io/prometheus/snmp-exporter
+              tag: v0.26.0@sha256:05fb4ba7439cd5c5854c8ef58d964f2638573c432a6ae71a3b570cefc4971891
+            env:
+              TZ: Australia/Victoria
+            command: "/bin/sh"
+            resources:
+              requests:
+                cpu: 15m
+                memory: 30M
+    service:
+      app:
+        controller: snmp-generator
+        ports:
+          http:
+            enabled: false
+          metrics:
+            enabled: true
+            protocol: TCP
+            port: 9617
+    serviceMonitor:
+      app:
+        enabled: true
+        endpoints:
+        - port: metrics
+          scheme: http
+          path: /metrics
+          interval: 5m
+          scrapeTimeout: 1m
+
