@@ -37,19 +37,20 @@ spec:
 
     ollama:
       models:
-        - codellama
-#        - mistral
-#        - llama2
-#        - llama3.1
-#        - dolphin-mixtral
-#        - llama2-uncensored
+        pull:
+          - codellama
+  #        - mistral
+  #        - llama2
+  #        - llama3.1
+  #        - dolphin-mixtral
+  #        - llama2-uncensored
+        run:
+          - codellama
       gpu:
         # Enable GPU integration
         enabled: false
         # Specify the number of GPU
         number: 1
-        # Default model to serve, if not set, no model will be served at container startup
-      defaultModel: "codellama"
 
       serviceAccount:
         # Specifies whether a service account should be created
@@ -82,7 +83,7 @@ spec:
         memory: 4G
         cpu: 2000m
       limits:
-        memory: 12G
+        memory: 24G
 
     livenessProbe:
       enabled: true
