@@ -14,7 +14,7 @@ spec:
         kind: HelmRepository
         name: ollama
         namespace: flux-system
-      interval: 15m
+
   maxHistory: 2
 
   install:
@@ -36,16 +36,16 @@ spec:
     replicaCount: 1
 
     ollama:
-      models:
-        pull:
-          - codellama
-  #        - mistral
-  #        - llama2
-  #        - llama3.1
-  #        - dolphin-mixtral
-  #        - llama2-uncensored
-        run:
-          - codellama
+#      models:
+#        pull:
+#          - codellama
+#          - mistral
+#          - llama2
+#          - llama3.1
+#          - dolphin-mixtral
+#          - llama2-uncensored
+#        run:
+#          - codellama
       gpu:
         # Enable GPU integration
         enabled: false
