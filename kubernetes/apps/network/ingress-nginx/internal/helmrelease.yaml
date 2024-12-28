@@ -24,6 +24,7 @@ spec:
   values:
     fullnameOverride: ingress-nginx-internal
     controller:
+      replicaCount: 2
       service:
         annotations:
           lbipam.cilium.io/ips: "192.168.10.26"
@@ -39,6 +40,7 @@ spec:
               operator: In
               values: ["internal"]
       config:
+        block-user-agents: "AdsBot-Google,Amazonbot,anthropic-ai,Applebot-Extended,Bytespider,CCBot,ChatGPT-User,ClaudeBot,Claude-Web,cohere-ai,Diffbot,FacebookBot,FriendlyCrawler,Google-Extended,GoogleOther,GPTBot,img2dataset,omgili,omgilibot,peer39_crawler,peer39_crawler/1.0,PerplexityBot,YouBot," # taken from https://github.com/ai-robots-txt/ai.robots.txt
         client-body-buffer-size: 100M
         client-body-timeout: 120
         client-header-timeout: 120
@@ -69,4 +71,4 @@ spec:
         requests:
           cpu: 100m
         limits:
-          memory: 500Mi
+          memory: 768Mi
