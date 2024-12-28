@@ -3,13 +3,17 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-minecraft-ftb
+  name: &app minecraft-ftb
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
-  dependsOn:
-    - name: cluster-apps-rook-ceph-cluster
+#  dependsOn:
+#    - name: cluster-apps-rook-ceph-cluster
+  targetNamespace: gameserver
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
   path: ./kubernetes/apps/gameserver/minecraft/ftb
   prune: true
   sourceRef:
@@ -17,4 +21,4 @@ spec:
     name: home-kubernetes
   interval: 30m
   retryInterval: 1m
-  timeout: 3m
+  timeout: 5m
