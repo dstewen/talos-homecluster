@@ -88,7 +88,7 @@ spec:
       ops: "dneck77"
       gameMode: survival
       pvp: false
-      onlineMode: false
+      onlineMode: true
       jvmXXOpts: "-XX:MaxRAMPercentage=75"
       memory: 8192M
       serviceType: LoadBalancer
