@@ -36,9 +36,9 @@ spec:
     replicaCount: 1
 
     ollama:
-#      models:
-#        pull:
-#          - codellama
+      models:
+        pull:
+          - codellama
 #          - mistral
 #          - llama2
 #          - llama3.1
