@@ -62,7 +62,7 @@ tasks:
 
   iperf2:
     desc: Start a iperf2 server on one node, and iperf2 client on another node, to benchmark network performance.
-    dir: "/{{.ROOT_DIR}}/.taskfiles/Kubernetes/template/iperf"
+    dir: "/{{.ROOT_DIR}}/.taskfiles/kubernetes/template/iperf"
     vars: &iperf2-vars
       SERVER_NAME: &iperf2-server-name "iperf2-server-{{- .TIMENOW -}}"
       SERVER_NS: &iperf2-server-ns '{{ .SERVER_NS | default "default" }}'
