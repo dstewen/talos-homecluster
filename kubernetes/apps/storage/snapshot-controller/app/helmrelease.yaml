@@ -54,7 +54,7 @@ spec:
 #                values:
 #                - worker
 
-      args:
-        enableDistributedSnapshotting: true
+#      args:
+#        enableDistributedSnapshotting: true
       serviceMonitor:
         create: true
