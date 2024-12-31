@@ -6,3 +6,4 @@ resources:
   - ./data-pvc.yaml
   - ./helmrelease.yaml
 #  - ./volsync.yaml
+  - ./volsync_nas.yaml

@@ -8,8 +8,8 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
-#  dependsOn:
-#    - name: cluster-apps-rook-ceph-cluster
+  dependsOn:
+    - name: rook-ceph-cluster
   targetNamespace: gameserver
   commonMetadata:
     labels:
@@ -22,3 +22,7 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 5m
+#  postBuild:
+#    substitute:
+#      APP: *app
+#      VOLSYNC_CAPACITY: 5Gi
