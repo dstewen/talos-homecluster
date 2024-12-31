@@ -34,41 +34,41 @@ spec:
     copyMethod: "${VOLSYNC_COPYMETHOD:-Snapshot}"
     pruneIntervalDays: 7
     repository: "${APP}-volsync-secret"
-    volumeSnapshotClassName: "${VOLSYNC_SNAPSHOTCLASS:-local-hostpath}"
-    cacheCapacity: "${VOLSYNC_CACHE_CAPACITY:-4Gi}"
-    cacheStorageClassName: "${VOLSYNC_CACHE_SNAPSHOTCLASS:-local-hostpath}"
+    volumeSnapshotClassName: "${VOLSYNC_SNAPSHOTCLASS:-csi-ceph-blockpool}"
+    cacheCapacity: "${VOLSYNC_CACHE_CAPACITY:-2Gi}"
+    cacheStorageClassName: "${VOLSYNC_CACHE_SNAPSHOTCLASS:-ceph-block}"
     cacheAccessModes: ["${VOLSYNC_CACHE_ACCESSMODES:-ReadWriteOnce}"]
-    storageClassName: "${VOLSYNC_STORAGECLASS:-local-hostpath}"
+    storageClassName: "${VOLSYNC_STORAGECLASS:-ceph-block}"
     accessModes: ["${VOLSYNC_ACCESSMODES:-ReadWriteOnce}"]
     moverSecurityContext:
-      runAsUser: ${VOLSYNC_PUID:-568}
-      runAsGroup: ${VOLSYNC_PGID:-568}
-      fsGroup: ${VOLSYNC_PGID:-568}
+      runAsUser: ${VOLSYNC_PUID:-1000}
+      runAsGroup: ${VOLSYNC_PGID:-1000}
+      fsGroup: ${VOLSYNC_PGID:-1000}
     retain:
       hourly: 6
       daily: 5
       weekly: 4
       monthly: 2
       yearly: 1
----
+#---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/volsync.backube/replicationdestination_v1alpha1.json
-apiVersion: volsync.backube/v1alpha1
-kind: ReplicationDestination
-metadata:
-  name: "${APP}-dst"
-spec:
-  trigger:
-    manual: restore-once
-  restic:
-    repository: "${APP}-volsync-secret"
-    copyMethod: Snapshot
-    volumeSnapshotClassName: "${VOLSYNC_SNAPSHOTCLASS:-local-hostpath}"
-    cacheStorageClassName: "${VOLSYNC_CACHE_SNAPSHOTCLASS:-local-hostpath}"
-    cacheAccessModes: ["${VOLSYNC_CACHE_ACCESSMODES:-ReadWriteOnce}"]
-    cacheCapacity: "${VOLSYNC_CACHE_CAPACITY:-8Gi}"
-    storageClassName: "${VOLSYNC_STORAGECLASS:-local-hostpath}"
-    accessModes: ["${VOLSYNC_ACCESSMODES:-ReadWriteOnce}"]
-    capacity: "${VOLSYNC_CAPACITY}"
+#apiVersion: volsync.backube/v1alpha1
+#kind: ReplicationDestination
+#metadata:
+#  name: "${APP}-dst"
+#spec:
+#  trigger:
+#    manual: restore-once
+#  restic:
+#    repository: "${APP}-volsync-secret"
+#    copyMethod: Snapshot
+#    volumeSnapshotClassName: "${VOLSYNC_SNAPSHOTCLASS:-local-hostpath}"
+#    cacheStorageClassName: "${VOLSYNC_CACHE_SNAPSHOTCLASS:-local-hostpath}"
+#    cacheAccessModes: ["${VOLSYNC_CACHE_ACCESSMODES:-ReadWriteOnce}"]
+#    cacheCapacity: "${VOLSYNC_CACHE_CAPACITY:-8Gi}"
+#    storageClassName: "${VOLSYNC_STORAGECLASS:-local-hostpath}"
+#    accessModes: ["${VOLSYNC_ACCESSMODES:-ReadWriteOnce}"]
+#    capacity: "${VOLSYNC_CAPACITY}"
     # enableFileDeletion: true # Uncomment on next Volsync release
     # cleanupCachePVC: true # Uncomment on next Volsync release
     # cleanupTempPVC: true # Uncomment on next Volsync release
