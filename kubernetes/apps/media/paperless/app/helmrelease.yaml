@@ -24,8 +24,8 @@ spec:
   dependsOn:
     - name: dragonfly-operator
       namespace: database
-    - name: local-path-provisioner
-      namespace: storage
+#    - name: local-path-provisioner
+#      namespace: storage
     - name: volsync
       namespace: volsync
   values:
