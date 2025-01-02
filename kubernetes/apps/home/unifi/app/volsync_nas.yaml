@@ -30,7 +30,7 @@ metadata:
   name: unifi-minio-rsrc
   namespace: gameserver
 spec:
-  sourcePVC: unifi-data-v1
+  sourcePVC: unifi-config
   trigger:
     schedule: "0 * * * *"
   restic:
