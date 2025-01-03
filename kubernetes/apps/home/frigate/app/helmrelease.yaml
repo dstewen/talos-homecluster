@@ -138,12 +138,10 @@ spec:
         sizeLimit: 4Gi
         globalMounts:
           - path: /dev/shm
-      usb:
+      coral:
         type: hostPath
-        hostPath: /dev/bus/usb
-        hostPathType: Directory
-        globalMounts:
-          - path: /dev/bus/usb
+        hostPath: /dev/apex_0
+        hostPathType: CharDevice
       media:
         type: nfs
         server: 192.168.10.15
