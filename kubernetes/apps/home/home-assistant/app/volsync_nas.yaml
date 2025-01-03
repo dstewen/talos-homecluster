@@ -38,13 +38,13 @@ spec:
     pruneIntervalDays: 7
     repository: home-assistant-restic-secret
     cacheCapacity: 2Gi
-    cacheStorageClassName: local-hostpath
-    volumeSnapshotClassName: csi-ceph-filesystem
-    storageClassName: ceph-filesystem
+    cacheStorageClassName: ceph-block
+    volumeSnapshotClassName: csi-ceph-blockpool
+    storageClassName: ceph-block
     moverSecurityContext:
-      runAsUser: 568
-      runAsGroup: 568
-      fsGroup: 568
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
     retain:
       daily: 7
       within: 3d
