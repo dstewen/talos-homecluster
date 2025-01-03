@@ -6,4 +6,4 @@ resources:
   - ./externalsecret.yaml
   - ./helmrelease.yaml
   - ./volume.yaml
-  - ../../../../templates/volsync
+#  - ../../../../templates/volsync
