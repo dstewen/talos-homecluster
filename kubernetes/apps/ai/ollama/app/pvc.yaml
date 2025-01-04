@@ -9,8 +9,8 @@ metadata:
     app.kubernetes.io/instance: *name
     snapshot.home.arpa/enabled: "true"
 spec:
-  accessModes: ["ReadWriteOnce"]
-  storageClassName: openebs-hostpath
+  accessModes: ["ReadWriteMany"]
+  storageClassName: ceph-block
   resources:
     requests:
       storage: 50Gi
