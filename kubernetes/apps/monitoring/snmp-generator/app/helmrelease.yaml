@@ -55,7 +55,7 @@ spec:
           app:
             image:
               repository: quay.io/prometheus/snmp-exporter
-              tag: v0.26.0@sha256:05fb4ba7439cd5c5854c8ef58d964f2638573c432a6ae71a3b570cefc4971891
+              tag: v0.27.0@sha256:bc0932f6c8257ebc05aa75bde956c0dd600cd4698f1fe009ea560803ecefb352
             env:
               TZ: Australia/Victoria
             command: "/bin/sh"
