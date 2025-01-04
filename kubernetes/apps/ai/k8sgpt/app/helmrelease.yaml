@@ -31,5 +31,5 @@ spec:
 
   values:
     controllerManager:
-      nodeSelector:
-        node-role.kubernetes.io/worker: worker
+#      nodeSelector:
+#        node-role.kubernetes.io/worker: worker
