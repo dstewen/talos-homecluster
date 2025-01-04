@@ -77,7 +77,7 @@ spec:
       models:
         enabled: true
         annotations: {}
-        storageClass: local-hostpath
+        storageClass: ceph-block
         accessModes: ReadWriteOnce
         size: 10Gi
         globalMount: /models
@@ -85,7 +85,7 @@ spec:
       output:
         enabled: true
         annotations: {}
-        storageClass: local-hostpath
+        storageClass: ceph-block
         accessModes: ReadWriteOnce
         size: 5Gi
         globalMount: /tmp/generated
