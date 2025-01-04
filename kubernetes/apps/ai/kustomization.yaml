@@ -7,8 +7,8 @@ resources:
   - ./namespace.yaml
   # Flux-Kustomizations
   - ./boinc/ks.yaml
-#  - ./localai/ks.yaml
-#  - ./k8sgpt/ks.yaml
+  - ./localai/ks.yaml
+  - ./k8sgpt/ks.yaml
   - ./ollama/ks.yaml
   - ./open-webui/ks.yaml
 #  - ./stable-diffusion/ks.yaml
