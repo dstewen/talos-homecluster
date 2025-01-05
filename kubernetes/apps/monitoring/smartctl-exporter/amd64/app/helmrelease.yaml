@@ -35,7 +35,8 @@ spec:
       tag: 0.13.0@sha256:a31f74f50c0e3a22cc1bb474ea8ff0d5d4c4ca3be5409eaf24d8894ff74b0921
     config:
       devices:
-        - /dev/sda
+        - /dev/nvme0n1
+        - /dev/nvme1n1
     nodeSelector:
       kubernetes.io/arch: amd64
     serviceMonitor:
