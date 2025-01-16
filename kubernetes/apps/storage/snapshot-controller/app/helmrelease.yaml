@@ -9,12 +9,11 @@ spec:
   chart:
     spec:
       chart: snapshot-controller
-      version: 0.2.4
+      version: 4.0.0
       sourceRef:
         kind: HelmRepository
-        name: democratic-csi
+        name: piraeus
         namespace: flux-system
-  maxHistory: 2
   install:
     crds: CreateReplace
     remediation:
@@ -23,38 +22,10 @@ spec:
     cleanupOnFail: true
     crds: CreateReplace
     remediation:
+      strategy: rollback
       retries: 3
-  uninstall:
-    keepHistory: false
   values:
-#    volumeSnapshotClasses:
-#      - name: democratic-csi-local-hostpath
-#        driver: local-hostpath.cluster.local
-#        annotations:
-#          snapshot.storage.kubernetes.io/is-default-class: "true"
-#        deletionPolicy: Delete
     controller:
-      revisionHistoryLimit: 3
-# Disabled as currently no workers
-#      affinity:
-#        nodeAffinity:
-#          requiredDuringSchedulingIgnoredDuringExecution:
-#            nodeSelectorTerms:
-#            - matchExpressions:
-#              - key: kubernetes.io/arch
-#                operator: In
-#                values:
-#                - arm64
-#          preferredDuringSchedulingIgnoredDuringExecution:
-#          - weight: 50
-#            preference:
-#              matchExpressions:
-#              - key: node-role.kubernetes.io/worker
-#                operator: In
-#                values:
-#                - worker
-
-#      args:
-#        enableDistributedSnapshotting: true
+      replicaCount: 1
       serviceMonitor:
         create: true
