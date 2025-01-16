@@ -40,9 +40,9 @@ spec:
         pull:
           - codellama
           - llama3-uncensored
-          - code-companion
-          - chatgpt-4-uncensored
-          - codewriter
+#          - code-companion
+#          - chatgpt-4-uncensored
+#          - codewriter
 #          - mistral
 #          - llama2
 #          - llama3.1
