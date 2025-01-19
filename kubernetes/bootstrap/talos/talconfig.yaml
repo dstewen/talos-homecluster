@@ -120,6 +120,357 @@ nodes:
               SHUTDOWNCMD "/sbin/poweroff"
             mountPath: /usr/local/etc/nut/upsmon.conf
 
+  - hostname: "pi4cmio"
+    ipAddress: "102.168.10.25"
+    installDisk: /dev/mmcblk0
+    talosImageURL: factory.talos.dev/installer/488a948de2b6aa44262c404196bc9a0ba7928dd1c4a86eca22003e7798c7b93d
+    schematic:
+      overlay:
+        image: siderolabs/sbc-raspberrypi
+        name: rpi_generic
+        options:
+            configTxtAppend: |
+              # Disable SD Card
+              dtparam=sd=off
+
+              # CM4 USB
+              dtoverlay=dwc2,dr_mode=host
+
+              # Silabls Radio
+              dtoverlay=miniuart-bt
+              dtoverlay=uart4,ctsrts
+
+              # Debug console
+              dtoverlay=uart5
+
+              # User-defined LED
+              dtoverlay=gpio-led,gpio=44,label=usr,trigger=heartbeat
+              dtoverlay=gpio-led,gpio=42,label=act,trigger=activity
+
+              # RTC
+              dtparam=i2c_arm=on
+              dtparam=i2c_vc=on
+              dtoverlay=i2c-rtc,pcf85063a,i2c_csi_dsi
+
+              # 2GHz CPU (cooling of HA yellow is sufficient here)
+              over_voltage=6
+              arm_freq=2000
+      customization:
+        extraKernelArgs:
+        - "console=tty0"
+        - "console=ttyAMA5,115200"  # USB Console
+        - "net.ifnames=0"
+        - "sysctl.kernel.kexec_load_disabled=1"
+        - "talos.dashboard.disabled=1"
+    controlPlane: false
+    networkInterfaces:
+      # 1G Internal Port
+      - deviceSelector:
+          hardwareAddr: e4:5f:01:50:27:2d
+        dhcp: false
+        addresses:
+          - "192.168.10.25/24"
+        routes:
+          - network: 0.0.0.0/0
+            gateway: "192.168.10.1"
+        mtu: 1500
+
+
+
+
+  - hostname: "blade4"
+    ipAddress: "102.168.10.34"
+    installDisk: /dev/mmcblk0
+    talosImageURL: factory.talos.dev/installer/488a948de2b6aa44262c404196bc9a0ba7928dd1c4a86eca22003e7798c7b93d
+    schematic:
+      overlay:
+        image: siderolabs/sbc-raspberrypi
+        name: rpi_generic
+        options:
+            configTxtAppend: |
+              # Disable SD Card
+              dtparam=sd=off
+
+              # CM4 USB
+              dtoverlay=dwc2,dr_mode=host
+
+              # Silabls Radio
+              dtoverlay=miniuart-bt
+
+              # Enable SPI
+              dtparam=spi=on
+
+              # ComputeBlade Dev TPM module
+              dtoverlay=tpm-slb9670
+
+              # Debug console
+              dtoverlay=uart5
+
+              # User-defined LED
+              dtoverlay=gpio-led,gpio=44,label=usr,trigger=heartbeat
+              dtoverlay=gpio-led,gpio=42,label=act,trigger=activity
+
+              # RTC
+              dtparam=i2c_arm=on
+              dtoverlay=i2c-rtc,ds3231
+
+              # 2GHz CPU (cooling of ComputeBlade is sufficient here)
+              over_voltage=6
+              arm_freq=2000
+      customization:
+        extraKernelArgs:
+        - "console=tty0"
+        - "net.ifnames=0"
+        - "sysctl.kernel.kexec_load_disabled=1"
+        - "talos.dashboard.disabled=1"
+    controlPlane: false
+    networkInterfaces:
+      # 1G Internal Port
+      - deviceSelector:
+          hardwareAddr: e4:5f:01:50:27:2d
+        dhcp: false
+        addresses:
+          - "192.168.10.34/24"
+        routes:
+          - network: 0.0.0.0/0
+            gateway: "192.168.10.1"
+        mtu: 1500
+
+  - hostname: "blade5"
+    ipAddress: "102.168.10.35"
+    installDisk: /dev/mmcblk0
+    talosImageURL: factory.talos.dev/installer/488a948de2b6aa44262c404196bc9a0ba7928dd1c4a86eca22003e7798c7b93d
+    schematic:
+      overlay:
+        image: siderolabs/sbc-raspberrypi
+        name: rpi_generic
+        options:
+            configTxtAppend: |
+              # Disable SD Card
+              dtparam=sd=off
+
+              # CM4 USB
+              dtoverlay=dwc2,dr_mode=host
+
+              # Silabls Radio
+              dtoverlay=miniuart-bt
+
+              # Enable SPI
+              dtparam=spi=on
+
+              # ComputeBlade Dev TPM module
+              dtoverlay=tpm-slb9670
+
+              # Debug console
+              dtoverlay=uart5
+
+              # User-defined LED
+              dtoverlay=gpio-led,gpio=44,label=usr,trigger=heartbeat
+              dtoverlay=gpio-led,gpio=42,label=act,trigger=activity
+
+              # RTC
+              dtparam=i2c_arm=on
+              dtoverlay=i2c-rtc,ds3231
+
+              # 2GHz CPU (cooling of ComputeBlade is sufficient here)
+              over_voltage=6
+              arm_freq=2000
+      customization:
+        extraKernelArgs:
+        - "console=tty0"
+        - "net.ifnames=0"
+        - "sysctl.kernel.kexec_load_disabled=1"
+        - "talos.dashboard.disabled=1"
+    controlPlane: false
+    networkInterfaces:
+      # 1G Internal Port
+      - deviceSelector:
+          hardwareAddr: e4:5f:01:ec:16:b4
+        dhcp: false
+        addresses:
+          - "192.168.10.35/24"
+        routes:
+          - network: 0.0.0.0/0
+            gateway: "192.168.10.1"
+        mtu: 1500
+
+  - hostname: "blade6"
+    ipAddress: "102.168.10.36"
+    installDisk: /dev/mmcblk0
+    talosImageURL: factory.talos.dev/installer/488a948de2b6aa44262c404196bc9a0ba7928dd1c4a86eca22003e7798c7b93d
+    schematic:
+      overlay:
+        image: siderolabs/sbc-raspberrypi
+        name: rpi_generic
+        options:
+            configTxtAppend: |
+              # Disable SD Card
+              dtparam=sd=off
+
+              # CM4 USB
+              dtoverlay=dwc2,dr_mode=host
+
+              # Silabls Radio
+              dtoverlay=miniuart-bt
+
+              # Enable SPI
+              dtparam=spi=on
+
+              # ComputeBlade Dev TPM module
+              dtoverlay=tpm-slb9670
+
+              # Debug console
+              dtoverlay=uart5
+
+              # User-defined LED
+              dtoverlay=gpio-led,gpio=44,label=usr,trigger=heartbeat
+              dtoverlay=gpio-led,gpio=42,label=act,trigger=activity
+
+              # RTC
+              dtparam=i2c_arm=on
+              dtoverlay=i2c-rtc,ds3231
+
+              # 2GHz CPU (cooling of ComputeBlade is sufficient here)
+              over_voltage=6
+              arm_freq=2000
+      customization:
+        extraKernelArgs:
+        - "console=tty0"
+        - "net.ifnames=0"
+        - "sysctl.kernel.kexec_load_disabled=1"
+        - "talos.dashboard.disabled=1"
+    controlPlane: false
+    networkInterfaces:
+      # 1G Internal Port
+      - deviceSelector:
+          hardwareAddr: e4:5f:01:ec:16:a5
+        dhcp: false
+        addresses:
+          - "192.168.10.36/24"
+        routes:
+          - network: 0.0.0.0/0
+            gateway: "192.168.10.1"
+        mtu: 1500
+
+  - hostname: "blade7"
+    ipAddress: "102.168.10.37"
+    installDisk: /dev/mmcblk0
+    talosImageURL: factory.talos.dev/installer/488a948de2b6aa44262c404196bc9a0ba7928dd1c4a86eca22003e7798c7b93d
+    schematic:
+      overlay:
+        image: siderolabs/sbc-raspberrypi
+        name: rpi_generic
+        options:
+            configTxtAppend: |
+              # Disable SD Card
+              dtparam=sd=off
+
+              # CM4 USB
+              dtoverlay=dwc2,dr_mode=host
+
+              # Silabls Radio
+              dtoverlay=miniuart-bt
+
+              # Enable SPI
+              dtparam=spi=on
+
+              # ComputeBlade Dev TPM module
+              dtoverlay=tpm-slb9670
+
+              # Debug console
+              dtoverlay=uart5
+
+              # User-defined LED
+              dtoverlay=gpio-led,gpio=44,label=usr,trigger=heartbeat
+              dtoverlay=gpio-led,gpio=42,label=act,trigger=activity
+
+              # RTC
+              dtparam=i2c_arm=on
+              dtoverlay=i2c-rtc,ds3231
+
+              # 2GHz CPU (cooling of ComputeBlade is sufficient here)
+              over_voltage=6
+              arm_freq=2000
+      customization:
+        extraKernelArgs:
+        - "console=tty0"
+        - "net.ifnames=0"
+        - "sysctl.kernel.kexec_load_disabled=1"
+        - "talos.dashboard.disabled=1"
+    controlPlane: false
+    networkInterfaces:
+      # 1G Internal Port
+      - deviceSelector:
+          hardwareAddr: e4:5f:01:ec:16:9c
+        dhcp: false
+        addresses:
+          - "192.168.10.37/24"
+        routes:
+          - network: 0.0.0.0/0
+            gateway: "192.168.10.1"
+        mtu: 1500
+
+  - hostname: "blade8"
+    ipAddress: "102.168.10.38"
+    installDisk: /dev/mmcblk0
+    talosImageURL: factory.talos.dev/installer/488a948de2b6aa44262c404196bc9a0ba7928dd1c4a86eca22003e7798c7b93d
+    schematic:
+      overlay:
+        image: siderolabs/sbc-raspberrypi
+        name: rpi_generic
+        options:
+            configTxtAppend: |
+              # Disable SD Card
+              dtparam=sd=off
+
+              # CM4 USB
+              dtoverlay=dwc2,dr_mode=host
+
+              # Silabls Radio
+              dtoverlay=miniuart-bt
+
+              # Enable SPI
+              dtparam=spi=on
+
+              # ComputeBlade Dev TPM module
+              dtoverlay=tpm-slb9670
+
+              # Debug console
+              dtoverlay=uart5
+
+              # User-defined LED
+              dtoverlay=gpio-led,gpio=44,label=usr,trigger=heartbeat
+              dtoverlay=gpio-led,gpio=42,label=act,trigger=activity
+
+              # RTC
+              dtparam=i2c_arm=on
+              dtoverlay=i2c-rtc,ds3231
+
+              # 2GHz CPU (cooling of ComputeBlade is sufficient here)
+              over_voltage=6
+              arm_freq=2000
+      customization:
+        extraKernelArgs:
+        - "console=tty0"
+        - "net.ifnames=0"
+        - "sysctl.kernel.kexec_load_disabled=1"
+        - "talos.dashboard.disabled=1"
+    controlPlane: false
+    networkInterfaces:
+      # 1G Internal Port
+      - deviceSelector:
+          hardwareAddr: e4:5f:01:ec:16:5a
+        dhcp: false
+        addresses:
+          - "192.168.10.38/24"
+        routes:
+          - network: 0.0.0.0/0
+            gateway: "192.168.10.1"
+        mtu: 1500
+
+
+
+
 # Global patches
 patches:
   - "@./patches/global/cluster-discovery.yaml"
