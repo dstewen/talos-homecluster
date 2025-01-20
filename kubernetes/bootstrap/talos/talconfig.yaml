@@ -123,7 +123,7 @@ nodes:
   - hostname: "pi4cmio"
     ipAddress: "102.168.10.25"
     installDisk: /dev/mmcblk0
-    talosImageURL: factory.talos.dev/installer/488a948de2b6aa44262c404196bc9a0ba7928dd1c4a86eca22003e7798c7b93d
+    talosImageURL: factory.talos.dev/installer/488a948de2b6aa44262c404196bc9a0ba7928dd1c4a86eca22003e7798c7b93d # Need to change to schematic that has nut
     schematic:
       overlay:
         image: siderolabs/sbc-raspberrypi
@@ -174,7 +174,13 @@ nodes:
           - network: 0.0.0.0/0
             gateway: "192.168.10.1"
         mtu: 1500
-
+    extensionServices:
+      - name: nut-client
+        configFiles:
+          - content: |-
+              MONITOR ups@192.168.10.23 1 upsmon_local mypassword secondary
+              SHUTDOWNCMD "/sbin/poweroff"
+            mountPath: /usr/local/etc/nut/upsmon.conf
 
 
 
@@ -235,6 +241,13 @@ nodes:
           - network: 0.0.0.0/0
             gateway: "192.168.10.1"
         mtu: 1500
+    extensionServices:
+      - name: nut-client
+        configFiles:
+          - content: |-
+              MONITOR ups@192.168.10.23 1 upsmon_local mypassword secondary
+              SHUTDOWNCMD "/sbin/poweroff"
+            mountPath: /usr/local/etc/nut/upsmon.conf
 
   - hostname: "blade5"
     ipAddress: "102.168.10.35"
@@ -293,6 +306,13 @@ nodes:
           - network: 0.0.0.0/0
             gateway: "192.168.10.1"
         mtu: 1500
+    extensionServices:
+      - name: nut-client
+        configFiles:
+          - content: |-
+              MONITOR ups@192.168.10.23 1 upsmon_local mypassword secondary
+              SHUTDOWNCMD "/sbin/poweroff"
+            mountPath: /usr/local/etc/nut/upsmon.conf
 
   - hostname: "blade6"
     ipAddress: "102.168.10.36"
@@ -351,6 +371,13 @@ nodes:
           - network: 0.0.0.0/0
             gateway: "192.168.10.1"
         mtu: 1500
+    extensionServices:
+      - name: nut-client
+        configFiles:
+          - content: |-
+              MONITOR ups@192.168.10.23 1 upsmon_local mypassword secondary
+              SHUTDOWNCMD "/sbin/poweroff"
+            mountPath: /usr/local/etc/nut/upsmon.conf
 
   - hostname: "blade7"
     ipAddress: "102.168.10.37"
@@ -409,6 +436,13 @@ nodes:
           - network: 0.0.0.0/0
             gateway: "192.168.10.1"
         mtu: 1500
+    extensionServices:
+      - name: nut-client
+        configFiles:
+          - content: |-
+              MONITOR ups@192.168.10.23 1 upsmon_local mypassword secondary
+              SHUTDOWNCMD "/sbin/poweroff"
+            mountPath: /usr/local/etc/nut/upsmon.conf
 
   - hostname: "blade8"
     ipAddress: "102.168.10.38"
@@ -467,7 +501,13 @@ nodes:
           - network: 0.0.0.0/0
             gateway: "192.168.10.1"
         mtu: 1500
-
+    extensionServices:
+      - name: nut-client
+        configFiles:
+          - content: |-
+              MONITOR ups@192.168.10.23 1 upsmon_local mypassword secondary
+              SHUTDOWNCMD "/sbin/poweroff"
+            mountPath: /usr/local/etc/nut/upsmon.conf
 
 
 
