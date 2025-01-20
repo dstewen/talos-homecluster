@@ -79,11 +79,3 @@ spec:
             relabelings:
               - sourceLabels: [__meta_kubernetes_pod_node_name]
                 targetLabel: node
-    resources:
-      requests:
-        gpu.intel.com/i915: 1
-        cpu: 100m
-        memory: 100Mi
-      limits:
-        gpu.intel.com/i915: 1
-        memory: 500Mi
