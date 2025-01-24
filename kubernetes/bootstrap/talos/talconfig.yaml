@@ -120,8 +120,10 @@ nodes:
               SHUTDOWNCMD "/sbin/poweroff"
             mountPath: /usr/local/etc/nut/upsmon.conf
 
+
+# https://github.com/xvzf/homeassistant-yellow-talos
   - hostname: "pi4cmio"
-    ipAddress: "102.168.10.25"
+    ipAddress: "192.168.10.25"
     installDisk: /dev/mmcblk0
     talosImageURL: factory.talos.dev/installer/488a948de2b6aa44262c404196bc9a0ba7928dd1c4a86eca22003e7798c7b93d # Need to change to schematic that has nut
     schematic:
@@ -185,7 +187,7 @@ nodes:
 
 
   - hostname: "blade4"
-    ipAddress: "102.168.10.34"
+    ipAddress: "192.168.10.34"
     installDisk: /dev/mmcblk0
     talosImageURL: factory.talos.dev/installer/488a948de2b6aa44262c404196bc9a0ba7928dd1c4a86eca22003e7798c7b93d
     schematic:
@@ -250,7 +252,7 @@ nodes:
             mountPath: /usr/local/etc/nut/upsmon.conf
 
   - hostname: "blade5"
-    ipAddress: "102.168.10.35"
+    ipAddress: "192.168.10.35"
     installDisk: /dev/mmcblk0
     talosImageURL: factory.talos.dev/installer/488a948de2b6aa44262c404196bc9a0ba7928dd1c4a86eca22003e7798c7b93d
     schematic:
@@ -315,7 +317,7 @@ nodes:
             mountPath: /usr/local/etc/nut/upsmon.conf
 
   - hostname: "blade6"
-    ipAddress: "102.168.10.36"
+    ipAddress: "192.168.10.36"
     installDisk: /dev/mmcblk0
     talosImageURL: factory.talos.dev/installer/488a948de2b6aa44262c404196bc9a0ba7928dd1c4a86eca22003e7798c7b93d
     schematic:
@@ -380,7 +382,7 @@ nodes:
             mountPath: /usr/local/etc/nut/upsmon.conf
 
   - hostname: "blade7"
-    ipAddress: "102.168.10.37"
+    ipAddress: "192.168.10.37"
     installDisk: /dev/mmcblk0
     talosImageURL: factory.talos.dev/installer/488a948de2b6aa44262c404196bc9a0ba7928dd1c4a86eca22003e7798c7b93d
     schematic:
@@ -445,7 +447,7 @@ nodes:
             mountPath: /usr/local/etc/nut/upsmon.conf
 
   - hostname: "blade8"
-    ipAddress: "102.168.10.38"
+    ipAddress: "192.168.10.38"
     installDisk: /dev/mmcblk0
     talosImageURL: factory.talos.dev/installer/488a948de2b6aa44262c404196bc9a0ba7928dd1c4a86eca22003e7798c7b93d
     schematic:
