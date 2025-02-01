@@ -80,6 +80,6 @@ spec:
 
     persistence:
       config:
-        existingClaim: open-webui-data-pvc
+        existingClaim: open-webui-data
         globalMounts:
           - path: /app/backend/data
