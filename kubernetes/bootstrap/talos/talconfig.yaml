@@ -132,7 +132,7 @@ nodes:
         options:
             configTxtAppend: |
               # Disable SD Card
-              dtparam=sd=off
+              # dtparam=sd=off
 
               # CM4 USB
               dtoverlay=dwc2,dr_mode=host
