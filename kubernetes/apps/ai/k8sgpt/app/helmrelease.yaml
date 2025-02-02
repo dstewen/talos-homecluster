@@ -30,6 +30,6 @@ spec:
     keepHistory: false
 
   values:
-    controllerManager:
+#    controllerManager:
 #      nodeSelector:
 #        node-role.kubernetes.io/worker: worker
