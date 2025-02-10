@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: "${CLAIM:=${APP}-dst}"
+  name: "${CLAIM:=${APP}}"
   labels:
     app.kubernetes.io/name: "${APP}"
 spec:
@@ -10,7 +10,7 @@ spec:
   dataSourceRef:
     kind: ReplicationDestination
     apiGroup: volsync.backube
-    name: "${APP}-dst"
+    name: "${APP}-bootstrap"
   resources:
     requests:
       storage: "${VOLSYNC_CAPACITY:-5Gi}"
