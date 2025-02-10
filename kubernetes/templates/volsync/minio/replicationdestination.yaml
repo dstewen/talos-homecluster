@@ -18,8 +18,8 @@ spec:
     volumeSnapshotClassName: "${VOLSYNC_SNAPSHOTCLASS:=ceph-block}"
     moverSecurityContext:
       runAsUser: ${APP_UID:=1000}
-      runAsGroup: ${APP_GID:=100}
-      fsGroup: ${APP_GID:=100}
+      runAsGroup: ${APP_GID:=1000}
+      fsGroup: ${APP_GID:=1000}
     accessModes:
       - "${VOLSYNC_ACCESSMODES:=ReadWriteOnce}"
     capacity: "${VOLSYNC_CAPACITY:=2Gi}"
