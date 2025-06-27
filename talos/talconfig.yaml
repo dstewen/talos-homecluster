@@ -5,10 +5,10 @@ clusterName: kubernetes
 talosVersion: "${talosVersion}"
 kubernetesVersion: "${kubernetesVersion}"
 
-endpoint: https://192.168.10.254:6443
+endpoint: https://10.200.15.254:6443
 additionalApiServerCertSans: &sans
   - "127.0.0.1"
-  - "192.168.10.254"
+  - "10.200.15.254"
 additionalMachineCertSans: *sans
 
 clusterPodNets: ["10.42.0.0/16"]
@@ -35,10 +35,10 @@ nodes:
           - "10.200.15.51/24"
         routes:
           - network: "0.0.0.0/0"
-            gateway: "192.168.10.1"
+            gateway: "10.200.15.1"
         mtu: 1500
         vip:
-          ip: "192.168.10.254"
+          ip: "10.200.15.254"
   - hostname: "ms2"
     ipAddress: "10.200.15.52"
     installDiskSelector:
@@ -55,10 +55,10 @@ nodes:
           - "10.200.15.52/24"
         routes:
           - network: "0.0.0.0/0"
-            gateway: "192.168.10.1"
+            gateway: "10.200.15.1"
         mtu: 1500
         vip:
-          ip: "192.168.10.254"
+          ip: "10.200.15.254"
   - hostname: "ms3"
     ipAddress: "10.200.15.53"
     installDiskSelector:
@@ -75,10 +75,10 @@ nodes:
           - "10.200.15.53/24"
         routes:
           - network: "0.0.0.0/0"
-            gateway: "192.168.10.1"
+            gateway: "10.200.15.1"
         mtu: 1500
         vip:
-          ip: "192.168.10.254"
+          ip: "10.200.15.254"
   - hostname: "blade5"
     ipAddress: "10.200.15.35"
     installDisk: "/dev/disk/by-id/nvme-WD_Blue_SN570_500GB_220628800811"
@@ -94,7 +94,7 @@ nodes:
           - "10.200.15.35/24"
         routes:
           - network: "0.0.0.0/0"
-            gateway: "192.168.10.1"
+            gateway: "10.200.15.1"
         mtu: 1500
   - hostname: "blade6"
     ipAddress: "10.200.15.36"
@@ -111,7 +111,7 @@ nodes:
           - "10.200.15.36/24"
         routes:
           - network: "0.0.0.0/0"
-            gateway: "192.168.10.1"
+            gateway: "10.200.15.1"
         mtu: 1500
   - hostname: "blade7"
     ipAddress: "10.200.15.37"
@@ -128,7 +128,7 @@ nodes:
           - "10.200.15.37/24"
         routes:
           - network: "0.0.0.0/0"
-            gateway: "192.168.10.1"
+            gateway: "10.200.15.1"
         mtu: 1500
   - hostname: "blade8"
     ipAddress: "10.200.15.38"
@@ -145,7 +145,7 @@ nodes:
           - "10.200.15.38/24"
         routes:
           - network: "0.0.0.0/0"
-            gateway: "192.168.10.1"
+            gateway: "10.200.15.1"
         mtu: 1500
 
 # Global patches
