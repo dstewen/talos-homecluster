@@ -35,15 +35,23 @@ nodes:
       - deviceSelector:
           hardwareAddr: "58:47:ca:77:cf:39"
         ignore: true
-        # 10G
-      - deviceSelector:
-          hardwareAddr: "58:47:ca:77:cf:36"
+        #bond0
+      - interface: bond0
+        bond:
+          mode: 802.3ad
+          deviceSelectors:
+            - hardwareAddr: "58:47:ca:77:cf:*"
+              driver: i40e
+          xmitHashPolicy: layer3+4
+          lacpRate: fast
+          miimon: 1000
         dhcp: false
         addresses:
           - "10.200.15.51/24"
         routes:
           - network: "0.0.0.0/0"
             gateway: "10.200.15.1"
+            metric: 1
         mtu: 1500
         vip:
           ip: "10.200.15.254"
@@ -70,15 +78,23 @@ nodes:
       - deviceSelector:
           hardwareAddr: "58:47:ca:78:f1:35"
         ignore: true
-        # 10G
-      - deviceSelector:
-          hardwareAddr: "58:47:ca:78:f1:32"
+        #bond0
+      - interface: bond0
+        bond:
+          mode: 802.3ad
+          deviceSelectors:
+            -  hardwareAddr: "58:47:ca:78:f1:*"
+               driver: i40e
+          xmitHashPolicy: layer3+4
+          lacpRate: fast
+          miimon: 1000
         dhcp: false
         addresses:
           - "10.200.15.52/24"
         routes:
           - network: "0.0.0.0/0"
             gateway: "10.200.15.1"
+            metric: 1
         mtu: 1500
         vip:
           ip: "10.200.15.254"
@@ -105,15 +121,23 @@ nodes:
       - deviceSelector:
           hardwareAddr: "58:47:ca:78:f8:4d"
         ignore: true
-        # 10G
-      - deviceSelector:
-          hardwareAddr: "58:47:ca:78:f8:4a"
+        #bond0
+      - interface: bond0
+        bond:
+          mode: 802.3ad
+          deviceSelectors:
+            -  hardwareAddr: "58:47:ca:78:f8:*"
+               driver: i40e
+          xmitHashPolicy: layer3+4
+          lacpRate: fast
+          miimon: 1000
         dhcp: false
         addresses:
           - "10.200.15.53/24"
         routes:
           - network: "0.0.0.0/0"
             gateway: "10.200.15.1"
+            metric: 1
         mtu: 1500
         vip:
           ip: "10.200.15.254"
@@ -132,14 +156,19 @@ nodes:
     talosImageURL: factory.talos.dev/installer/de1619e16531ddff67ccb4ce636a5e3ba5197eb4fc0e8421f095ec50ce9d26a6
     controlPlane: false
     networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "e4:5f:01:ec:16:b4"
+        #bond0
+      - interface: bond0
+        bond:
+          mode: active-backup
+          deviceSelectors:
+            - hardwareAddr: "e4:5f:01:ec:16:b4"
         dhcp: false
         addresses:
           - "10.200.15.35/24"
         routes:
           - network: "0.0.0.0/0"
             gateway: "10.200.15.1"
+            metric: 1
         mtu: 1500
     extensionServices:
       - name: nut-client
@@ -156,14 +185,19 @@ nodes:
     talosImageURL: factory.talos.dev/installer/de1619e16531ddff67ccb4ce636a5e3ba5197eb4fc0e8421f095ec50ce9d26a6
     controlPlane: false
     networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "e4:5f:01:ec:16:a5"
+        #bond0
+      - interface: bond0
+        bond:
+          mode: active-backup
+          deviceSelectors:
+            - hardwareAddr: "e4:5f:01:ec:16:a5"
         dhcp: false
         addresses:
           - "10.200.15.36/24"
         routes:
           - network: "0.0.0.0/0"
             gateway: "10.200.15.1"
+            metric: 1
         mtu: 1500
     extensionServices:
       - name: nut-client
@@ -180,14 +214,19 @@ nodes:
     talosImageURL: factory.talos.dev/installer/de1619e16531ddff67ccb4ce636a5e3ba5197eb4fc0e8421f095ec50ce9d26a6
     controlPlane: false
     networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "e4:5f:01:ec:16:9c"
+        #bond0
+      - interface: bond0
+        bond:
+          mode: active-backup
+          deviceSelectors:
+            - hardwareAddr: "e4:5f:01:ec:16:9c"
         dhcp: false
         addresses:
           - "10.200.15.37/24"
         routes:
           - network: "0.0.0.0/0"
             gateway: "10.200.15.1"
+            metric: 1
         mtu: 1500
     extensionServices:
       - name: nut-client
@@ -204,14 +243,19 @@ nodes:
     talosImageURL: factory.talos.dev/installer/de1619e16531ddff67ccb4ce636a5e3ba5197eb4fc0e8421f095ec50ce9d26a6
     controlPlane: false
     networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "e4:5f:01:ec:16:5a"
+        #bond0
+      - interface: bond0
+        bond:
+          mode: active-backup
+          deviceSelectors:
+            - hardwareAddr: "e4:5f:01:ec:16:5a"
         dhcp: false
         addresses:
           - "10.200.15.38/24"
         routes:
           - network: "0.0.0.0/0"
             gateway: "10.200.15.1"
+            metric: 1
         mtu: 1500
     extensionServices:
       - name: nut-client
