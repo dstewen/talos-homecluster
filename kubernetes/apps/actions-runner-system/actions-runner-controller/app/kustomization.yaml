@@ -6,4 +6,5 @@ namespace: actions-runner-system
 resources:
 #  - ./externalsecret.yaml
   - ./helmrelease.yaml
+  - ./ocirepository.yaml
   - ./secret.sops.yaml
