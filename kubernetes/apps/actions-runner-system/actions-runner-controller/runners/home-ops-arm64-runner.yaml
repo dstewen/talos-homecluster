@@ -1,0 +1,259 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: arc-home-ops
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: gha-runner-scale-set
+      version: 0.12.0
+      sourceRef:
+        kind: HelmRepository
+        name: actions-runner-controller
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    runnerScaleSetName: arc-runner-set-home-ops
+    githubConfigUrl: https://github.com/dstewen/talos-home
+    githubConfigSecret: pre-defined-secret
+    minRunners: 1
+    maxRunners: 3
+    containerMode:
+      type: dind
+    template:
+      spec:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: node-role.kubernetes.io/worker
+                  operator: In
+                  values:
+                  - worker
+            preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                - key: kubernetes.io/arch
+                  operator: In
+                  values:
+                  - arm64
+          podAntiAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+              - weight: 100
+                podAffinityTerm:
+                  labelSelector:
+                    matchExpressions:
+                      - key: actions.github.com/scale-set-name
+                        operator: In
+                        values:
+                          - arc-runner-set-home-ops
+                  topologyKey: kubernetes.io/hostname
+        containers:
+          - name: runner
+            image: ghcr.io/joryirving/actions-runner:2.325.0@sha256:9c2e75b8581ae5856613a82a3d4a5f1ed5f0b1aed25df03b154e93a32a9cc54b
+            command: ["/home/runner/run.sh"]
+
+# Required for arc metrics
+#    listenerTemplate:
+#      metadata:
+#        annotations:
+#          prometheus.io/scrape: "true"
+#          prometheus.io/path: "/metrics"
+#          prometheus.io/port: "8080"
+#    listenerTemplate:
+#      spec:
+#        containers:
+#        affinity:
+#          nodeAffinity:
+#            requiredDuringSchedulingIgnoredDuringExecution:
+#              nodeSelectorTerms:
+#              - matchExpressions:
+#                - key: node-role.kubernetes.io/worker
+#                  operator: In
+#                  values:
+#                  - worker
+#            preferredDuringSchedulingIgnoredDuringExecution:
+#            - weight: 1
+#              preference:
+#                matchExpressions:
+#                - key: kubernetes.io/arch
+#                  operator: In
+#                  values:
+#                  - arm64
+
+    listenerMetrics:
+      counters:
+        gha_started_jobs_total:
+          labels:
+            ["repository", "organization", "enterprise", "job_name", "event_name"]
+        gha_completed_jobs_total:
+          labels:
+            [
+              "repository",
+              "organization",
+              "enterprise",
+              "job_name",
+              "event_name",
+              "job_result",
+            ]
+      gauges:
+        gha_assigned_jobs:
+          labels: ["name", "namespace", "repository", "organization", "enterprise"]
+        gha_running_jobs:
+          labels: ["name", "namespace", "repository", "organization", "enterprise"]
+        gha_registered_runners:
+          labels: ["name", "namespace", "repository", "organization", "enterprise"]
+        gha_busy_runners:
+          labels: ["name", "namespace", "repository", "organization", "enterprise"]
+        gha_min_runners:
+          labels: ["name", "namespace", "repository", "organization", "enterprise"]
+        gha_max_runners:
+          labels: ["name", "namespace", "repository", "organization", "enterprise"]
+        gha_desired_runners:
+          labels: ["name", "namespace", "repository", "organization", "enterprise"]
+        gha_idle_runners:
+          labels: ["name", "namespace", "repository", "organization", "enterprise"]
+      histograms:
+        gha_job_startup_duration_seconds:
+          labels:
+            ["repository", "organization", "enterprise", "job_name", "event_name"]
+          buckets:
+            [
+              0.01,
+              0.05,
+              0.1,
+              0.5,
+              1.0,
+              2.0,
+              3.0,
+              4.0,
+              5.0,
+              6.0,
+              7.0,
+              8.0,
+              9.0,
+              10.0,
+              12.0,
+              15.0,
+              18.0,
+              20.0,
+              25.0,
+              30.0,
+              40.0,
+              50.0,
+              60.0,
+              70.0,
+              80.0,
+              90.0,
+              100.0,
+              110.0,
+              120.0,
+              150.0,
+              180.0,
+              210.0,
+              240.0,
+              300.0,
+              360.0,
+              420.0,
+              480.0,
+              540.0,
+              600.0,
+              900.0,
+              1200.0,
+              1800.0,
+              2400.0,
+              3000.0,
+              3600.0,
+            ]
+        gha_job_execution_duration_seconds:
+          labels:
+            [
+              "repository",
+              "organization",
+              "enterprise",
+              "job_name",
+              "event_name",
+              "job_result",
+            ]
+          buckets:
+            [
+              0.01,
+              0.05,
+              0.1,
+              0.5,
+              1.0,
+              2.0,
+              3.0,
+              4.0,
+              5.0,
+              6.0,
+              7.0,
+              8.0,
+              9.0,
+              10.0,
+              12.0,
+              15.0,
+              18.0,
+              20.0,
+              25.0,
+              30.0,
+              40.0,
+              50.0,
+              60.0,
+              70.0,
+              80.0,
+              90.0,
+              100.0,
+              110.0,
+              120.0,
+              150.0,
+              180.0,
+              210.0,
+              240.0,
+              300.0,
+              360.0,
+              420.0,
+              480.0,
+              540.0,
+              600.0,
+              900.0,
+              1200.0,
+              1800.0,
+              2400.0,
+              3000.0,
+              3600.0,
+            ]
+
+    controllerServiceAccount:
+      name: actions-runner-controller-gha-rs-controller
+      namespace: actions-runner-system
+#  valuesFrom:
+#    - kind: Secret
+#      name: actions-runner-controller-auth-secret
+#      valuesKey: github_app_id
+#      targetPath: githubConfigSecret.github_app_id
+#    - kind: Secret
+#      name: actions-runner-controller-auth-secret
+#      valuesKey: github_app_installation_id
+#      targetPath: githubConfigSecret.github_app_installation_id
+#    - kind: Secret
+#      name: actions-runner-controller-auth-secret
+#      valuesKey: github_app_private_key
+#      targetPath: githubConfigSecret.github_app_private_key
+    nodeSelector:
+      node-role.kubernetes.io/worker: worker
