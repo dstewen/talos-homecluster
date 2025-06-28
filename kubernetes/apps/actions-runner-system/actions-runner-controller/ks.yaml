@@ -6,9 +6,9 @@ metadata:
   name: &app actions-runner-controller
   namespace: actions-runner-system
 spec:
-  dependsOn:
-    - name: external-secrets-stores
-      namespace: external-secrets
+#  dependsOn:
+#    - name: external-secrets-stores
+#      namespace: external-secrets
   targetNamespace: actions-runner-system
   commonMetadata:
     labels:
