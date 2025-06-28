@@ -9,3 +9,4 @@ resources:
   - ./external-secrets.yaml
   - ./openebs.yaml
   - ./piraeus.yaml
+  - ./rook-ceph.yaml
