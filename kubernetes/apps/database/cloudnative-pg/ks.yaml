@@ -11,6 +11,9 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   path: ./kubernetes/apps/database/cloudnative-pg/app
+  dependsOn:
+    - name: openebs
+      namespace: openebs-system
   prune: true
   sourceRef:
     kind: GitRepository

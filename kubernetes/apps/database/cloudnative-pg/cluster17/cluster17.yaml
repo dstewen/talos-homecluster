@@ -16,7 +16,7 @@ spec:
 # Note: Bootstrap is needed when recovering from an existing cnpg cluster
   bootstrap:
     recovery:
-      source: &previousCluster postgres17-v1
+      source: &previousCluster postgres17-v2
 #    initdb:
 #      import:
 #        type: monolith
@@ -47,7 +47,7 @@ spec:
         compression: bzip2
       destinationPath: s3://cnpg-backups-new/
       endpointURL: http://192.168.10.198:9000
-      serverName: &currentCluster postgres17-v2
+      serverName: &currentCluster postgres17-v3
       s3Credentials:
         accessKeyId:
           name: cloudnative-pg-secret
