@@ -5,6 +5,7 @@ kind: Kustomization
 resources:
   - ./1password-charts.yaml
   - ./backube.yaml
+  - ./bjw-s.yaml
   - ./external-dns.yaml
   - ./external-secrets.yaml
   - ./openebs.yaml
