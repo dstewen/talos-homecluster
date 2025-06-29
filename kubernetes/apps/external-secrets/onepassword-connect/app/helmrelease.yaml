@@ -71,8 +71,8 @@ spec:
               OP_SESSION:
                 valueFrom:
                   secretKeyRef:
-                    name: onepassword-connect-secret
-                    key: token
+                    name: op-credentials
+                    key: 1password-credentials.json
             probes:
               liveness:
                 enabled: true
