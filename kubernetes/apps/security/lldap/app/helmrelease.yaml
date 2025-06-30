@@ -89,29 +89,38 @@ spec:
             port: *port
           ldap:
             port: *ldapPort
-    ingress:
+#    ingress:
+#      app:
+#        enabled: true
+#        annotations:
+#          hajimari.io/enable: "true"
+#          hajimari.io/icon: mdi:account-multiple
+#          hajimari.io/info: "LLDAP instance for home.arpa"
+#          gethomepage.dev/enabled: "true"
+#          gethomepage.dev/icon: lldap.png
+#          gethomepage.dev/name: LLDAP
+#          gethomepage.dev/group: Infrastructure
+#          gethomepage.dev/description: OIDC User Management
+#        className: internal
+#        hosts:
+#          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+#            paths:
+#              - path: /
+#                service:
+#                  identifier: app
+#                  port: http
+#        tls:
+#          - hosts:
+#              - *host
+
+    route:
       app:
-        enabled: true
-        annotations:
-          hajimari.io/enable: "true"
-          hajimari.io/icon: mdi:account-multiple
-          hajimari.io/info: "LLDAP instance for home.arpa"
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/icon: lldap.png
-          gethomepage.dev/name: LLDAP
-          gethomepage.dev/group: Infrastructure
-          gethomepage.dev/description: OIDC User Management
-        className: internal
-        hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
-        tls:
-          - hosts:
-              - *host
+        hostnames: ["lldap.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: internal
+            namespace: kube-system
+            sectionName: https
+
     persistence:
       data:
         type: emptyDir
