@@ -95,27 +95,63 @@ spec:
         ports:
           http:
             port: 32400
-    ingress:
+#    ingress:
+#      app:
+#        annotations:
+#          gethomepage.dev/enabled: "true"
+#          gethomepage.dev/group: Video
+#          gethomepage.dev/name: Plex
+#          gethomepage.dev/icon: plex.png
+#          gethomepage.dev/description: "Plex Server Home Talos"
+##          gethomepage.dev/widget.type: overseerr
+##          gethomepage.dev/widget.url: http://overseerr.media:80
+##          gethomepage.dev/widget.key: "MTczMDYwNTU2MzE1MzkzZGVlZWE3LTNkMTMtNDkzZi05ZTEzLWVhNmZkMGRmZmFlZA=="
+#          external-dns.alpha.kubernetes.io/target: external.davidstewen.com
+#          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+#        className: external
+#        hosts:
+#          - host: "{{ .Release.Name }}.davidstewen.com"
+#            paths:
+#              - path: /
+#                service:
+#                  identifier: app
+#                  port: http
+
+    route:
       app:
         annotations:
           gethomepage.dev/enabled: "true"
-          gethomepage.dev/group: Video
+          gethomepage.dev/group: Media
           gethomepage.dev/name: Plex
           gethomepage.dev/icon: plex.png
-          gethomepage.dev/description: "Plex Server Home Talos"
-#          gethomepage.dev/widget.type: overseerr
-#          gethomepage.dev/widget.url: http://overseerr.media:80
-#          gethomepage.dev/widget.key: "MTczMDYwNTU2MzE1MzkzZGVlZWE3LTNkMTMtNDkzZi05ZTEzLWVhNmZkMGRmZmFlZA=="
-          external-dns.alpha.kubernetes.io/target: external.davidstewen.com
-          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-        className: external
-        hosts:
-          - host: "{{ .Release.Name }}.davidstewen.com"
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
+          gethomepage.dev/description: Media Player
+          gethomepage.dev/widget.type: plex
+          gethomepage.dev/widget.url: http://plex.media:32400
+#          gethomepage.dev/widget.key: "{{ `{{HOMEPAGE_VAR_PLEX_TOKEN}}` }}"
+#          gethomepage.dev/pod-selector: >-
+#            app.kubernetes.io/name in (plex)
+
+        hostnames: ["plex.davidstewen.com"]
+        parentRefs:
+          - name: external
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - name: *app
+                port: *port
+            filters:
+              - type: RequestHeaderModifier
+                requestHeaderModifier:
+                  remove: ["Range"]
+            matches:
+              - path:
+                  type: PathPrefix
+                  value: /library/streams
+          - backendRefs:
+              - name: *app
+                port: *port
+
     persistence:
       config:
         existingClaim: plex-config-0
