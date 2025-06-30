@@ -423,26 +423,36 @@ spec:
     kubeProxy:
       enabled: false # Disabled due to eBPF
     prometheus:
-      ingress:
-        enabled: true
-        ingressClassName: internal
-        annotations:
-          hajimari.io/appName: Prometheus
-          hajimari.io/icon: simple-icons:prometheus
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/icon: prometheus.png
-          gethomepage.dev/name: Prometheus
-          gethomepage.dev/group: Infrastructure
-          gethomepage.dev/description: Monitoring Scrape Service
-#          gethomepage.dev/widget.type: prometheus
-#          gethomepage.dev/widget.url: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
-          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
-        pathType: Prefix
-        hosts:
-          - "prometheus.${SECRET_DOMAIN}"
-        tls:
-          - hosts:
-              - "prometheus.${SECRET_DOMAIN}"
+#      ingress:
+#        enabled: true
+#        ingressClassName: internal
+#        annotations:
+#          hajimari.io/appName: Prometheus
+#          hajimari.io/icon: simple-icons:prometheus
+#          gethomepage.dev/enabled: "true"
+#          gethomepage.dev/icon: prometheus.png
+#          gethomepage.dev/name: Prometheus
+#          gethomepage.dev/group: Infrastructure
+#          gethomepage.dev/description: Monitoring Scrape Service
+##          gethomepage.dev/widget.type: prometheus
+##          gethomepage.dev/widget.url: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
+#          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+#        pathType: Prefix
+#        hosts:
+#          - "prometheus.${SECRET_DOMAIN}"
+#        tls:
+#          - hosts:
+#              - "prometheus.${SECRET_DOMAIN}"
+
+      route:
+        main:
+          enabled: true
+          hostnames: ["prometheus.${SECRET_DOMAIN}"]
+          parentRefs:
+            - name: internal
+              namespace: kube-system
+              sectionName: https
+
       thanosService:
         enabled: false
       thanosServiceMonitor:
