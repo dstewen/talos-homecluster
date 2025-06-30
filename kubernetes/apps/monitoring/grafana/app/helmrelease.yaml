@@ -57,7 +57,7 @@ spec:
       GF_DATE_FORMATS_USE_BROWSER_LOCALE: true
       GF_EXPLORE_ENABLED: true
       GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: natel-discrete-panel,pr0ps-trackmap-panel,panodata-map-panel
-      GF_SERVER_ROOT_URL: "https://grafana.${SECRET_DOMAIN}"
+      GF_SERVER_ROOT_URL: "https://grafana.davidstewen.com"
     envFromSecrets:
       - name: grafana-secret
     grafana.ini:
@@ -66,7 +66,7 @@ spec:
         check_for_plugin_updates: false
         reporting_enabled: false
       auth:
-        signout_redirect_url: https://id.${SECRET_DOMAIN}/application/o/grafana-provider/end-session/
+        signout_redirect_url: https://id.davidstewen.com/application/o/grafana-provider/end-session/
         oauth_auto_login: true
         oauth_allow_insecure_email_lookup: true
       auth.anonymous:
@@ -80,9 +80,9 @@ spec:
 #        client_id: # Set by env vars secret
 #        client_secret: # Set by env vars secret
         scopes: openid email profile
-        auth_url: https://id.${SECRET_DOMAIN}/application/o/authorize/
-        token_url: https://id.${SECRET_DOMAIN}/application/o/token/
-        api_url: https://id.${SECRET_DOMAIN}/application/o/userinfo/
+        auth_url: https://id.davidstewen.com/application/o/authorize/
+        token_url: https://id.davidstewen.com/application/o/token/
+        api_url: https://id.davidstewen.com/application/o/userinfo/
         # Optionally map user groups to Grafana roles
         role_attribute_path: contains(groups[*], 'Grafana Admins') && 'Admin' || contains(groups[*], 'Grafana Editors') && 'Editor' || 'Viewer'
     dashboardProviders:
@@ -931,7 +931,7 @@ spec:
     route:
       main:
         enabled: true
-        hostnames: ["grafana.${SECRET_DOMAIN}"]
+        hostnames: ["grafana.davidstewen.com"]
         parentRefs:
           - name: internal
             namespace: kube-system
