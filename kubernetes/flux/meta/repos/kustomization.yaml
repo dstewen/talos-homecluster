@@ -8,6 +8,8 @@ resources:
   - ./bjw-s.yaml
   - ./external-dns.yaml
   - ./external-secrets.yaml
+  - ./grafana.yaml
+  - ./prometheus-community.yaml
   - ./openebs.yaml
   - ./piraeus.yaml
   - ./rook-ceph.yaml
