@@ -12,6 +12,7 @@ resources:
   - ./external-secrets.yaml
   - ./grafana.yaml
   - ./intel.yaml
+  - ./kubernetes-sigs-nfd.yaml
   - ./prometheus-community.yaml
   - ./openebs.yaml
   - ./piraeus.yaml
