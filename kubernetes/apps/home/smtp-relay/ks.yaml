@@ -18,7 +18,15 @@ spec:
       kind: HelmRelease
       name: *app
       namespace: *namespace
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   path: ./kubernetes/apps/home/smtp-relay/app
+  postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
   prune: true
   sourceRef:
     kind: GitRepository
