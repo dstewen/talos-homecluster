@@ -23,7 +23,7 @@ spec:
     minRunners: 1
     maxRunners: 3
     containerMode:
-      type: dind
+      type: kubernetes
     template:
       spec:
         affinity:
@@ -58,6 +58,9 @@ spec:
           - name: runner
             image: ghcr.io/joryirving/actions-runner:2.325.0@sha256:9c2e75b8581ae5856613a82a3d4a5f1ed5f0b1aed25df03b154e93a32a9cc54b
             command: ["/home/runner/run.sh"]
+            env:
+              - name: ACTIONS_RUNNER_REQUIRE_JOB_CONTAINER
+                value: "false"
 
 # Required for arc metrics
 #    listenerTemplate:
@@ -231,7 +234,7 @@ spec:
             ]
 
     controllerServiceAccount:
-      name: actions-runner-controller-gha-rs-controller
+      name: actions-runner-controller
       namespace: actions-runner-system
 #    nodeSelector:
 #      node-role.kubernetes.io/worker: worker
