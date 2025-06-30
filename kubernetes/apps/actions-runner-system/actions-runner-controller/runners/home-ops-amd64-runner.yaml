@@ -17,7 +17,7 @@ spec:
     - name: openebs
       namespace: openebs-system
   values:
-    runnerScaleSetName: &name arc-runner-set-home-ops-amd64-runner
+#    runnerScaleSetName: &name arc-runner-set-home-ops-amd64-runner
     githubConfigUrl: https://github.com/dstewen/talos-homecluster
     githubConfigSecret: pre-defined-secret
     minRunners: 1
