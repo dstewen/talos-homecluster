@@ -106,6 +106,8 @@ spec:
         limits:
           cpu: 2000m
           memory: 2Gi
+      ingress:
+        enabled: false
 #      ingress:
 #        enabled: true
 #        ingressClassName: internal
@@ -128,14 +130,6 @@ spec:
 #        hosts:
 #          - "id.${SECRET_DOMAIN}"
 #        https: false
-
-    route:
-      app:
-        hostnames: ["id.${SECRET_DOMAIN}"]
-        parentRefs:
-          - name: internal
-            namespace: kube-system
-            sectionName: https
 
     worker:
       affinity:
