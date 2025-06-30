@@ -5,13 +5,13 @@ kind: Kustomization
 namespace: monitoring
 components:
   - ../../components/common
-resources: []
+resources:
   # Flux-Kustomizations
 #  - ./actual-budget-exporter/ks.yaml
 #  - ./cloudflare-exporter/ks.yaml
 #  - ./frigate-exporter/ks.yaml
 #  - ./grafana/ks.yaml
-#  - ./kube-prometheus-stack/ks.yaml
+  - ./kube-prometheus-stack/ks.yaml
 #  - ./kubernetes-dashboard/ks.yaml
 #  - ./loki/ks.yaml
 #  - ./netdata/ks.yaml
