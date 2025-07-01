@@ -109,7 +109,7 @@ spec:
 
     route:
       app:
-        hostnames: ["search.davidstewen.com"]
+        hostnames: ["search.${SECRET_DOMAIN}"]
         parentRefs:
           - name: internal
             namespace: kube-system
