@@ -159,7 +159,7 @@ spec:
         hostnames:
           - home-assistant.davidstewen.com
         parentRefs:
-          - name: external
+          - name: internal
             namespace: kube-system
             sectionName: https
         rules:
