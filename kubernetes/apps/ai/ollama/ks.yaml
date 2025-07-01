@@ -17,7 +17,15 @@ spec:
       kind: HelmRelease
       name: *app
       namespace: *namespace
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   path: ./kubernetes/apps/ai/ollama/app
+  postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
   prune: true
   sourceRef:
     kind: GitRepository
