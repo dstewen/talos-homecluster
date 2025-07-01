@@ -107,7 +107,7 @@ spec:
     route:
       app:
         enabled: true
-        hostnames: ["opwn-webui.davidstewen.com"]
+        hostnames: ["open-webui.davidstewen.com"]
         parentRefs:
           - name: internal
             namespace: kube-system
