@@ -127,7 +127,7 @@ spec:
 
     route:
       app:
-        hostnames: ["esphome.${SECRET_DOMAIN}"]
+        hostnames: ["esphome.davidstewen.com"]
         parentRefs:
           - name: internal
             namespace: kube-system
