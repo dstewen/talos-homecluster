@@ -19,7 +19,7 @@ spec:
   values:
 #    runnerScaleSetName: &name arc-runner-set-home-ops-amd64-runner
     githubConfigUrl: https://github.com/dstewen/talos-homecluster
-    githubConfigSecret: actions-runner-controller-auth-secret
+#    githubConfigSecret: actions-runner-controller-auth-secret
     minRunners: 1
     maxRunners: 2
     containerMode:
@@ -31,6 +31,11 @@ spec:
         resources:
           requests:
             storage: 25Gi
+
+    controllerServiceAccount:
+      name: actions-runner-controller
+      namespace: actions-runner-system
+
     template:
       spec:
 #        affinity:
@@ -253,21 +258,18 @@ spec:
               3600.0,
             ]
 
-    controllerServiceAccount:
-      name: actions-runner-controller
-      namespace: actions-runner-system
 #    nodeSelector:
 #      node-role.kubernetes.io/worker: worker
   valuesFrom:
     - kind: Secret
-      name: actions-runner-controller-secret
+      name: actions-runner-controller-auth-secret
       valuesKey: github_app_id
       targetPath: githubConfigSecret.github_app_id
     - kind: Secret
-      name: actions-runner-controller-secret
+      name: actions-runner-controller-auth-secret
       valuesKey: github_app_installation_id
       targetPath: githubConfigSecret.github_app_installation_id
     - kind: Secret
-      name: actions-runner-controller-secret
+      name: actions-runner-controller-auth-secret
       valuesKey: github_app_private_key
       targetPath: githubConfigSecret.github_app_private_key
