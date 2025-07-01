@@ -5,17 +5,17 @@ kind: HelmRelease
 metadata:
   name: searxng
 spec:
-  interval: 30m
-  chart:
-    spec:
-      chart: app-template
-      version: 3.7.3
-      interval: 30m
-      sourceRef:
-        kind: HelmRepository
-        name: bjw-s
-        namespace: flux-system
-
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
   values:
 
     defaultPodOptions:
@@ -94,18 +94,30 @@ spec:
           http:
             port: *httpPort
 
-    ingress:
+#    ingress:
+#      app:
+#        className: "internal"
+#        annotations:
+#          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+#        hosts:
+#          - host: search.${SECRET_DOMAIN}
+#            paths:
+#              - path: /
+#                service:
+#                  identifier: app
+#                  port: http
+
+    route:
       app:
-        className: "internal"
-        annotations:
-          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
-        hosts:
-          - host: search.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
+        hostnames: ["search.davidstewen.com"]
+        parentRefs:
+          - name: internal
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
 
     persistence:
       config:
