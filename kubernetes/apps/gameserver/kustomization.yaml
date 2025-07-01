@@ -5,6 +5,6 @@ kind: Kustomization
 namespace: gameserver
 components:
     - ../../../../components/volsync
-resources: []
+resources:
   # Flux-Kustomizations1
-#  - ./minecraft/ks.yaml
+  - ./minecraft/ks.yaml
