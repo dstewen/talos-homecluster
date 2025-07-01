@@ -5,7 +5,7 @@ kind: Kustomization
 namespace: media
 components:
   - ../../components/common
-resources:
+resources: []
   # Flux-Kustomizations
 #  - _pvc
 #  - ./arr-misc/ks.yaml
@@ -17,7 +17,7 @@ resources:
 #  - ./maintainerr/ks.yaml
 #  - ./overseerr/ks.yaml
 #  - ./paperless/ks.yaml
-  - ./plex/ks.yaml
+#  - ./plex/ks.yaml
 #  - ./prowlarr/ks.yaml
 #  - ./qbittorrent/ks.yaml
 #  - ./radarr/ks.yaml
