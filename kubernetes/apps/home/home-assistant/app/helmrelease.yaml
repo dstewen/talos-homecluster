@@ -97,53 +97,89 @@ spec:
                 memory: 1024M
     service:
       app:
-        controller: home-assistant
+        primary: true
+        type: LoadBalancer
+        sessionAffinity: ClientIP
+        annotations:
+          lbipam.cilium.io/ips: ${SVC_HASS_ADDR}
         ports:
           http:
             port: 8123
+      code-server:
+        ports:
           code-server:
             port: 12321
-    ingress:
+#    ingress:
+#      app:
+#        annotations:
+#          external-dns.alpha.kubernetes.io/target: external.davidstewen.com
+#          gethomepage.dev/enabled: "true"
+#          gethomepage.dev/icon: home-assistant.png
+#          gethomepage.dev/name: Home-Assistant-CM4-Cluster
+#          gethomepage.dev/group: Home
+#          gethomepage.dev/href: https://home-assistant.${SECRET_DOMAIN}
+#          hajimari.io/enable: "true"
+#          hajimari.io/icon: mdi:home-assistant
+#          hajimari.io/group: Home
+#          hajimari.io/url: https://home-assistant.${SECRET_DOMAIN}
+#        className: external
+#        hosts:
+#          - host: home-assistant.davidstewen.com
+#            paths:
+#              - path: /
+#                service:
+#                  identifier: app
+#                  port: http
+
+
+
+#      code-server:
+#        annotations:
+#          external-dns.alpha.kubernetes.io/target: internal.davidstewen.com
+#          gethomepage.dev/enabled: "true"
+#          gethomepage.dev/icon: home-assistant.png
+#          gethomepage.dev/name: Home-Assistant-Yellow
+#          gethomepage.dev/group: Home
+#          gethomepage.dev/href: https://hass-code.${SECRET_DOMAIN}
+#          hajimari.io/enable: "true"
+#          hajimari.io/icon: mdi:home-assistant
+#          hajimari.io/group: Home
+#          hajimari.io/url: https://hass-code.${SECRET_DOMAIN}
+#        className: internal
+#        hosts:
+#          - host: hass-code.davidstewen.com
+#            paths:
+#              - path: /
+#                service:
+#                  identifier: app
+#                  port: code-server
+
+    route:
       app:
-        annotations:
-          external-dns.alpha.kubernetes.io/target: external.davidstewen.com
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/icon: home-assistant.png
-          gethomepage.dev/name: Home-Assistant-CM4-Cluster
-          gethomepage.dev/group: Home
-          gethomepage.dev/href: https://home-assistant.${SECRET_DOMAIN}
-          hajimari.io/enable: "true"
-          hajimari.io/icon: mdi:home-assistant
-          hajimari.io/group: Home
-          hajimari.io/url: https://home-assistant.${SECRET_DOMAIN}
-        className: external
-        hosts:
-          - host: home-assistant.davidstewen.com
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
-      code-server:
-        annotations:
-          external-dns.alpha.kubernetes.io/target: internal.davidstewen.com
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/icon: home-assistant.png
-          gethomepage.dev/name: Home-Assistant-Yellow
-          gethomepage.dev/group: Home
-          gethomepage.dev/href: https://hass-code.${SECRET_DOMAIN}
-          hajimari.io/enable: "true"
-          hajimari.io/icon: mdi:home-assistant
-          hajimari.io/group: Home
-          hajimari.io/url: https://hass-code.${SECRET_DOMAIN}
-        className: internal
-        hosts:
-          - host: hass-code.davidstewen.com
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: code-server
+        hostnames:
+          - home-assistant.davidstewen.com
+        parentRefs:
+          - name: external
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /code/
+            filters:
+              - type: URLRewrite
+                urlRewrite:
+                  path:
+                    type: ReplacePrefixMatch
+                    replacePrefixMatch: /
+            backendRefs:
+              - identifier: code-server
+                port: 12321
+          - backendRefs:
+              - identifier: app
+                port: 8123
+
     persistence:
       config:
         existingClaim: ${VOLSYNC_CLAIM}
