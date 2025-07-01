@@ -82,7 +82,6 @@ spec:
 #        kubernetes.io/hostname: k3sworker1
     service:
       app:
-        controller: plex
         type: LoadBalancer
         annotations:
           lbipam.cilium.io/ips: ${SVC_PLEX_ADDR}
