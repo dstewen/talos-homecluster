@@ -82,7 +82,7 @@ spec:
 #        intel.feature.node.kubernetes.io/gpu: "true"
     service:
       app:
-        controller: frigate
+#        controller: frigate
         annotations:
           lbipam.cilium.io/ips: ${SVC_FRIGATE_ADDR}
         type: LoadBalancer
