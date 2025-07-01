@@ -54,7 +54,7 @@ spec:
       runAsUser: 1000
       fsGroup: 1000
     serviceAnnotations:
-      lbipam.cilium.io/ips: ${SVC_MC_ADDR}
+      lbipam.cilium.io/ips: "10.200.15.230"
 #      mc-router.itzg.me/externalServerName: "mcsv.${SECRET_DOMAIN}"
     livenessProbe:
       command:
@@ -91,7 +91,7 @@ spec:
       jvmXXOpts: "-XX:MaxRAMPercentage=75"
       memory: 12288M
       serviceType: LoadBalancer
-      loadBalancerIP: "192.168.10.230"
+      loadBalancerIP: "10.200.15.230"
 #      servicePort: 25565
       motd: "TurtleTest FTB:R"
       externalTrafficPolicy: Cluster
