@@ -30,7 +30,7 @@ spec:
     provider: sops
     secretRef:
       name: sops-age
-  path: ./kubernetes/apps/home/smtp-relay/app
+  path: ./kubernetes/apps/home/frigate/app
   postBuild:
     substitute:
       APP: *app
