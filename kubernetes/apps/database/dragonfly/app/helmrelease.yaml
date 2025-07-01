@@ -37,6 +37,8 @@ spec:
 #                - amd64
     controllers:
       dragonfly-operator:
+        serviceAccount:
+          identifier: *app
         replicas: 1
         strategy: RollingUpdate
         containers:
@@ -103,8 +105,7 @@ spec:
 #    nodeSelector:
 #      kubernetes.io/arch: amd64
     serviceAccount:
-      create: true
-      name: *app
+      dragonfly-operator: {}
     serviceMonitor:
       app:
         serviceName: *app
