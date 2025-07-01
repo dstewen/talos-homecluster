@@ -5,8 +5,8 @@ kind: Kustomization
 namespace: selfhosted
 components:
   - ../../components/common
-resources:
+resources: []
   # Flux-Kustomizations
 #  - ./atuin/ks.yaml
 #  - ./it-tools/ks.yaml
-  - ./searxng/ks.yaml
+#  - ./searxng/ks.yaml
