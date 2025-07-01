@@ -80,7 +80,7 @@ spec:
         seccompProfile: { type: RuntimeDefault }
     service:
       app:
-        controller: mosquitto
+#        controller: mosquitto
         type: LoadBalancer
         annotations:
           lbipam.cilium.io/ips: "${SVC_MQTT_ADDR}"
