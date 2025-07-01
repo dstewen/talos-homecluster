@@ -26,7 +26,19 @@ spec:
       kind: HelmRelease
       name: *app
       namespace: *namespace
-  path: ./kubernetes/apps/home/frigate/app
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+  path: ./kubernetes/apps/home/smtp-relay/app
+  postBuild:
+    substitute:
+      APP: *app
+      VOLSYNC_CLAIM: frigate
+      VOLSYNC_CAPACITY: 10Gi
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
   prune: true
   sourceRef:
     kind: GitRepository
@@ -36,8 +48,3 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 5m
-  postBuild:
-    substitute:
-      APP: *app
-      VOLSYNC_CLAIM: frigate
-      VOLSYNC_CAPACITY: 10Gi
