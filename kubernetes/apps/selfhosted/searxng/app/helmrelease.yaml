@@ -117,7 +117,7 @@ spec:
         rules:
           - backendRefs:
               - identifier: app
-                port: *port
+                port: *httpPort
 
     persistence:
       config:
