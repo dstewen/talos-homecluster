@@ -91,9 +91,7 @@ spec:
       mgr:
         count: 1
         modules:
-          - name: diskprediction_local
-            enabled: true
-          - name: insights
+          - name: rook
             enabled: true
           - name: pg_autoscaler
             enabled: true
