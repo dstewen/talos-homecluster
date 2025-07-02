@@ -5,26 +5,17 @@ kind: HelmRelease
 metadata:
   name: &app actual-budget-exporter
 spec:
-  interval: 30m
-  chart:
-    spec:
-      chart: app-template
-      version: 3.7.3
-      interval: 30m
-      sourceRef:
-        kind: HelmRepository
-        name: bjw-s
-        namespace: flux-system
-  maxHistory: 2
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: app-template
   install:
     remediation:
-      retries: 5
+      retries: -1
   upgrade:
     cleanupOnFail: true
     remediation:
-      retries: 5
-  uninstall:
-    keepHistory: false
+      retries: 3
   values:
     controllers:
       actual-budget-exporter:
