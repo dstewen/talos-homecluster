@@ -81,11 +81,11 @@ spec:
               - mountPath: /var/run/secrets/talos.dev
                 name: talos
                 readOnly: true
-        serviceAccountName: actions-runner
+        serviceAccountName: *name
         volumes:
           - name: talos
             secret:
-              secretName: actions-runner
+              secretName: *name
 
 # Required for arc metrics
 #    listenerTemplate:
