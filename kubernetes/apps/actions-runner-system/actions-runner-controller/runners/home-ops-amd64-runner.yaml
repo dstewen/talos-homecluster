@@ -19,7 +19,7 @@ spec:
   values:
 #    runnerScaleSetName: &name arc-runner-set-home-ops-amd64-runner
     githubConfigUrl: https://github.com/dstewen/talos-homecluster
-#    githubConfigSecret: actions-runner-controller-auth-secret
+    githubConfigSecret: actions-runner-controller-auth-secret
     minRunners: 1
     maxRunners: 2
     containerMode:
