@@ -6,7 +6,7 @@ resources:
 #  - ./container-runner.yaml
 #  - ./externalsecret.yaml
   - ./home-ops-amd64-runner.yaml
-#  - ./home-ops-arm64-runner.yaml
+  - ./home-ops-arm64-runner.yaml
   - ./ocirepository.yaml
   - ./rbac.yaml
 #  - ./secret.sops.yaml
