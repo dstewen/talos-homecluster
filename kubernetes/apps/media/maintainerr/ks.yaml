@@ -6,6 +6,11 @@ metadata:
   name: &app maintainerr
   namespace: &namespace media
 spec:
+  dependsOn:
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
+    - name: volsync
+      namespace: volsync
   targetNamespace: *namespace
   commonMetadata:
     labels:
@@ -14,6 +19,10 @@ spec:
     - ../../../../components/volsync
   interval: 30m
   timeout: 5m
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   path: "./kubernetes/apps/media/maintainerr/app"
   prune: true
   sourceRef:
@@ -21,14 +30,12 @@ spec:
     name: flux-system
     namespace: flux-system
   wait: false
-  dependsOn:
-    - name: rook-ceph-cluster
-      namespace: rook-ceph
-    - name: volsync
-      namespace: volsync
   postBuild:
     substitute:
       APP: *app
       APP_UID: "1000"
       APP_GID: "1000"
       VOLSYNC_CLAIM: maintainerr-data
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
