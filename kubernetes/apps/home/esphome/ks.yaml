@@ -6,17 +6,21 @@ metadata:
   name: &app esphome
   namespace: &namespace home
 spec:
+  dependsOn:
+    - name: external-secrets-stores
+      namespace: external-secrets
+    - name: volsync
+      namespace: volsync
   targetNamespace: *namespace
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
   components:
     - ../../../../components/volsync
-  dependsOn:
-    - name: external-secrets-stores
-      namespace: external-secrets
-    - name: volsync
-      namespace: volsync
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   path: ./kubernetes/apps/home/esphome/app
   prune: true
   sourceRef:
@@ -34,3 +38,6 @@ spec:
       APP_GID: "1000"
       VOLSYNC_CLAIM: esphome-config
       VOLSYNC_CAPACITY: 5Gi
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
