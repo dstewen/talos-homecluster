@@ -1,7 +1,7 @@
 ---
 version: "0.14"
 mqtt:
-  host: 192.168.10.228
+  host: 10.200.15.228
   topic_prefix: frigate
   port: 1883
   user: "{FRIGATE_MQTT_USERNAME}"
@@ -62,7 +62,7 @@ go2rtc:
   webrtc:
 #    listen: ":8555"
     candidates:
-      - 192.168.10.238:8555 # <--- enter frigate host IP here
+      - 10.200.15.238:8555 # <--- enter frigate host IP here
       - stun:8555
 cameras:
 #  phone_rtsp:
