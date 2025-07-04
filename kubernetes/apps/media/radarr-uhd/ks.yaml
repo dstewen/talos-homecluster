@@ -21,6 +21,10 @@ spec:
       app.kubernetes.io/name: *app
   components:
     - ../../../../components/volsync
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   path: ./kubernetes/apps/media/radarr-uhd/app
   prune: true
   sourceRef:
@@ -38,3 +42,6 @@ spec:
       APP_GID: "568"
       VOLSYNC_CLAIM: radarr-uhd
       VOLSYNC_CAPACITY: 15Gi
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
