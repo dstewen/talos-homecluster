@@ -156,8 +156,7 @@ spec:
 
     route:
       app:
-        hostnames:
-          - home-assistant.davidstewen.com
+        hostnames: ["home-assistant.davidstewen.com"]
         parentRefs:
           - name: external
             namespace: kube-system
