@@ -135,7 +135,7 @@ spec:
 
     route:
       app:
-        hostnames: ["prowlarr.davidstewen.com"]
+        hostnames: ["qb.davidstewen.com"]
         parentRefs:
           - name: internal
             namespace: kube-system
