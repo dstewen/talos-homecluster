@@ -20,7 +20,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   components:
-    - ../../../../flux/components/volsync
+    - ../../../../components/volsync
   path: ./kubernetes/apps/media/radarr/app
   prune: true
   sourceRef:
