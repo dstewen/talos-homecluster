@@ -100,7 +100,7 @@ spec:
           lbipam.cilium.io/ips: ${SVC_UNIFI_ADDR}
         ports:
           http:
-            port: 8443
+            port: &port 8443
             protocol: HTTPS
           controller:
             enabled: true
@@ -130,28 +130,43 @@ spec:
             enabled: true
             port: 10001
             protocol: UDP
-    ingress:
+#    ingress:
+#      app:
+#        enabled: true
+#        className: "internal"
+#        annotations:
+#          external-dns.alpha.kubernetes.io/target: internal.davidstewen.com
+#          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+##          nginx.ingress.kubernetes.io/proxy-ssl-verify: "off"
+#          hajimari.io/icon: mdi-lan
+#          hajimari.io/group: Home
+#          hajimari.io/appName: Unifi Network Controller
+#          hajimari.io/url: https://unifi.${SECRET_DOMAIN}
+#        hosts:
+#          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+#            paths:
+#              - path: /
+#                service:
+#                  identifier: app
+#                  port: http
+#        tls:
+#          - hosts:
+#              - *host
+
+    route:
       app:
-        enabled: true
-        className: "internal"
-        annotations:
-          external-dns.alpha.kubernetes.io/target: internal.davidstewen.com
-          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-#          nginx.ingress.kubernetes.io/proxy-ssl-verify: "off"
-          hajimari.io/icon: mdi-lan
-          hajimari.io/group: Home
-          hajimari.io/appName: Unifi Network Controller
-          hajimari.io/url: https://unifi.${SECRET_DOMAIN}
-        hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
-        tls:
-          - hosts:
-              - *host
+        hostnames: ["unifitalos.davidstewen.com"]
+        parentRefs:
+          - name: internal
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
+            timeouts:
+              request: 0s  # websocket, never time out
+              backendRequest: 0s  # websocket, never time out
 
     persistence:
       data:
