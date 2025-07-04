@@ -24,6 +24,18 @@ spec:
     maxRunners: 3
     containerMode:
       type: kubernetes
+      kubernetesModeWorkVolumeClaim:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: openebs-hostpath
+        resources:
+          requests:
+            storage: 25Gi
+
+    controllerServiceAccount:
+      name: actions-runner-controller
+      namespace: actions-runner-system
+
     template:
       spec:
         affinity:
@@ -61,6 +73,19 @@ spec:
             env:
               - name: ACTIONS_RUNNER_REQUIRE_JOB_CONTAINER
                 value: "false"
+              - name: NODE
+                valueFrom:
+                  fieldRef:
+                    fieldPath: status.hostIP
+            volumeMounts:
+              - mountPath: /var/run/secrets/talos.dev
+                name: talos
+                readOnly: true
+        serviceAccountName: *name
+        volumes:
+          - name: talos
+            secret:
+              secretName: *name
 
 # Required for arc metrics
 #    listenerTemplate:
@@ -233,9 +258,6 @@ spec:
               3600.0,
             ]
 
-    controllerServiceAccount:
-      name: actions-runner-controller
-      namespace: actions-runner-system
 #    nodeSelector:
 #      node-role.kubernetes.io/worker: worker
 #  valuesFrom:
