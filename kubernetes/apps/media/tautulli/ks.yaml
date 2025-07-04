@@ -6,17 +6,21 @@ metadata:
   name: &app tautulli
   namespace: &namespace media
 spec:
+  dependsOn:
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
+    - name: volsync
+      namespace: volsync
   targetNamespace: *namespace
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
   components:
     - ../../../../components/volsync
-  dependsOn:
-    - name: rook-ceph-cluster
-      namespace: rook-ceph
-    - name: volsync
-      namespace: volsync
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   path: ./kubernetes/apps/media/tautulli/app
   prune: true
   sourceRef:
@@ -32,3 +36,6 @@ spec:
       APP: *app
       VOLSYNC_CLAIM: *app
       VOLSYNC_CAPACITY: 5Gi
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
