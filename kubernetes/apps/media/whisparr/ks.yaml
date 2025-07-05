@@ -17,6 +17,10 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   path: ./kubernetes/apps/media/whisparr/app
   prune: true
   sourceRef:
@@ -27,3 +31,7 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 5m
+  postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
