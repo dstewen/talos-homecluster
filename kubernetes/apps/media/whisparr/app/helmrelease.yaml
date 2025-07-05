@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: whisparr
+  name: &app whisparr
 spec:
   interval: 1h
   chartRef:
@@ -100,23 +100,36 @@ spec:
         ports:
           http:
             port: *port
-    ingress:
+#    ingress:
+#      app:
+#        annotations:
+#          gethomepage.dev/enabled: "true"
+#          gethomepage.dev/group: Adult Video
+#          gethomepage.dev/name: Whisparr
+#          gethomepage.dev/icon: whisparr.png
+#          gethomepage.dev/description: Whisparr Adult Content
+#          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+#        className: internal
+#        hosts:
+#          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
+#            paths:
+#              - path: /
+#                service:
+#                  identifier: app
+#                  port: http
+
+    route:
       app:
-        annotations:
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/group: Adult Video
-          gethomepage.dev/name: Whisparr
-          gethomepage.dev/icon: whisparr.png
-          gethomepage.dev/description: Whisparr Adult Content
-          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
-        className: internal
-        hosts:
-          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
+        hostnames: ["whisparr.davidstewen.com"]
+        parentRefs:
+          - name: internal
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - name: *app
+                port: *port
+
     persistence:
       config:
         existingClaim: whisparr
