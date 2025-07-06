@@ -8,5 +8,5 @@ components:
 resources:
   # Flux-Kustomizations
 #  - ./atuin/ks.yaml
-#  - ./it-tools/ks.yaml
+  - ./it-tools/ks.yaml
   - ./searxng/ks.yaml
