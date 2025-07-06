@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: it-tools
+  name: &app it-tools
 spec:
   interval: 1h
   chartRef:
@@ -78,30 +78,42 @@ spec:
           http:
             port: 8080
 
-    ingress:
+#    ingress:
+#      app:
+#        className: "internal"
+#        annotations:
+#          external-dns.alpha.kubernetes.io/target: internal.davidstewen.com
+#          gethomepage.dev/enabled: "true"
+#          gethomepage.dev/icon: it-tools.png
+#          gethomepage.dev/name: IT Tools
+#          gethomepage.dev/group: Selfhosted
+#          gethomepage.dev/href: https://it-tools.${SECRET_DOMAIN}
+#          hajimari.io/enable: "true"
+#          hajimari.io/icon: mdi:it-tools
+#          hajimari.io/group: Selfhosted
+#          hajimari.io/url: https://it-tools.${SECRET_DOMAIN}
+#        hosts:
+#          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+#            paths:
+#              - path: /
+#                service:
+#                  identifier: app
+#                  port: http
+#        tls:
+#          - hosts:
+#              - *host
+
+    route:
       app:
-        className: "internal"
-        annotations:
-          external-dns.alpha.kubernetes.io/target: internal.davidstewen.com
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/icon: it-tools.png
-          gethomepage.dev/name: IT Tools
-          gethomepage.dev/group: Selfhosted
-          gethomepage.dev/href: https://it-tools.${SECRET_DOMAIN}
-          hajimari.io/enable: "true"
-          hajimari.io/icon: mdi:it-tools
-          hajimari.io/group: Selfhosted
-          hajimari.io/url: https://it-tools.${SECRET_DOMAIN}
-        hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
-        tls:
-          - hosts:
-              - *host
+        hostnames: ["it-tools.davidstewen.com"]
+        parentRefs:
+          - name: internal
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - name: *app
+                port: *port
 
     persistence:
       tmp:
