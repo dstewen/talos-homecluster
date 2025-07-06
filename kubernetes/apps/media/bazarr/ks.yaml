@@ -17,6 +17,10 @@ spec:
       namespace: rook-ceph
     - name: volsync
       namespace: volsync
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   components:
     - ../../../../components/volsync
   path: ./kubernetes/apps/media/bazarr/app
@@ -36,3 +40,6 @@ spec:
       APP_GID: "568"
       VOLSYNC_CLAIM: bazarr
       VOLSYNC_CAPACITY: 10Gi
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
