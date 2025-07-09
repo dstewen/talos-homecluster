@@ -72,6 +72,6 @@ spec:
       nas:
         type: nfs
         server: 192.168.10.15
-        path: /volume2/piNFS01/flux-cluster/postgres/backups
+        path: /volume2/piNFS01/flux-cluster/postgres/postgres17/backups
         globalMounts:
           - path: /backups
