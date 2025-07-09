@@ -5,7 +5,7 @@ resources:
   - ./externalsecret.yaml
   - ./helmrelease.yaml
 configMapGenerator:
-  - name: cnpg-backup-scripts
+  - name: cnpg-backup16-scripts
     files:
       - list_dbs.sh=./resources/list_dbs.sh
 generatorOptions:

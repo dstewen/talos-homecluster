@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app cnpg-backup
+  name: &app cnpg-backup16
 spec:
   interval: 1h
   chartRef:
@@ -28,7 +28,7 @@ spec:
 #              EXCLUDE_DBS: app readarr_cache readarr_log postgres template0 template1
             envFrom: &envFrom
               - secretRef:
-                  name: cnpg-backup-secret
+                  name: cnpg-backup16-secret
         containers:
           app:
             image:
@@ -63,7 +63,7 @@ spec:
           - path: /config
       script:
         type: configMap
-        name: cnpg-backup-scripts
+        name: cnpg-backup16-scripts
         defaultMode: 0775
         globalMounts:
           - path: /scripts/list_dbs.sh
