@@ -39,7 +39,7 @@ spec:
               TZ: Australia/Melbourne
               POSTGRES_DB_FILE: /config/db_list
               POSTGRES_EXTRA_OPTS: "--blobs --clean --create --compress=9"
-              BACKUP_DIR: /backups
+#              BACKUP_DIR: /backups
               BACKUP_KEEP_DAYS: "7"
               BACKUP_KEEP_WEEKS: "4"
               BACKUP_KEEP_MONTHS: "6"
@@ -69,7 +69,7 @@ spec:
           - path: /scripts/list_dbs.sh
             subPath: list_dbs.sh
             readOnly: true
-      nas:
+      backups:
         type: nfs
         server: 192.168.10.15
         path: /volume2/piNFS01/flux-cluster/postgres/postgres17/backups
