@@ -143,7 +143,7 @@ spec:
   dependsOn:
     - name: cloudnative-pg-cluster17
       namespace: *namespace
-  path: ./kubernetes/main/apps/database/cloudnative-pg/backup17
+  path: ./kubernetes/apps/database/cloudnative-pg/backup17
   prune: true
   sourceRef:
     kind: GitRepository
