@@ -69,9 +69,9 @@ spec:
           - path: /scripts/list_dbs.sh
             subPath: list_dbs.sh
             readOnly: true
-      nas:
-        type: nfs
-        server: 192.168.10.15
-        path: /volume2/piNFS01/flux-cluster/postgres/postgres17/backups
-        globalMounts:
-          - path: /backups
+#      nas:
+#        type: nfs
+#        server: 192.168.10.15
+#        path: /volume2/piNFS01/flux-cluster/postgres/postgres17/backups
+#        globalMounts:
+#          - path: /backups
