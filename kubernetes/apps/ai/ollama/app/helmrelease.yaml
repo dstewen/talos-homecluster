@@ -45,14 +45,14 @@ spec:
               no_proxy: localhost,127.0.0.1
               OLLAMA_HOST: 0.0.0.0
               DEVICE: Arc
-              OLLAMA_INTEL_GPU: true
+#              OLLAMA_INTEL_GPU: true
               OLLAMA_NUM_GPU: 999
               ZES_ENABLE_SYSMAN: 1
               OLLAMA_ORIGINS: "*"
               OLLAMA_LOG_LEVEL: debug
               OLLAMA_MODELS: /models
               #IPEX_LLM_NUM_CTX: 16384
-              #ONEAPI_DEVICE_SELECTOR: level_zero:0
+              ONEAPI_DEVICE_SELECTOR: level_zero:0
             resources:
               requests:
                 cpu: 2000m
