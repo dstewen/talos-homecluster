@@ -51,7 +51,7 @@ spec:
               OLLAMA_ORIGINS: "*"
               OLLAMA_LOG_LEVEL: debug
               OLLAMA_MODELS: /models
-              #IPEX_LLM_NUM_CTX: 16384
+              OLLAMA_NUM_CTX: 16384
               ONEAPI_DEVICE_SELECTOR: level_zero:0
             resources:
               requests:
