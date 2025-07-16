@@ -93,7 +93,7 @@ spec:
 #                - path: /unifi
     service:
       app:
-        controller: *app
+#        controller: *app
         type: LoadBalancer
         externalTrafficPolicy: Cluster
         annotations:
