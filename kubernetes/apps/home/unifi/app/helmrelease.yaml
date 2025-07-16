@@ -112,7 +112,7 @@ spec:
             port: 8880
             protocol: HTTP
           portal-https:
-            enabled: false
+            enabled: true
             port: 8843
             protocol: HTTPS
           speedtest:
