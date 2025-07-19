@@ -82,6 +82,11 @@ spec:
         controller: *app
         enabled: false
     persistence:
+      cache:
+        existingClaim: tdarr-cache
+        globalMounts:
+          - path: /cache
+
       movies:
         type: nfs
         server: ${NAS_IP:=temp}
