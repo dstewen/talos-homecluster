@@ -110,14 +110,14 @@ spec:
       movies:
         type: nfs
         server: 192.168.10.15
-        path: /volume2/piNFS01/flux-cluster/plex/media_new/media/Movies
+        path: /volume2/piNFS01/flux-cluster/media_new/media/Movies
         globalMounts:
           - path: /mnt/movies
 
       tv:
         type: nfs
         server: 192.168.10.15
-        path: "/volume2/piNFS01/flux-cluster/plex/media_new/media/TV Shows"
+        path: "/volume2/piNFS01/flux-cluster/media_new/media/TV Shows"
         globalMounts:
           - path: /mnt/tv
 
