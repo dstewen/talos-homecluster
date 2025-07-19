@@ -148,7 +148,7 @@ spec:
           server:
             enabled: true
             protocol: TCP
-            port: 5000
+            port: &port 5000
 
     route:
       app:
