@@ -56,6 +56,8 @@ spec:
           - 568
     controllers:
       tdarr-node:
+        replicas: 3
+        strategy: RollingUpdate
         containers:
           node:
             image:
