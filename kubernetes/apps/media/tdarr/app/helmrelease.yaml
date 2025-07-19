@@ -60,7 +60,7 @@ spec:
         controller: *app
         type: LoadBalancer
         annotations:
-          lbipam.cilium.io/ips: ${SVC_TDARR_ADDR:=temp}
+          lbipam.cilium.io/ips: 10.200.15.242
         externalTrafficPolicy: Local
         ports:
           server:
