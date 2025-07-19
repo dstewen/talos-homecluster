@@ -33,7 +33,7 @@ spec:
         seccompProfile: { type: RuntimeDefault }
 
     controllers:
-      server:
+      fileflows:
 #        initContainers:
 #          init-dirs:
 #            image:
@@ -133,11 +133,11 @@ spec:
 
 
     service:
-#      app:
-#        controller: *app
-#        ports:
-#          http:
-#            port: &port 19200
+      app:
+        controller: *app
+        ports:
+          http:
+            port: &port 5000
       server:
         controller: server
         type: LoadBalancer
@@ -148,7 +148,7 @@ spec:
           server:
             enabled: true
             protocol: TCP
-            port: &port 5000
+            port: 19200
 
     route:
       server:
