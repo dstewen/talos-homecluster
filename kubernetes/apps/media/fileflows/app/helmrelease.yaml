@@ -72,10 +72,14 @@ spec:
             args:
               - --urls=http://*:5000
               - --docker
-            env:
+            env: &server_env
+              # Causes config files at `/Data/Data/Config/<num>/config.json` to not be encrypted.
+              # Without this, the config file is encrypted using the contents of /etc/machine-id as the
+              # password. This is flawed because the key _is baked into the image_. Just disable
+              # encryption - it adds zero benefit here, and makes it so that I cannot easily load these
+              # config files on startup.
+              FF_NO_ENCRYPT: "1"
               TZ: ${TIMEZONE}
-              PUID: "568"
-              PGID: "568"
             ports:
               - name: http
                 containerPort: 5000
