@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app tdarr-node
+  name: &app tdarr-node-arm64
 spec:
   interval: 1h
   chartRef:
@@ -55,7 +55,7 @@ spec:
           - 105 # render
           - 568
     controllers:
-      tdarr-node:
+      tdarr-node-arm64:
         replicas: 3
         strategy: RollingUpdate
         containers:
@@ -65,7 +65,7 @@ spec:
               tag: 2.45.01@sha256:7e98e8b97350101bda7af1673e473edd65915f10a0c5ae040487dec220a870c8
             env:
             - name: nodeID
-              value: kube-node
+              value: kube-node-arm64
             - name: serverIP
               value: 10.200.15.242
             - name: serverPort
@@ -73,10 +73,8 @@ spec:
             resources:
               requests:
                 cpu: 100m
-                gpu.intel.com/i915: 1
               limits:
-                cpu: 2
-                gpu.intel.com/i915: 1
+                cpu: 1000m
     service:
       app:
         controller: *app
