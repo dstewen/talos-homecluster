@@ -72,7 +72,7 @@ spec:
         controller: *app
         ports:
           http:
-            port: 5000
+            port: &port 5000
 
     route:
       app:
