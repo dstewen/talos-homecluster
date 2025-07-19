@@ -139,7 +139,7 @@ spec:
 #          http:
 #            port: &port 19200
       server:
-        controller: *app
+        controller: server
         type: LoadBalancer
         annotations:
           lbipam.cilium.io/ips: 10.200.15.243
