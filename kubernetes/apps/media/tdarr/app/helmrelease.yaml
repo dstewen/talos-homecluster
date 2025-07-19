@@ -109,21 +109,21 @@ spec:
 
       movies:
         type: nfs
-        server: 192.168.10.15
+        server: ${NAS_IP:=temp}
         path: /volume2/piNFS01/flux-cluster/media_new/media/Movies
         globalMounts:
           - path: /mnt/movies
 
       tv:
         type: nfs
-        server: 192.168.10.15
+        server: ${NAS_IP:=temp}
         path: "/volume2/piNFS01/flux-cluster/media_new/media/TV Shows"
         globalMounts:
           - path: /mnt/tv
 
       other-videos:
         type: nfs
-        server: 192.168.10.15
+        server: ${NAS_IP:=temp}
         path: "/volume2/piNFS01/flux-cluster/media_new/media/Other Videos"
         globalMounts:
           - path: /mnt/other-videos
