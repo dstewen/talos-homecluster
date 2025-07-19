@@ -170,7 +170,7 @@ spec:
 
     persistence:
       config:
-        existingClaim: *app
+        existingClaim: fileflows-config
         globalMounts:
           - path: /app/Data
             readOnly: false
