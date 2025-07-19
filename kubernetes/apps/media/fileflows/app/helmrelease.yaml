@@ -33,30 +33,66 @@ spec:
         seccompProfile: { type: RuntimeDefault }
 
     controllers:
-      fileflows:
+      server:
+#        initContainers:
+#          init-dirs:
+#            image:
+#              repository: busybox
+#              tag: latest
+#            command:
+#              - sh
+#              - -c
+#              - |
+#                mkdir -p /app/Data /app/Logs /app/ManuallyAdded /temp
+#                chown -R 0:0 /app /temp
+#            securityContext:
+#              runAsUser: 0
+
         initContainers:
-          init-dirs:
+          # For some dumb reason the application tries to open and save this file even if there are no changes.
+          # This requires that the file is writable by the application.
+          preload:
             image:
-              repository: busybox
-              tag: latest
+              repository: public.ecr.aws/docker/library/alpine
+              tag: 3.22.0
             command:
-              - sh
-              - -c
-              - |
-                mkdir -p /app/Data /app/Logs /app/ManuallyAdded /temp
-                chown -R 0:0 /app /temp
-            securityContext:
-              runAsUser: 0
+              - /preload/scripts/preload.sh
+        pod:
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
 
         containers:
           app:
-            image:
+            image: &image
               repository: docker.io/revenz/fileflows
               tag: 25.07@sha256:8127cb349701bf5c8298d6e75f6e1523e59ec5197b6906996c76cd3e9b63c820
+            args:
+              - --urls=http://*:5000
+              - --docker
             env:
               TZ: ${TIMEZONE}
               PUID: "568"
               PGID: "568"
+            ports:
+              - name: http
+                containerPort: 5000
+            probes:
+              startup: &probe
+                enabled: true
+                path: /health
+                port: http
+              readiness: *probe
+              liveness: *probe
+            securityContext: &fileflows_security_context
+              allowPrivilegeEscalation: false
+              # Cannot be enabled until https://fileflows.com/ticket?id=2271 is fixed
+              # readOnlyRootFilesystem: true
+              capabilities:
+                drop:
+                  - ALL
             resources:
               requests:
                 cpu: 10m
@@ -67,12 +103,48 @@ spec:
                 memory: 2Gi
                 gpu.intel.com/i915: 1
 
+      worker:
+        replicas: 2
+        type: statefulset
+        containers:
+          app:
+            image: *image
+            args:
+              - --docker
+            env:
+              <<: *server_env
+              FFNODE: "1" # This is a worker node, not a server.
+              ServerUrl: http://fileflows.media.svc
+              POD_NAME:
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.name
+            securityContext: *fileflows_security_context
+        pod:
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+
+
     service:
-      fileflows:
+#      app:
+#        controller: *app
+#        ports:
+#          http:
+#            port: &port 19200
+      server:
         controller: *app
+        type: LoadBalancer
+        annotations:
+          lbipam.cilium.io/ips: 10.200.15.243
+        externalTrafficPolicy: Cluster
         ports:
-          http:
-            port: &port 5000
+          server:
+            enabled: true
+            protocol: TCP
+            port: 5000
 
     route:
       app:
