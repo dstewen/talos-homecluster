@@ -54,7 +54,7 @@ spec:
           preload:
             image:
               repository: public.ecr.aws/docker/library/alpine
-              tag: 3.22.0
+              tag: 3.22.1
             command:
               - /preload/scripts/preload.sh
         pod:
