@@ -42,7 +42,7 @@ spec:
               repository: ghcr.io/haveagitgat/tdarr
               tag: 2.45.01
             env:
-              TZ: "${TIMEZONE}"
+              TZ: Australia/Melbourne
             resources:
               requests:
                 cpu: 50m
