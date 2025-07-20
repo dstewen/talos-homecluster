@@ -53,3 +53,4 @@ spec:
         path: /volume2/piNFS01/flux-cluster/postgres/postgres17/backups
         globalMounts:
           - path: /backups
+            readOnly: false
