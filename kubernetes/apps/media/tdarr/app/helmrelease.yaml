@@ -98,10 +98,10 @@ spec:
               - path: /app/server
                 subPath: server
 
-      cache:
-        existingClaim: tdarr-cache
-        globalMounts:
-          - path: /cache
+#      cache:
+#        existingClaim: tdarr-cache
+#        globalMounts:
+#          - path: /cache
 
 #      media:
 #        enabled: true
