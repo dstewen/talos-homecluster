@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/instance: *name
     snapshot.home.arpa/enabled: "true"
 spec:
-  accessModes: ["ReadWriteMany"]
+  accessModes: ["ReadWriteOnce"]
   storageClassName: ceph-block
   resources:
     requests:
