@@ -33,7 +33,10 @@ spec:
               tag: 2.15.2@sha256:4e7d75c9fe8f96ae766269fb451fc5ad215451b30a463c11142c492512c021cd
             env:
               TAUTULLI__PORT: &port 8181
-              TZ: Australia/Melbourne
+              TZ: ${TIMEZONE}
+            envFrom:
+              - secretRef:
+                  name: cluster-secrets
             probes:
               liveness: &probes
                 enabled: true
@@ -94,14 +97,23 @@ spec:
 
     route:
       app:
-        hostnames: ["tautulli.davidstewen.com"]
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Media
+          gethomepage.dev/name: Tautulli
+          gethomepage.dev/icon: tautulli.png
+          gethomepage.dev/description: Plex Stream Monitoring
+          gethomepage.dev/widget.type: tautulli
+          gethomepage.dev/widget.url: http://tautulli.media
+          gethomepage.dev/widget.key: "{{ `{{HOMEPAGE_VAR_TAUTULLI_TOKEN}}` }}"
+        hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
         parentRefs:
           - name: internal
             namespace: kube-system
             sectionName: https
         rules:
           - backendRefs:
-              - name: *app
+              - identifier: app
                 port: *port
 
     persistence:
