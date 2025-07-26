@@ -15,7 +15,7 @@ resources:
 #  - ./fileflows/ks.yaml
 #  - ./immich/ks.yaml
   - ./lidarr/ks.yaml
-#  - ./maintainerr/ks.yaml
+  - ./maintainerr/ks.yaml
   - ./overseerr/ks.yaml
 #  - ./paperless/ks.yaml
   - ./plex/ks.yaml
