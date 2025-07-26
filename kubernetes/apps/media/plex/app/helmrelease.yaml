@@ -89,7 +89,7 @@ spec:
           lbipam.cilium.io/ips: ${SVC_PLEX_ADDR:=temp}
         ports:
           http:
-            port: &port port
+            port: &port 32400
 #    ingress:
 #      app:
 #        annotations:
