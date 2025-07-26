@@ -104,7 +104,7 @@ spec:
           gethomepage.dev/icon: tautulli.png
           gethomepage.dev/description: Plex Stream Monitoring
           gethomepage.dev/widget.type: tautulli
-          gethomepage.dev/widget.url: http://tautulli.media
+          gethomepage.dev/widget.url: http://tautulli.media:8181
           gethomepage.dev/widget.key: "{{ `{{HOMEPAGE_VAR_TAUTULLI_TOKEN}}` }}"
         hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
         parentRefs:
