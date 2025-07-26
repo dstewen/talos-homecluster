@@ -23,6 +23,10 @@ data:
       searchDescriptions: true
       hideInternetSearch: true
     layout:
+      AI:
+        style: row
+        columns: 2
+        icon: mdi-home-analytics
       Security:
         style: row
         columns: 2
