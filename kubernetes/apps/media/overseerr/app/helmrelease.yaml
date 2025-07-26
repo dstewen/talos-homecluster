@@ -116,9 +116,9 @@ spec:
           gethomepage.dev/icon: overseerr.png
           gethomepage.dev/description: Media Request Management
           gethomepage.dev/widget.type: overseerr
-          gethomepage.dev/widget.url: http://overseerr.media:80
+          gethomepage.dev/widget.url: http://overseerr.media
           gethomepage.dev/widget.key: "{{`{{HOMEPAGE_VAR_OVERSEERR_TOKEN}}`}}"
-        hostnames: ["requests.davidstewen.com"]
+        hostnames: ["requests.${SECRET_DOMAIN}"]
         parentRefs:
           - name: internal
             namespace: kube-system
