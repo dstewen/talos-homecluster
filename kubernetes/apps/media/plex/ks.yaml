@@ -21,6 +21,10 @@ spec:
       namespace: rook-ceph
     - name: volsync
       namespace: volsync
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   path: ./kubernetes/apps/media/plex/app
   prune: true
   sourceRef:
@@ -36,6 +40,9 @@ spec:
       APP: *app
       VOLSYNC_CLAIM: plex-config-0
       VOLSYNC_CAPACITY: 5Gi
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
 #---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
 #apiVersion: kustomize.toolkit.fluxcd.io/v1
