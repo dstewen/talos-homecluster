@@ -27,7 +27,7 @@ spec:
               repository: ghcr.io/home-operations/qbittorrent
               tag: 5.1.2@sha256:9dd0164cc23e9c937e0af27fd7c3f627d1df30c182cf62ed34d3f129c55dc0e8
             env:
-              TZ: "${TIMEZONE}"
+              TZ: ${TIMEZONE}
               QBT_WEBUI_PORT: &port 80
               QBT_TORRENTING_PORT: &torrentPort 50413
 #              CROSS_SEED_ENABLED: false
@@ -38,6 +38,9 @@ spec:
 #            envFrom:
 #              - secretRef:
 #                  name: qbittorrent-secret
+            envFrom:
+              - secretRef:
+                  name: cluster-secrets
             probes:
               liveness:
                 enabled: true
@@ -135,14 +138,23 @@ spec:
 
     route:
       app:
-        hostnames: ["qb.davidstewen.com"]
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Downloads
+          gethomepage.dev/name: qBittorrent
+          gethomepage.dev/icon: qbittorrent.png
+          gethomepage.dev/widget.type: qbittorrent
+          gethomepage.dev/widget.url: http://qbittorrent.media
+          gethomepage.dev/widget.user: "{{`{{HOMEPAGE_VAR_QBITTORRENT_USER}}`}}"
+          gethomepage.dev/widget.password: "{{`{{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}`}}"
+        hostnames: ["qb.${SECRET_DOMAIN}"]
         parentRefs:
           - name: internal
             namespace: kube-system
             sectionName: https
         rules:
           - backendRefs:
-              - name: *app
+              - identifier: app
                 port: *port
 
     persistence:
