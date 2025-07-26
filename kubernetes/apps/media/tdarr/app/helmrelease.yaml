@@ -72,7 +72,7 @@ spec:
       app:
         annotations:
           gethomepage.dev/enabled: "true"
-          gethomepage.dev/group: Video
+          gethomepage.dev/group: Media
           gethomepage.dev/name: Tdarr
           gethomepage.dev/icon: tdarr.png
           gethomepage.dev/description: Distributed transcode automation
