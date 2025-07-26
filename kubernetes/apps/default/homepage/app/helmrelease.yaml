@@ -118,4 +118,5 @@ spec:
             path: /app/config/widgets.yaml
 
     serviceAccount:
-      homepage: {}
+      homepage:
+        enabled: true
