@@ -54,7 +54,10 @@ spec:
               repository: ghcr.io/jorenn92/maintainerr
               tag: 2.18.2
             env:
-              TZ: Australia/Melbourne
+              TZ: ${TIMEZONE}
+            envFrom:
+              - secretRef:
+                  name: cluster-secrets
             probes:
               liveness:
                 enabled: true
