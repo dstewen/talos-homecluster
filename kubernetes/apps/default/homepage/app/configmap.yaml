@@ -8,6 +8,8 @@ metadata:
 data:
   kubernetes.yaml: |
     mode: cluster
+    gateway: true
+    ingress: false
   settings.yaml: |
     # https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/ICONS.md
     # https://pictogrammers.com/library/mdi/
