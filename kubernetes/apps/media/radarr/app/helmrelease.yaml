@@ -29,6 +29,8 @@ spec:
             envFrom: &envFrom
               - secretRef:
                   name: radarr-secret
+              - secretRef:
+                  name: cluster-secrets
         containers:
           app:
             image:
