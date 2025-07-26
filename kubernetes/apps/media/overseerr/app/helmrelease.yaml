@@ -109,6 +109,15 @@ spec:
 
     route:
       app:
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Downloads
+          gethomepage.dev/name: Overseerr
+          gethomepage.dev/icon: overseerr.png
+          gethomepage.dev/description: Media Request Management
+          gethomepage.dev/widget.type: overseerr
+          gethomepage.dev/widget.url: http://overseerr.media:80
+          gethomepage.dev/widget.key: "{{`{{HOMEPAGE_VAR_OVERSEERR_TOKEN}}`}}"
         hostnames: ["requests.davidstewen.com"]
         parentRefs:
           - name: internal
@@ -116,7 +125,7 @@ spec:
             sectionName: https
         rules:
           - backendRefs:
-              - name: *app
+              - identifier: app
                 port: *port
 
     persistence:
