@@ -6,4 +6,3 @@ resources:
 #  - ./backblaze-b2
   - ./minio
   - ./pvc.yaml
-#  - ./backblazeb2.yaml
