@@ -29,6 +29,8 @@ spec:
             envFrom: &envFrom
               - secretRef:
                   name: whisparr-secret
+              - secretRef:
+                  name: cluster-secrets
         containers:
           app:
             image:
@@ -43,7 +45,7 @@ spec:
               WHISPARR__LOG__LEVEL: info
               WHISPARR__PORT: &port 6969
               WHISPARR__UPDATE__BRANCH: develop
-              TZ: Australia/Melbourne
+              TZ: ${TIMEZONE}
             envFrom: *envFrom
             probes:
               liveness: &probes
@@ -120,14 +122,20 @@ spec:
 
     route:
       app:
-        hostnames: ["whisparr.davidstewen.com"]
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Adult Video
+          gethomepage.dev/name: Whisparr
+          gethomepage.dev/icon: whisparr.png
+          gethomepage.dev/description: Whisparr Adult Content
+        hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
         parentRefs:
           - name: internal
             namespace: kube-system
             sectionName: https
         rules:
           - backendRefs:
-              - name: *app
+              - identifier: app
                 port: *port
 
     persistence:
