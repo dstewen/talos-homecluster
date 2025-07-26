@@ -42,7 +42,10 @@ spec:
               repository: ghcr.io/haveagitgat/tdarr
               tag: 2.45.01
             env:
-              TZ: Australia/Melbourne
+              TZ: ${TIMEZONE}
+            envFrom:
+              - secretRef:
+                  name: cluster-secrets
             resources:
               requests:
                 cpu: 50m
