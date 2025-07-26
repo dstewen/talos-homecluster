@@ -101,11 +101,10 @@ data:
             - icon: github.png
               description: Renovate Dashboard
               href: https://github.com/dstewen/cm4-cluster/issues/1
-    - Proxmox:
-        - pve1:
-            - icon: proxmox.png
-              description: Proxmox host pve1
-              href: https://pve1.davidstewen.com:8006
+        - talos-homecluster:
+            - icon: github.png
+              description: Renovate Dashboard
+              href: https://github.com/dstewen/talos-homecluster/issues/1
 
   services.yaml: |
     - Infrastructure:
