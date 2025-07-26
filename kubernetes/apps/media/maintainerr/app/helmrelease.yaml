@@ -102,14 +102,19 @@ spec:
 
     route:
       app:
-        hostnames: ["maintainerr.davidstewen.com"]
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Downloads
+          gethomepage.dev/name: Maintainerr
+          gethomepage.dev/icon: maintainerr.png
+        hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
         parentRefs:
           - name: internal
             namespace: kube-system
             sectionName: https
         rules:
           - backendRefs:
-              - name: *app
+              - identifier: app
                 port: *port
 
     persistence:
