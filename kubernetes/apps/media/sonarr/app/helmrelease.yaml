@@ -30,13 +30,15 @@ spec:
             envFrom: &envFrom
               - secretRef:
                   name: sonarr-secret
+              - secretRef:
+                  name: cluster-secrets
         containers:
           app:
             image:
               repository: ghcr.io/home-operations/sonarr
               tag: 4.0.15.2940@sha256:ca6c735014bdfb04ce043bf1323a068ab1d1228eea5bab8305ca0722df7baf78
             env:
-              TZ: Australia/Melbourne
+              TZ: ${TIMEZONE}
               SONARR__AUTH_METHOD: External
               SONARR__AUTH_REQUIRED: DisabledForLocalAddresses
               SONARR__INSTANCE_NAME: Sonarr
@@ -122,14 +124,22 @@ spec:
 
     route:
       app:
-        hostnames: ["sonarr.davidstewen.com"]
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Downloads
+          gethomepage.dev/name: Sonarr
+          gethomepage.dev/icon: sonarr.png
+          gethomepage.dev/widget.type: sonarr
+          gethomepage.dev/widget.url: http://sonarr.media
+          gethomepage.dev/widget.key: "{{`{{HOMEPAGE_VAR_SONARR_TOKEN}}`}}"
+        hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
         parentRefs:
           - name: internal
             namespace: kube-system
             sectionName: https
         rules:
           - backendRefs:
-              - name: *app
+              - identifier: app
                 port: *port
 
     persistence:
