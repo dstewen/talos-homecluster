@@ -106,6 +106,10 @@ spec:
 
     route:
       app:
+        annotations:
+          hajimari.io/appName: "Open Web UI"
+          hajimari.io/enable: "true"
+          hajimari.io/group: "AI"
         enabled: true
         hostnames: ["open-webui.davidstewen.com"]
         parentRefs:
