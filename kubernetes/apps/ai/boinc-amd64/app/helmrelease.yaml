@@ -62,8 +62,8 @@ spec:
         fsGroup: 568
         fsGroupChangePolicy: OnRootMismatch
         seccompProfile: { type: RuntimeDefault }
-      nodeSelector:
-        intel.feature.node.kubernetes.io/gpu: "true"
+#      nodeSelector:
+#        intel.feature.node.kubernetes.io/gpu: "true"
 #        kubernetes.io/hostname: k3sworker1
 #      annotations:
 #        k8s.v1.cni.cncf.io/networks: |
@@ -119,6 +119,6 @@ spec:
           - path: /var/lib/boinc
             readOnly: false
 
-      dri:
-        type: hostPath
-        hostPath: /dev/dri
+#      dri:
+#        type: hostPath
+#        hostPath: /dev/dri
