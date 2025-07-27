@@ -37,12 +37,14 @@ spec:
               repository: boinc/client
               tag: intel
             env:
-              TZ: Australia/Melbourne
+              TZ: "${TIMEZONE}"
               BOINC_GUI_RPC_PASSWORD: "123"
               BOINC_CMD_LINE_OPTIONS: "--allow_remote_gui_rpc"
-#            envFrom:
-#              - secretRef:
-#                  name: boinc-secret
+            envFrom:
+              - secretRef:
+                  name: boinc-secret
+              - secretRef:
+                  name: cluster-secrets
             resources:
               requests:
                 cpu: 10m
@@ -78,27 +80,45 @@ spec:
           lbipam.cilium.io/ips: ${SVC_BOINC_ADDR_AMD64}
         ports:
           http:
-            port: 80
+            port: &port 80
           https:
             port: 443
           manager:
             port: 31416
 
-    ingress:
+    route:
       app:
-        annotations:
-          external-dns.alpha.kubernetes.io/target: internal.davidstewen.com
-        className: internal
-        hosts:
-          - host: boinc.davidstewen.com
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
+        hostnames: ["boinc.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: internal
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
+
+
+#    ingress:
+#      app:
+#        annotations:
+#          external-dns.alpha.kubernetes.io/target: internal.davidstewen.com
+#        className: internal
+#        hosts:
+#          - host: boinc.davidstewen.com
+#            paths:
+#              - path: /
+#                service:
+#                  identifier: app
+#                  port: http
+
     persistence:
       config:
         existingClaim: boinc-config
         globalMounts:
           - path: /var/lib/boinc
             readOnly: false
+
+      dri:
+        type: hostPath
+        hostPath: /dev/dri
