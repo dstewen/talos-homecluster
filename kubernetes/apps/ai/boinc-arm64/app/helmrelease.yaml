@@ -40,9 +40,11 @@ spec:
               TZ: "${TIMEZONE}"
 #              BOINC_GUI_RPC_PASSWORD: "123"
               BOINC_CMD_LINE_OPTIONS: "--allow_remote_gui_rpc"
-#            envFrom:
-#              - secretRef:
-#                  name: boinc-secret
+            envFrom:
+              - secretRef:
+                  name: boinc-arm64-secret
+              - secretRef:
+                  name: cluster-secrets
             resources:
               requests:
                 cpu: 10m
