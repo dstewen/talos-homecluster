@@ -29,6 +29,8 @@ spec:
             envFrom: &envFrom
               - secretRef:
                   name: radarr-uhd-secret
+              - secretRef:
+                  name: cluster-secrets
         containers:
           app:
             image:
@@ -115,14 +117,14 @@ spec:
 
     route:
       app:
-        hostnames: ["radarr-uhd.davidstewen.com"]
+        hostnames: ["radarr-uhd.${SECRET_DOMAIN}"]
         parentRefs:
           - name: internal
             namespace: kube-system
             sectionName: https
         rules:
           - backendRefs:
-              - name: *app
+              - identifier: app
                 port: *port
 
     persistence:
@@ -139,8 +141,9 @@ spec:
       tmp:
         type: emptyDir
       media:
+        enabled: true
         type: nfs
-        server: 192.168.10.15
+        server: ${NAS_IP}
         path: /volume2/piNFS01/flux-cluster/media_new
         globalMounts:
           - path: /media
