@@ -114,7 +114,7 @@ spec:
 
     persistence:
       config:
-        existingClaim: boinc-config
+        existingClaim: boinc-amd64-config
         globalMounts:
           - path: /var/lib/boinc
             readOnly: false
