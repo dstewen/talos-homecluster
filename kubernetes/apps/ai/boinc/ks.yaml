@@ -13,6 +13,10 @@ spec:
   dependsOn:
     - name: openebs
       namespace: openebs-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   path: ./kubernetes/apps/ai/boinc/app
   prune: true
   sourceRef:
@@ -22,3 +26,7 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 5m
+  postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
