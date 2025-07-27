@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: boinc
+  name: boinc-amd64
 spec:
   interval: 1h
   chartRef:
@@ -38,11 +38,11 @@ spec:
               tag: intel
             env:
               TZ: "${TIMEZONE}"
-              BOINC_GUI_RPC_PASSWORD: "123"
+#              BOINC_GUI_RPC_PASSWORD: "123"
               BOINC_CMD_LINE_OPTIONS: "--allow_remote_gui_rpc"
             envFrom:
               - secretRef:
-                  name: boinc-secret
+                  name: boinc-amd64-secret
               - secretRef:
                   name: cluster-secrets
             resources:
@@ -88,7 +88,7 @@ spec:
 
     route:
       app:
-        hostnames: ["boinc.${SECRET_DOMAIN}"]
+        hostnames: ["boinc-amd64.${SECRET_DOMAIN}"]
         parentRefs:
           - name: internal
             namespace: kube-system

@@ -5,7 +5,7 @@ metadata:
   name: boinc-config
   namespace: ai
   labels:
-    app.kubernetes.io/name: &name boinc
+    app.kubernetes.io/name: &name boinc-amd64
     app.kubernetes.io/instance: *name
     snapshot.home.arpa/enabled: "true"
 spec:

@@ -17,7 +17,7 @@ spec:
     provider: sops
     secretRef:
       name: sops-age
-  path: ./kubernetes/apps/ai/boinc/app
+  path: ./kubernetes/apps/ai/boinc-amd64/app
   prune: true
   sourceRef:
     kind: GitRepository
