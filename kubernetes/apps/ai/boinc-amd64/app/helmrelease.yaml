@@ -62,6 +62,9 @@ spec:
         fsGroup: 568
         fsGroupChangePolicy: OnRootMismatch
         seccompProfile: { type: RuntimeDefault }
+        supplementalGroups:
+          - 44 # video
+          - 568
 #      nodeSelector:
 #        intel.feature.node.kubernetes.io/gpu: "true"
 #        kubernetes.io/hostname: k3sworker1
