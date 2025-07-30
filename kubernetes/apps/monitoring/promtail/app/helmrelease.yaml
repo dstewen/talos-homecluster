@@ -62,10 +62,10 @@ spec:
           type: LoadBalancer
           #clusterIP: null
           port: 514
-          externalIPs: 10.200.15.243 # SVC_SYSLOG_ADDR
+#          externalIPs: 10.200.15.243 # SVC_SYSLOG_ADDR
           #nodePort: 32682
-#          annotations:
-#            lbipam.cilium.io/ips: ${SVC_SYSLOG_ADDR:=temp}
+          annotations:
+            lbipam.cilium.io/ips: 10.200.15.243
           #labels: {}
           #loadBalancerIP: null
           #loadBalancerSourceRanges: []
@@ -80,10 +80,10 @@ spec:
           type: LoadBalancer
           #clusterIP: null
           port: 1514
-          externalIPs: 10.200.15.244 # SVC_SYSLOG_IDS_ADDR
+#          externalIPs: 10.200.15.244 # SVC_SYSLOG_IDS_ADDR
           #nodePort: 32682
-#          annotations:
-#            lbipam.cilium.io/ips: ${SVC_SYSLOG_IDS_ADDR:=temp}
+          annotations:
+            lbipam.cilium.io/ips: 10.200.15.244
           #labels: {}
           #loadBalancerIP: null
           #loadBalancerSourceRanges: []
