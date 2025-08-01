@@ -169,6 +169,14 @@ spec:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/node-exporters-folder
+          - name: opnsense
+            orgId: 1
+            folder: Opnsense
+            type: file
+            disableDeletion: false
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/opnsense-folder
           - name: prometheus
             orgId: 1
             folder: Prometheus
