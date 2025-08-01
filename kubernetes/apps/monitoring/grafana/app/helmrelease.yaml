@@ -161,6 +161,14 @@ spec:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/nginx-folder
+          - name: node-exporters
+            orgId: 1
+            folder: Node-Exporters
+            type: file
+            disableDeletion: false
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/node-exporters-folder
           - name: prometheus
             orgId: 1
             folder: Prometheus
@@ -250,12 +258,6 @@ spec:
           # renovate: depName="Cloudflare Tunnels (cloudflared)"
           gnetId: 17457
           revision: 6
-          datasource:
-            - { name: DS_PROMETHEUS, value: Prometheus }
-        cloudnative-pg:
-          # renovate: depName="CloudNativePG Dashboard"
-          gnetId: 20417
-          revision: 4
           datasource:
             - { name: DS_PROMETHEUS, value: Prometheus }
         dragonfly:
@@ -367,12 +369,17 @@ spec:
         kubernetes-nodes:
           # renovate: depName="Kubernetes / Views / Nodes"
           gnetId: 15759
-          revision: 35
+          revision: 37
           datasource: Prometheus
         kubernetes-pods:
           # renovate: depName="Kubernetes / Views / Pods"
           gnetId: 15760
           revision: 36
+          datasource: Prometheus
+        kubernetes--pvc-stats:
+          # renovate: depName="Kubernetes PVC Stats"
+          gnetId: 23233
+          revision: 6
           datasource: Prometheus
         kubernetes-volumes:
           # renovate: depName="K8s / Storage / Volumes / Cluster"
@@ -501,6 +508,18 @@ spec:
           revision: 2
           datasource:
             - { type: loki, uid: loki }
+        loki-logging-volume-analysis-dashboard:
+        # renovate: depName="Loki Logging Volume Analysis Dashboard"
+          gnetId: 23789
+          revision: 1
+          datasource:
+            - { name: DS_LOKI, value: Loki }
+        k8s-app-logs-dashboard:
+        # renovate: depName="K8s App Logs / Multi Clusters (Loki, Infinite Scroll, Grafana 11, 2025, namespace, app, container, podsearch, logsearch)"
+          gnetId: 22874
+          revision: 3
+          datasource:
+            - { name: DS_LOKI, value: Loki }
         loki-stack-monitoring:
           # renovate: depName="Loki Stack Monitoring"
           gnetId: 14055
@@ -592,6 +611,85 @@ spec:
           gnetId: 10187
           revision: 1
           datasource: Prometheus
+      node-exporters:
+        node-exporter-bsd:
+          # renovate: depName="Node-Exporter BSD"
+          gnetId: 4260
+          revision: 15
+          datasource: Prometheus
+        node-exporter-nodes-by-jobs:
+          # renovate: depName="Node Exporter / Nodes by jobs"
+          gnetId: 23686
+          revision: 1
+          datasource:
+            - { name: DS_PROMETHEUS, value: Prometheus }
+        node-cpu-system:
+          # renovate: depName="Node / CPU and System"
+          gnetId: 22275
+          revision: 1
+          datasource: Prometheus
+        node-fleet-overview:
+          # renovate: depName="Node / Fleet Overview"
+          gnetId: 22269
+          revision: 1
+          datasource: Prometheus
+        node-information:
+          # renovate: depName="Node Information"
+          gnetId: 22403
+          revision: 12
+          datasource:
+            - { name: DS_PROMETHEUS, value: Prometheus }
+        node-network:
+          # renovate: depName="Node / Network"
+          gnetId: 22273
+          revision: 1
+          datasource: Prometheus
+        node-overview:
+          # renovate: depName="Node / Overview"
+          gnetId: 22272
+          revision: 1
+          datasource: Prometheus
+        node-status:
+          # renovate: depName="Node Status"
+          gnetId: 22820
+          revision: 1
+          datasource:
+            - { name: DS_VICTORIA, value: Prometheus }
+        node-temperature:
+          # renovate: depName="Node Exporter / Node Temperatures"
+          gnetId: 15202
+          revision: 1
+          datasource: Prometheus
+      opnsense:
+        opnsense-dashboard:
+          # renovate: depName="Opnsense Dashboard"
+          gnetId: 19366
+          revision: 5
+          datasource:
+            - { name: DS_PROMETHEUS, value: Prometheus }
+        opnsense-exporter:
+          # renovate: depName="Opnsense-Exporter"
+          gnetId: 21113
+          revision: 1
+          datasource:
+            - { name: DS_PROMETHEUS-K0, value: Prometheus }
+        opnsense-firewall:
+          # renovate: depName="Opnsense Firewall"
+          gnetId: 9291
+          revision: 1
+          datasource: Prometheus
+        opnsense-basic-metrics:
+          # renovate: depName="Opnsense Basic Metrics"
+          gnetId: 22248
+          revision: 1
+          datasource:
+            - { name: DS_PROMETHEUS, value: Prometheus }
+        opnsense-metrics:
+          # renovate: depName="Opnsense Metrics"
+          gnetId: 18957
+          revision: 1
+          datasource:
+            - { name: DS_PROMETHEUS, value: Prometheus }
       prometheus:
         prometheus:
           # renovate: depName="Prometheus"
@@ -613,8 +711,20 @@ spec:
         cnpg-dashboard:
           url: https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/v1.21.0/docs/src/samples/monitoring/grafana-dashboard.json
           datasource: Prometheus
+        cloudnative-pg:
+          # renovate: depName="CloudNativePG Dashboard"
+          gnetId: 20417
+          revision: 4
+          datasource:
+            - { name: DS_PROMETHEUS, value: Prometheus }
         dragonfly-dashboard:
           url: https://raw.githubusercontent.com/dragonflydb/dragonfly-operator/main/monitoring/grafana-dashboard.json
+          datasource:
+            - { name: DS_PROMETHEUS, value: Prometheus }
+        frigate-dashboard:
+          # renovate: depName="Frigate Dashboard"
+          gnetId: 18226
+          revision: 9
           datasource:
             - { name: DS_PROMETHEUS, value: Prometheus }
         grafana-internals:
@@ -632,6 +742,12 @@ spec:
           # renovate: depName="K8S Pod Metrics"
           gnetId: 21548
           revision: 3
+          datasource:
+            - { name: DS_PROMETHEUS, value: Prometheus }
+        minecraft-server-stats-updated:
+          # renovate: depName="Minecraft Server Stats - Updated"
+          gnetId: 21835
+          revision: 1
           datasource:
             - { name: DS_PROMETHEUS, value: Prometheus }
         prometheus-metrics-for-external-secrets:
@@ -694,6 +810,12 @@ spec:
           url: https://raw.githubusercontent.com/actions/actions-runner-controller/master/docs/gha-runner-scale-set-controller/samples/grafana-dashboard/ARC-Autoscaling-Runner-Set-Monitoring_1692627561838.json
           datasource:
             - { name: DS_PROMETHEUS, value: Prometheus }
+        ceph-cluster:
+          # renovate: depName="Ceph Cluster Dashboard"
+          gnetId: 23159
+          revision: 1
+          datasource:
+            - { name: DS_PROMETHEUS, value: Prometheus }
         ceph-fs:
           # renovate: depName="Ceph - CephFS Dashboard"
           gnetId: 9340
@@ -709,89 +831,6 @@ spec:
         ceph-usage:
           # renovate: depName="Ceph - Usage Dashboard"
           gnetId: 23246
-          revision: 1
-          datasource:
-            - { name: DS_PROMETHEUS, value: Prometheus }
-        frigate-dashboard:
-          # renovate: depName="Frigate Dashboard"
-          gnetId: 18226
-          revision: 9
-          datasource:
-            - { name: DS_PROMETHEUS, value: Prometheus }
-        minecraft-server-stats-updated:
-          # renovate: depName="Minecraft Server Stats - Updated"
-          gnetId: 21835
-          revision: 1
-          datasource:
-            - { name: DS_PROMETHEUS, value: Prometheus }
-        node-cpu-system:
-          # renovate: depName="Node / CPU and System"
-          gnetId: 22275
-          revision: 1
-          datasource: Prometheus
-        node-exporter-bsd:
-          # renovate: depName="Node-Exporter BSD"
-          gnetId: 4260
-          revision: 15
-          datasource: Prometheus
-        node-fleet-overview:
-          # renovate: depName="Node / Fleet Overview"
-          gnetId: 22269
-          revision: 1
-          datasource: Prometheus
-        node-information:
-          # renovate: depName="Node Information"
-          gnetId: 22403
-          revision: 12
-          datasource:
-            - { name: DS_PROMETHEUS, value: Prometheus }
-        node-network:
-          # renovate: depName="Node / Network"
-          gnetId: 22273
-          revision: 1
-          datasource: Prometheus
-        node-overview:
-          # renovate: depName="Node / Overview"
-          gnetId: 22272
-          revision: 1
-          datasource: Prometheus
-        node-status:
-          # renovate: depName="Node Status"
-          gnetId: 22820
-          revision: 1
-          datasource:
-            - { name: DS_VICTORIA, value: Prometheus }
-        node-temperature:
-          # renovate: depName="Node Exporter / Node Temperatures"
-          gnetId: 15202
-          revision: 1
-          datasource: Prometheus
-        opnsense-exporter:
-          # renovate: depName="Opnsense-Exporter"
-          gnetId: 21113
-          revision: 1
-          datasource:
-            - { name: DS_PROMETHEUS-K0, value: Prometheus }
-        opnsense:
-          # renovate: depName="Opnsense Dashboard"
-          gnetId: 19366
-          revision: 5
-          datasource:
-            - { name: DS_PROMETHEUS, value: Prometheus }
-        opnsense-firewall:
-          # renovate: depName="Opnsense Firewall"
-          gnetId: 9291
-          revision: 1
-          datasource: Prometheus
-        opnsense-basic-metrics:
-          # renovate: depName="Opnsense Basic Metrics"
-          gnetId: 22248
-          revision: 1
-          datasource:
-            - { name: DS_PROMETHEUS, value: Prometheus }
-        opnsense-metrics:
-          # renovate: depName="Opnsense Metrics"
-          gnetId: 18957
           revision: 1
           datasource:
             - { name: DS_PROMETHEUS, value: Prometheus }
