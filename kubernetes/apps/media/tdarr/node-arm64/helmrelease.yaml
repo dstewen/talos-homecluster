@@ -76,10 +76,12 @@ spec:
         controller: *app
         enabled: false
     persistence:
-#      cache:
-#        existingClaim: tdarr-cache
-#        globalMounts:
-#          - path: /cache
+      cache:
+        type: nfs
+        server: ${NAS_IP:=temp}
+        path: "/volume2/piNFS01/flux-cluster/tdarr/cache"
+        globalMounts:
+          - path: /cache
 
       movies:
         type: nfs

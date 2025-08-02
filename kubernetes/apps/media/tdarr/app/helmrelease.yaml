@@ -105,6 +105,12 @@ spec:
 #        existingClaim: tdarr-cache
 #        globalMounts:
 #          - path: /cache
+      cache:
+        type: nfs
+        server: ${NAS_IP:=temp}
+        path: "/volume2/piNFS01/flux-cluster/tdarr/cache"
+        globalMounts:
+          - path: /cache
 
 #      media:
 #        enabled: true
