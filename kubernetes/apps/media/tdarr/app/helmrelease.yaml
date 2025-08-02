@@ -123,6 +123,13 @@ spec:
         globalMounts:
           - path: /mnt/movies
 
+      output:
+        type: nfs
+        server: ${NAS_IP:=temp}
+        path: /volume2/piNFS01/flux-cluster/tdarr/output
+        globalMounts:
+          - path: /output
+
       tv:
         type: nfs
         server: ${NAS_IP:=temp}
