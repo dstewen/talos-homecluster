@@ -113,9 +113,9 @@ spec:
       tv:
         type: nfs
         server: ${NAS_IP:=temp}
-        path: "/volume2/piNFS01/flux-cluster/media_new/media/TV Shows"
+        path: "/volume2/piNFS01/flux-cluster/media_new/media/Recorded TV Shows"
         globalMounts:
-          - path: /mnt/tv
+          - path: /mnt/recorded-tv
 
       other-videos:
         type: nfs
