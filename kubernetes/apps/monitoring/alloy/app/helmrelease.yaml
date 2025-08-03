@@ -16,8 +16,19 @@ spec:
         create: false
         name: &name alloy-configmap
         key: config.alloy
+      extraPorts:
+        - name: tcp-syslog
+          port: 514
+          targetPort: 514
+          protocol: TCP
+        - name: tcp-syslog-ids
+          port: 1514
+          targetPort: 1514
+          protocol: TCP
     controller:
       podAnnotations:
         configmap.reloader.stakater.com/reload: *name
+    serviceAccount:
+      create: true
     serviceMonitor:
       enabled: true

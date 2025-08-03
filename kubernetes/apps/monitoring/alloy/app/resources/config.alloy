@@ -130,6 +130,26 @@ loki.process "cluster_events" {
   }
 }
 
+// Accept Syslog TCP 514 from OPNsense
+loki.source.syslog "opnsense" {
+  listener {
+    protocol = "tcp"
+    address = "0.0.0.0:514"
+    labels = { source = "opnsense" }
+  }
+  forward_to = [loki.write.local.receiver]
+}
+
+// Accept Syslog TCP 1514 from OPNsense
+loki.source.syslog "opnsense-ids" {
+  listener {
+    protocol = "tcp"
+    address = "0.0.0.0:1514"
+    labels = { source = "opnsense-ids" }
+  }
+  forward_to = [loki.write.local.receiver]
+}
+
 loki.write "default" {
   endpoint {
     url = "http://loki-headless.monitoring.svc.cluster.local:3100/loki/api/v1/push"
