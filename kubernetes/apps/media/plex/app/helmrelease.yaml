@@ -33,8 +33,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/home-operations/plex
-              tag: 1.41.9.9961@sha256:6c86319bb3275135f5da5aec71b45e48305669ecbceee0f88d335bebf0d0f218
+              repository: ghcr.io/c0depool/plex-pass
+              tag: v1.42.0.9975-6b2b441e1@sha256:3b873c87a996d4a426ccb846e25e2340ceaf4c13f6446805561209f1264d3ced
             env:
               TZ: ${TIMEZONE}
               PLEX_ADVERTISE_URL: https://plex.davidstewen.com:443,http://10.200.15.224:32400
