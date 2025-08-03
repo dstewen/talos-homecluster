@@ -55,21 +55,6 @@ spec:
                 cpu: 10m
               limits:
                 memory: 1Gi
-          subcleaner:
-            image:
-              repository: registry.k8s.io/git-sync/git-sync
-              tag: v4.4.2@sha256:3089d9787b89bdc5af01d9f6e8d515aefb9672e8aea3972d7ff67478112bacb3
-            env:
-              GITSYNC_REPO: https://github.com/KBlixt/subcleaner
-              GITSYNC_REF: master
-              GITSYNC_PERIOD: 24h
-              GITSYNC_ROOT: /add-ons
-            resources:
-              requests:
-                cpu: 10m
-              limits:
-                memory: 128Mi
-            securityContext: *securityContext
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -135,29 +120,24 @@ spec:
                 port: *port
 
     persistence:
-      add-ons:
-        type: emptyDir
-      cache:
-        type: emptyDir
-        globalMounts:
-          - path: /config/cache
       config:
         existingClaim: bazarr
-      log:
-        type: emptyDir
-        globalMounts:
-          - path: /config/log
+
       media:
         type: nfs
         server: 192.168.10.15
         path: /volume2/piNFS01/flux-cluster/media_new
         globalMounts:
           - path: /media
-      scripts:
-        type: configMap
-        name: bazarr-scripts
-        defaultMode: 0775
-        globalMounts:
-          - readOnly: true
-      tmp:
+
+      tmpfs:
         type: emptyDir
+        advancedMounts:
+          bazarr:
+            app:
+              - path: /config/cache
+                subPath: cache
+              - path: /config/log
+                subPath: log
+              - path: /tmp
+                subPath: tmp
