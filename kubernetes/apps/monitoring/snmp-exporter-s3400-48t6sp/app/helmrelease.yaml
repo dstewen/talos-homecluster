@@ -41,7 +41,7 @@ spec:
         memory: 32Mi
     serviceMonitor:
       enabled: true
-#      namespace: monitoring
+      namespace: monitoring
       params:
         - name: s3400-48t6sp-0
           target: 192.168.10.3
