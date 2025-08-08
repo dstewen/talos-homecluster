@@ -47,7 +47,7 @@ spec:
           target: 192.168.10.3
           module:
             - if_mib
-          auth: [public_v2]
+          auth: ["public_v2"]
       path: /snmp
       scrapeTimeout: 30s
 #      scrapeInterval: 60s
