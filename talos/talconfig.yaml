@@ -46,15 +46,36 @@ nodes:
           lacpRate: fast
           miimon: 1000
         dhcp: false
-        addresses:
-          - "10.200.15.51/24"
-        routes:
-          - network: "0.0.0.0/0"
-            gateway: "10.200.15.1"
-            metric: 1
         mtu: 1500
-        vip:
-          ip: "10.200.15.254"
+        vlans:
+          # HomeLABServers VLAN
+          - vlanId: 15
+            dhcp: false
+            addresses:
+              - 10.200.15.51/24
+            mtu: 1500
+            routes:
+              - network: 0.0.0.0/0
+                gateway: 10.200.15.1
+                metric: 1
+            vip:
+              ip: 10.200.15.254
+          # K3S_Services_VLAN
+          - vlanId: 20
+            dhcp: false
+            mtu: 1500
+          # Provisioning VLAN
+          - vlanId: 30
+            dhcp: false
+            mtu: 1500
+          # IOT VLAN
+          - vlanId: 100
+            dhcp: false
+            mtu: 1500
+          # GuestWifi VLAN
+          - vlanId: 110
+            dhcp: false
+            mtu: 1500
     extensionServices:
       - name: nut-client
         configFiles:
@@ -89,15 +110,36 @@ nodes:
           lacpRate: fast
           miimon: 1000
         dhcp: false
-        addresses:
-          - "10.200.15.52/24"
-        routes:
-          - network: "0.0.0.0/0"
-            gateway: "10.200.15.1"
-            metric: 1
         mtu: 1500
-        vip:
-          ip: "10.200.15.254"
+        vlans:
+          # HomeLABServers VLAN
+          - vlanId: 15
+            dhcp: false
+            addresses:
+              - 10.200.15.52/24
+            mtu: 1500
+            routes:
+              - network: 0.0.0.0/0
+                gateway: 10.200.15.1
+                metric: 1
+            vip:
+              ip: 10.200.15.254
+          # K3S_Services_VLAN
+          - vlanId: 20
+            dhcp: false
+            mtu: 1500
+          # Provisioning VLAN
+          - vlanId: 30
+            dhcp: false
+            mtu: 1500
+          # IOT VLAN
+          - vlanId: 100
+            dhcp: false
+            mtu: 1500
+          # GuestWifi VLAN
+          - vlanId: 110
+            dhcp: false
+            mtu: 1500
     extensionServices:
       - name: nut-client
         configFiles:
@@ -132,15 +174,36 @@ nodes:
           lacpRate: fast
           miimon: 1000
         dhcp: false
-        addresses:
-          - "10.200.15.53/24"
-        routes:
-          - network: "0.0.0.0/0"
-            gateway: "10.200.15.1"
-            metric: 1
         mtu: 1500
-        vip:
-          ip: "10.200.15.254"
+        vlans:
+          # HomeLABServers VLAN
+          - vlanId: 15
+            dhcp: false
+            addresses:
+              - 10.200.15.53/24
+            mtu: 1500
+            routes:
+              - network: 0.0.0.0/0
+                gateway: 10.200.15.1
+                metric: 1
+            vip:
+              ip: 10.200.15.254
+          # K3S_Services_VLAN
+          - vlanId: 20
+            dhcp: false
+            mtu: 1500
+          # Provisioning VLAN
+          - vlanId: 30
+            dhcp: false
+            mtu: 1500
+          # IOT VLAN
+          - vlanId: 100
+            dhcp: false
+            mtu: 1500
+          # GuestWifi VLAN
+          - vlanId: 110
+            dhcp: false
+            mtu: 1500
     extensionServices:
       - name: nut-client
         configFiles:
@@ -163,13 +226,34 @@ nodes:
           deviceSelectors:
             - hardwareAddr: "e4:5f:01:ec:16:b4"
         dhcp: false
-        addresses:
-          - "10.200.15.35/24"
-        routes:
-          - network: "0.0.0.0/0"
-            gateway: "10.200.15.1"
-            metric: 1
         mtu: 1500
+        vlans:
+          # HomeLABServers VLAN
+          - vlanId: 15
+            dhcp: false
+            addresses:
+              - 10.200.15.35/24
+            mtu: 1500
+            routes:
+              - network: 0.0.0.0/0
+                gateway: 10.200.15.1
+                metric: 1
+          # K3S_Services_VLAN
+          - vlanId: 20
+            dhcp: false
+            mtu: 1500
+          # Provisioning VLAN
+          - vlanId: 30
+            dhcp: false
+            mtu: 1500
+          # IOT VLAN
+          - vlanId: 100
+            dhcp: false
+            mtu: 1500
+          # GuestWifi VLAN
+          - vlanId: 110
+            dhcp: false
+            mtu: 1500
     extensionServices:
       - name: nut-client
         configFiles:
@@ -192,13 +276,34 @@ nodes:
           deviceSelectors:
             - hardwareAddr: "e4:5f:01:ec:16:a5"
         dhcp: false
-        addresses:
-          - "10.200.15.36/24"
-        routes:
-          - network: "0.0.0.0/0"
-            gateway: "10.200.15.1"
-            metric: 1
         mtu: 1500
+        vlans:
+          # HomeLABServers VLAN
+          - vlanId: 15
+            dhcp: false
+            addresses:
+              - 10.200.15.36/24
+            mtu: 1500
+            routes:
+              - network: 0.0.0.0/0
+                gateway: 10.200.15.1
+                metric: 1
+          # K3S_Services_VLAN
+          - vlanId: 20
+            dhcp: false
+            mtu: 1500
+          # Provisioning VLAN
+          - vlanId: 30
+            dhcp: false
+            mtu: 1500
+          # IOT VLAN
+          - vlanId: 100
+            dhcp: false
+            mtu: 1500
+          # GuestWifi VLAN
+          - vlanId: 110
+            dhcp: false
+            mtu: 1500
     extensionServices:
       - name: nut-client
         configFiles:
@@ -221,13 +326,34 @@ nodes:
           deviceSelectors:
             - hardwareAddr: "e4:5f:01:ec:16:9c"
         dhcp: false
-        addresses:
-          - "10.200.15.37/24"
-        routes:
-          - network: "0.0.0.0/0"
-            gateway: "10.200.15.1"
-            metric: 1
         mtu: 1500
+        vlans:
+          # HomeLABServers VLAN
+          - vlanId: 15
+            dhcp: false
+            addresses:
+              - 10.200.15.37/24
+            mtu: 1500
+            routes:
+              - network: 0.0.0.0/0
+                gateway: 10.200.15.1
+                metric: 1
+          # K3S_Services_VLAN
+          - vlanId: 20
+            dhcp: false
+            mtu: 1500
+          # Provisioning VLAN
+          - vlanId: 30
+            dhcp: false
+            mtu: 1500
+          # IOT VLAN
+          - vlanId: 100
+            dhcp: false
+            mtu: 1500
+          # GuestWifi VLAN
+          - vlanId: 110
+            dhcp: false
+            mtu: 1500
     extensionServices:
       - name: nut-client
         configFiles:
@@ -250,13 +376,34 @@ nodes:
           deviceSelectors:
             - hardwareAddr: "e4:5f:01:ec:16:5a"
         dhcp: false
-        addresses:
-          - "10.200.15.38/24"
-        routes:
-          - network: "0.0.0.0/0"
-            gateway: "10.200.15.1"
-            metric: 1
         mtu: 1500
+        vlans:
+          # HomeLABServers VLAN
+          - vlanId: 15
+            dhcp: false
+            addresses:
+              - 10.200.15.38/24
+            mtu: 1500
+            routes:
+              - network: 0.0.0.0/0
+                gateway: 10.200.15.1
+                metric: 1
+          # K3S_Services_VLAN
+          - vlanId: 20
+            dhcp: false
+            mtu: 1500
+          # Provisioning VLAN
+          - vlanId: 30
+            dhcp: false
+            mtu: 1500
+          # IOT VLAN
+          - vlanId: 100
+            dhcp: false
+            mtu: 1500
+          # GuestWifi VLAN
+          - vlanId: 110
+            dhcp: false
+            mtu: 1500
     extensionServices:
       - name: nut-client
         configFiles:
