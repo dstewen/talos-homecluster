@@ -64,6 +64,10 @@ go2rtc:
     candidates:
       - 10.200.15.238:8555 # <--- enter frigate host IP here
       - stun:8555
+live:
+  streams:
+    main_stream: office
+    sub_stream: office_sub
 cameras:
 #  phone_rtsp:
 #    enabled: true
@@ -101,8 +105,6 @@ cameras:
             - detect
       output_args:
         record: preset-record-generic-audio-aac
-    live:
-      stream_name: office
     onvif:
       host: 192.168.10.81
       port: 80
