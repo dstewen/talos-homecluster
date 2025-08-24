@@ -137,7 +137,7 @@ loki.source.syslog "opnsense" {
     address = "0.0.0.0:514"
     labels = { source = "opnsense" }
   }
-  forward_to = [loki.write.local.receiver]
+  forward_to = [loki.write.default.receiver]
 }
 
 // Accept Syslog TCP 1514 from OPNsense
@@ -147,7 +147,7 @@ loki.source.syslog "opnsense_ids" {
     address = "0.0.0.0:1514"
     labels = { source = "opnsense_ids" }
   }
-  forward_to = [loki.write.local.receiver]
+  forward_to = [loki.write.default.receiver]
 }
 
 loki.write "default" {
