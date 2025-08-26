@@ -134,7 +134,7 @@ loki.process "cluster_events" {
 loki.source.syslog "opnsense" {
   listener {
     protocol = "tcp"
-    address = "0.0.0.0:514"
+    address = "10.200.15.226:514"
     labels = { source = "opnsense" }
   }
   forward_to = [loki.write.default.receiver]
@@ -144,7 +144,7 @@ loki.source.syslog "opnsense" {
 loki.source.syslog "opnsense_ids" {
   listener {
     protocol = "tcp"
-    address = "0.0.0.0:1514"
+    address = "10.200.15.229:1514"
     labels = { source = "opnsense_ids" }
   }
   forward_to = [loki.write.default.receiver]
