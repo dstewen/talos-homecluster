@@ -84,7 +84,23 @@ discovery.relabel "pod_logs" {
   }
 }
 
-discovery.relabel "loki_syslog_proxy" {
+loki.process "syslog" {
+	forward_to = [loki.write.default.receiver]
+
+	// structured_metadata is enabled by default, as of v3.4
+	// https://grafana.com/docs/loki/v3.4.x/configure/#limits_config
+	stage.structured_metadata {
+		values = {
+			severity = "",
+			facility = "",
+			app_name = "",
+			proc_id  = "",
+			msg_id   = "",
+		}
+	}
+}
+
+loki.relabel "syslog" {
 	targets = []
 
 	rule {
@@ -185,8 +201,8 @@ loki.source.syslog "loki_syslog_proxy" {
       service_name = "opnsense_ids",
     }
   }
-  forward_to = [loki.process.loki_syslog_proxy]
-  relabel_rules = discovery.relabel.loki_syslog_proxy.rules
+  forward_to = [loki.process.syslog.receiver]
+  relabel_rules = loki.relabel.syslog.rules
 }
 
 loki.process "loki_syslog_proxy" {
