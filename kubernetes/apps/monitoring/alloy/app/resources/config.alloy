@@ -181,7 +181,7 @@ loki.source.syslog "loki_syslog_proxy" {
     protocol = "tcp"
     address = "10.200.15.229:1514"
     labels   = {
-      job = "loki.source.syslog.loki_opnsense_ids",
+      job = "loki.source.syslog.loki_syslog_proxy",
       service_name = "opnsense_ids",
     }
   }
