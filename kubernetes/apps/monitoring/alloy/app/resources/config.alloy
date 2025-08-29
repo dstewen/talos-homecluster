@@ -131,22 +131,26 @@ loki.process "cluster_events" {
 }
 
 // Accept Syslog TCP 514 from OPNsense
-loki.source.syslog "opnsense" {
+loki.source.syslog "loki_syslog_proxy" {
   listener {
     protocol = "tcp"
     address = "10.200.15.226:514"
-    labels = { source = "opnsense" }
+    labels   = {
+      job = "loki.source.syslog.loki_syslog_proxy",
+      service_name = "opnsense",
+    }
   }
-  forward_to = [loki.write.default.receiver]
-}
 
 // Accept Syslog TCP 1514 from OPNsense
-loki.source.syslog "opnsense_ids" {
   listener {
     protocol = "tcp"
     address = "10.200.15.229:1514"
-    labels = { source = "opnsense_ids" }
+    labels   = {
+      job = "loki.source.syslog.loki_opnsense_ids",
+      service_name = "opnsense_ids",
+    }
   }
+
   forward_to = [loki.write.default.receiver]
 }
 
