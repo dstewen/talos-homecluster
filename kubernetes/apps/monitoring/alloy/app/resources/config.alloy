@@ -84,7 +84,7 @@ discovery.relabel "pod_logs" {
   }
 }
 
-discovery.relabel "loki_syslog_proxy" {
+discovery.relabel "syslog" {
 	targets = []
 
 	rule {
@@ -195,7 +195,7 @@ loki.source.syslog "loki_syslog_proxy" {
       service_name = "opnsense_ids",
     }
   }
-  relabel_rules = loki.relabel.loki_syslog_proxy.rules
+  relabel_rules = loki.relabel.syslog.rules
   forward_to = [loki.write.default.receiver]
 }
 
