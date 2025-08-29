@@ -101,7 +101,6 @@ loki.process "syslog" {
 }
 
 loki.relabel "syslog" {
-	targets = []
 
 	rule {
 		source_labels = ["__syslog_message_hostname"]
