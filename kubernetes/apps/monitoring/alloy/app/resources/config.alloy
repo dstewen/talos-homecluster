@@ -128,14 +128,12 @@ loki.process "cluster_events" {
       kubernetes_cluster_events = "job",
     }
   }
-}
 
-loki.process "drop_old" {
-  forward_to = [loki.write.default.receiver]
   stage.drop {
     older_than          = "4h"
     drop_counter_reason = "too old"
   }
+
 }
 
 // Accept Syslog TCP 514 from OPNsense
