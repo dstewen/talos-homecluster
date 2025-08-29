@@ -84,7 +84,7 @@ discovery.relabel "pod_logs" {
   }
 }
 
-discovery.relabel "syslog" {
+discovery.relabel "loki_syslog_proxy" {
 	targets = []
 
 	rule {
@@ -186,7 +186,7 @@ loki.source.syslog "loki_syslog_proxy" {
     }
   }
   forward_to = [loki.process.loki_syslog_proxy]
-  relabel_rules = loki.relabel.syslog.rules
+  relabel_rules = loki.relabel.loki_syslog_proxy.rules
 }
 
 loki.process "loki_syslog_proxy" {
