@@ -165,16 +165,6 @@ loki.process "cluster_events" {
 
 }
 
-loki.process "loki_syslog_proxy" {
-  forward_to = [loki.write.default.receiver]
-
-  stage.drop {
-    older_than          = "4h"
-    drop_counter_reason = "too old"
-  }
-
-}
-
 // Accept Syslog TCP 514 from OPNsense
 loki.source.syslog "loki_syslog_proxy" {
   listener {
@@ -195,8 +185,18 @@ loki.source.syslog "loki_syslog_proxy" {
       service_name = "opnsense_ids",
     }
   }
-  relabel_rules = loki.relabel.syslog.rules
   forward_to = [loki.process.loki_syslog_proxy]
+  relabel_rules = loki.relabel.syslog.rules
+}
+
+loki.process "loki_syslog_proxy" {
+  forward_to = [loki.write.default.receiver]
+
+  stage.drop {
+    older_than          = "4h"
+    drop_counter_reason = "too old"
+  }
+
 }
 
 loki.write "default" {
