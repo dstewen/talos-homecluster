@@ -196,7 +196,7 @@ loki.source.syslog "loki_syslog_proxy" {
     }
   }
   relabel_rules = loki.relabel.syslog.rules
-  forward_to = [loki.write.default.receiver]
+  forward_to = [loki.process.loki_syslog_proxy]
 }
 
 loki.write "default" {
