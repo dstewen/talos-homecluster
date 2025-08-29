@@ -157,7 +157,7 @@ loki.source.syslog "loki_syslog_proxy" {
     }
   }
 
-  forward_to = [loki.write.drop_old.receiver]
+  forward_to = [loki.write.default.receiver]
 }
 
 loki.write "default" {
