@@ -23,6 +23,7 @@ spec:
               pullPolicy: IfNotPresent
             env:
               REMOTE_SERVER_NAME: 10.200.15.229
+              REMOTE_SERVER_PORT: 1514
               RSYSLOG_HOSTNAME: rsyslog
               TZ: Australia/Melbourne
             envFrom:
