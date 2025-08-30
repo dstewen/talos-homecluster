@@ -61,6 +61,6 @@ spec:
       config:
         enabled: true
         type: configMap
-        existingClaim: rsyslog-configmap
+        name: rsyslog-configmap
         globalMounts:
           - path: "/etc/rsyslog.d/40-forwarder.config"
