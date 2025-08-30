@@ -21,6 +21,10 @@ spec:
               repository: rsyslog/official-docker
               tag: 2025-04
               pullPolicy: IfNotPresent
+            env:
+              REMOTE_SERVER_NAME: 10.200.15.229
+              RSYSLOG_HOSTNAME: rsyslog
+              TZ: Australia/Melbourne
             envFrom:
             - configMapRef:
                 name: rsyslog-configmap
