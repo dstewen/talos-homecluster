@@ -191,7 +191,7 @@ loki.process "cluster_events" {
 loki.source.syslog "loki_syslog_proxy" {
   listener {
     protocol = "tcp"
-    address = "10.200.15.226:514"
+    address = "10.200.15.229:514"
     labels   = {
       job = "loki.source.syslog.loki_syslog_proxy",
       service_name = "opnsense",
