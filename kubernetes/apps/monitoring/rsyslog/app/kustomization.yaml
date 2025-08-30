@@ -6,6 +6,6 @@ resources:
 configMapGenerator:
   - name: rsyslog-configmap
     files:
-      - config.rsyslog=./resources/rsyslog.conf
+      - 40-forwarder.conf=./resources/rsyslog.conf
 generatorOptions:
   disableNameSuffixHash: true
