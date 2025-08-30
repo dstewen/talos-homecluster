@@ -8,7 +8,7 @@ components:
 resources:
   # Flux-Kustomizations
 #  - ./actual-budget-exporter/ks.yaml
-  - ./alloy/ks.yaml
+#  - ./alloy/ks.yaml
 #  - ./cloudflare-exporter/ks.yaml
   - ./frigate-exporter/ks.yaml
   - ./grafana/ks.yaml
