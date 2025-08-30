@@ -18,8 +18,8 @@ spec:
         containers:
           app:
             image:
-              repository: rsyslog/rsyslog-collector
-              tag: 2025-04
+              repository: w0n9/rsyslog-forwarder
+              tag: v0.0.2
               pullPolicy: IfNotPresent
             env:
               REMOTE_SERVER_NAME: 10.200.15.229
@@ -58,7 +58,7 @@ spec:
             protocol: UDP
           syslog-tcp:
             enabled: true
-            port: 1514
+            port: 514
             protocol: TCP
     persistence:
       config:
