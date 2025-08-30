@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: syslog-config-v4
+  name: syslog-config-v1
   namespace: monitoring
   labels:
     app.kubernetes.io/name: &name syslog
@@ -13,4 +13,4 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  storageClassName: nfs-client-bgp
+  storageClassName: ceph-block

@@ -3,3 +3,9 @@ kind: Kustomization
 resources:
   - ./pvc.yaml
   - ./helmrelease.yaml
+configMapGenerator:
+  - name: syslog-configmap
+    files:
+      - config.syslog=./resources/rsyslog.conf
+generatorOptions:
+  disableNameSuffixHash: true

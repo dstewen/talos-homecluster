@@ -21,6 +21,9 @@ spec:
               repository: ghcr.io/linuxserver/syslog-ng
               tag: 4.8.3
               pullPolicy: IfNotPresent
+            envFrom:
+            - configMapRef:
+                name: syslog-configmap
             securityContext:
               runAsUser: 0
               runAsGroup: 0
@@ -49,7 +52,7 @@ spec:
         type: LoadBalancer
 #        externalTrafficPolicy: Cluster
         annotations:
-          lbipam.cilium.io/ips: 10.200.15.226,10.200.15.229
+          lbipam.cilium.io/ips: 10.200.15.226
         ports:
           syslog-udp:
             enabled: true
@@ -62,6 +65,6 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: syslog-config-v4
+        existingClaim: syslog-config-v1
         globalMounts:
           - path: "/config"
