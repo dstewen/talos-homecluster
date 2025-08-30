@@ -16,6 +16,9 @@ spec:
         create: false
         name: &name alloy-configmap
         key: config.alloy
+      # -- Disables sending Grafana Labs anonymous usage stats
+      # Alloy.
+      enableReporting: false
       extraPorts:
         - name: tcp-syslog
           port: 514
