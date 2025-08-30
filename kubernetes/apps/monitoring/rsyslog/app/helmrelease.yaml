@@ -18,7 +18,7 @@ spec:
         containers:
           app:
             image:
-              repository: rsyslog/official-docker
+              repository: rsyslog/rsyslog-collector
               tag: 2025-04
               pullPolicy: IfNotPresent
             env:
