@@ -18,17 +18,14 @@ spec:
         containers:
           app:
             image:
-              repository: w0n9/rsyslog-forwarder
-              tag: v0.0.2
+              repository: rsyslog/rsyslog-collector
+              tag: 2025-04
               pullPolicy: IfNotPresent
             env:
               REMOTE_SERVER_NAME: 10.200.15.229
               REMOTE_SERVER_PORT: 1514
               RSYSLOG_HOSTNAME: rsyslog
               TZ: Australia/Melbourne
-            envFrom:
-            - configMapRef:
-                name: rsyslog-configmap
             securityContext:
               runAsUser: 0
               runAsGroup: 0
