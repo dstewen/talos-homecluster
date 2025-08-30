@@ -4,8 +4,8 @@ resources:
   - ./pvc.yaml
   - ./helmrelease.yaml
 configMapGenerator:
-  - name: syslog-configmap
+  - name: rsyslog-configmap
     files:
-      - config.syslog=./resources/rsyslog.conf
+      - config.rsyslog=./resources/rsyslog.conf
 generatorOptions:
   disableNameSuffixHash: true
