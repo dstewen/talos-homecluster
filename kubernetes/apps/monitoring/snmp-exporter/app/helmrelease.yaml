@@ -69,7 +69,6 @@ spec:
         #ipFamilyPolicy: PreferDualStack
     serviceMonitor:
       enabled: true
-      interval: 30s
       params:
         - name: opnsense
           auth: [public_v2]
@@ -83,7 +82,7 @@ spec:
           auth: [public_v2]
           module: [if_mib]
           target: 192.168.10.128
-      scrapeTimeout: 30s
+      scrapeTimeout: 10s
       relabelings:
         - { sourceLabels: ["__param_target"], targetLabel: instance }
       additionalMetricsRelabelConfigs:
