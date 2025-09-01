@@ -62,5 +62,3 @@ spec:
       relabelings:
         - sourceLabels: [__param_target]
           targetLabel: instance
-        - action: labeldrop
-          regex: (pod)
