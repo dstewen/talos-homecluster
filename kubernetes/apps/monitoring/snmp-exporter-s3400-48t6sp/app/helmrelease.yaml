@@ -55,7 +55,7 @@ spec:
     serviceMonitor:
       enabled: true
       params:
-        - name: s3400-48t6sp
+        - name: s3400-48t6sp-0
           auth: [public_v2]
           module: [if_mib]
           target: 192.168.10.3
