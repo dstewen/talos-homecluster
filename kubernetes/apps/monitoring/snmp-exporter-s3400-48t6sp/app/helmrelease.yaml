@@ -55,10 +55,12 @@ spec:
     serviceMonitor:
       enabled: true
       params:
-        - name: s3400-48t6sp-0
+        - name: s340048t6sp
           auth: [public_v2]
           module: [if_mib]
           target: 192.168.10.3
       relabelings:
         - sourceLabels: [__param_target]
           targetLabel: instance
+        - action: labeldrop
+          regex: (pod)
