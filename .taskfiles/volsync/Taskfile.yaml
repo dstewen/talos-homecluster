@@ -13,7 +13,7 @@ vars:
 
 tasks:
   list:
-    desc: List snapshots for an application [CLUSTER=main] [NS=default] [APP=required]
+    desc: List snapshots for an application [NS=default] [APP=required]
     summary: |
       Args:
         NS: Namespace the PVC is in (default: default)
