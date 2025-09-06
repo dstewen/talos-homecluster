@@ -13,7 +13,8 @@ spec:
       containers:
         - name: list
           image: docker.io/restic/restic:latest
-          args: ["snapshots"]
+          args:
+            - snapshots
           envFrom:
             - secretRef:
                 name: {{ ENV.APP }}-volsync-minio
