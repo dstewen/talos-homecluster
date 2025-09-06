@@ -19,7 +19,7 @@ tasks:
         NS: Namespace the PVC is in (default: default)
         APP: Application to list snapshots for (required)
     cmds:
-      - minijinja-cli --env {{.VOLSYNC_RESOURCES_DIR}}/list.yaml.j2 | kubectl apply -f -
+      - minijinja-cli --env {{.VOLSYNC_RESOURCES_DIR}}/list.yaml.j2 | kubectl apply --server-side --filename -
       - kubectl -n {{.NS}} wait job/list-{{.APP}} --for condition=complete --timeout=1m
       - kubectl -n {{.NS}} logs job/list-{{.APP}} --container list
       - kubectl -n {{.NS}} delete job list-{{.APP}}
