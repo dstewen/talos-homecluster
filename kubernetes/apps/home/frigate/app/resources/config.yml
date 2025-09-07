@@ -40,6 +40,19 @@ audio:
 
 record:
   enabled: true
+  retain:
+    days: 21
+    mode: all
+  events:
+    retain:
+      default: 35
+      mode: active_objects
+
+objects:
+  track:
+    - person
+    - dog
+    - cat
 
 snapshots:
   enabled: true
