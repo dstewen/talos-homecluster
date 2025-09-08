@@ -40,11 +40,6 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  healthCheckExprs:
-    - apiVersion: dragonflydb.io/v1alpha1
-      kind: Dragonfly
-      failed: status.phase != 'ready'
-      current: status.phase == 'ready'
   dependsOn:
     - name: dragonfly-operator
       namespace: database
