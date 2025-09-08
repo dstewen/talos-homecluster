@@ -7,7 +7,7 @@ resources:
   - ./aqua.yaml
   - ./authentik.yaml
   - ./backube.yaml
-  - ./bjw-s.yaml
+#  - ./bjw-s.yaml
   - ./cloudnative-pg.yaml
   - ./external-dns.yaml
   - ./external-secrets.yaml
