@@ -6,10 +6,10 @@ resources:
   - ./externalsecret.yaml
   - ./helmrelease.yaml
   - ./ocirepository.yaml
-#configMapGenerator:
-#  - name: kopia-repository-configmap
-#    files:
-#      - repository.config=./resources/repository.config
+configMapGenerator:
+  - name: kopia-repository-configmap
+    files:
+      - repository.config=./resources/repository.config
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
