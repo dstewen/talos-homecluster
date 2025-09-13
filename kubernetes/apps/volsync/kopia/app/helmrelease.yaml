@@ -72,7 +72,7 @@ spec:
     route:
       app:
         hostnames:
-          - "{{ .Release.Name }}.davidstewen.com"
+          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
         parentRefs:
           - name: internal
             namespace: kube-system
@@ -85,12 +85,12 @@ spec:
 #          - path: /config/repository.config
 #            subPath: repository.config
 #            readOnly: true
-#      repository:
-#        type: nfs
-#        server: expanse.internal
-#        path: /mnt/eros/VolsyncKopia
-#        globalMounts:
-#          - path: /repository
+      repository:
+        type: nfs
+        server: 192.168.10.15
+        path: /volume2/piNFS01/volsync-kopia-backups
+        globalMounts:
+          - path: /repository
       tmpfs:
         type: emptyDir
         advancedMounts:
