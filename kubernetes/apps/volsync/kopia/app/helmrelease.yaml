@@ -30,9 +30,9 @@ spec:
               KOPIA_WEB_ENABLED: true
               KOPIA_WEB_PORT: &port 80
               TZ: Australia/Melbourne
-            envFrom:
-              - secretRef:
-                  name: kopia-secret
+#            envFrom:
+#              - secretRef:
+#                  name: kopia-secret
             args:
               - --without-password
             probes:
@@ -72,25 +72,25 @@ spec:
     route:
       app:
         hostnames:
-          - "{{ .Release.Name }}.turbo.ac"
+          - "{{ .Release.Name }}.davidstewen.com"
         parentRefs:
           - name: internal
             namespace: kube-system
             sectionName: https
     persistence:
-      config-file:
-        type: configMap
-        name: kopia-repository-configmap
-        globalMounts:
-          - path: /config/repository.config
-            subPath: repository.config
-            readOnly: true
-      repository:
-        type: nfs
-        server: expanse.internal
-        path: /mnt/eros/VolsyncKopia
-        globalMounts:
-          - path: /repository
+#      config-file:
+#        type: configMap
+#        name: kopia-repository-configmap
+#        globalMounts:
+#          - path: /config/repository.config
+#            subPath: repository.config
+#            readOnly: true
+#      repository:
+#        type: nfs
+#        server: expanse.internal
+#        path: /mnt/eros/VolsyncKopia
+#        globalMounts:
+#          - path: /repository
       tmpfs:
         type: emptyDir
         advancedMounts:
