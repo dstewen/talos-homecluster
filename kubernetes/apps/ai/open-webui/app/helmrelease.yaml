@@ -45,6 +45,7 @@ spec:
               ENABLE_RAG_WEB_SEARCH: true
               RAG_WEB_SEARCH_ENGINE: searxng
               SEARXNG_QUERY_URL: http://searxng.selfhosted.svc.cluster.local:8080/search?q=<query>
+              ENABLE_REALTIME_CHAT_SAVE: true
               # Redis
               # https://docs.openwebui.com/getting-started/advanced-topics/env-configuration/#redis
               ENABLE_WEBSOCKET_SUPPORT: true
