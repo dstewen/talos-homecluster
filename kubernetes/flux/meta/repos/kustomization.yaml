@@ -15,7 +15,7 @@ resources:
   - ./intel.yaml
   - ./itzg.yaml
   - ./kubernetes-sigs-nfd.yaml
-  - ./prometheus-community.yaml
+#  - ./prometheus-community.yaml
   - ./openebs.yaml
   - ./piraeus.yaml
   - ./rook-ceph.yaml
