@@ -50,7 +50,7 @@ spec:
 #          - hosts:
 #              - *host
     toolbox:
-      enabled: true
+      enabled: false
 #      affinity:
 #        nodeAffinity:
 #          requiredDuringSchedulingIgnoredDuringExecution:
