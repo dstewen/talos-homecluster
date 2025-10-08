@@ -42,8 +42,7 @@ spec:
   targetNamespace: *namespace
   commonMetadata:
     labels:
-      app.kubernetes.io/name: open-webui
-      app.kubernetes.io/component: pipelines
+      app.kubernetes.io/name: open-webui-pipelines
   interval: 10m
   path: ./kubernetes/apps/ai/open-webui/pipelines
   prune: true
