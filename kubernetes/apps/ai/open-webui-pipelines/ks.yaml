@@ -10,7 +10,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: open-webui-pipelines
-  interval: 10m
+  interval: 30m
   path: ./kubernetes/apps/ai/open-webui-pipelines/app
   prune: true
   sourceRef:
@@ -29,3 +29,5 @@ spec:
       VOLSYNC_CLAIM: open-webui-pipelines-data
       VOLSYNC_CAPACITY: 1Gi
       VOLSYNC_CACHE_CAPACITY: 1Gi
+  retryInterval: 1m
+  timeout: 15m

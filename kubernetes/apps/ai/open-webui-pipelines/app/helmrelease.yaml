@@ -10,6 +10,7 @@ spec:
     kind: OCIRepository
     name: app-template
   install:
+    timeout: 15m
     remediation:
       retries: -1
   upgrade:
@@ -61,7 +62,7 @@ spec:
                 cpu: "10m"
                 memory: "128Mi"
               limits:
-                cpu: "250m"
+                cpu: "1000m"
                 memory: "512Mi"
 
     service:
