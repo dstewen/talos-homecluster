@@ -74,6 +74,8 @@ spec:
   dependsOn:
     - name: cloudnative-pg
       namespace: database
+    - name: plugin-barman-cloud
+      namespace: database
     - name: external-secrets-stores
       namespace: external-secrets
   healthCheckExprs:
