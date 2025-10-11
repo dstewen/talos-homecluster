@@ -11,7 +11,8 @@ spec:
   dependsOn:
     - name: cert-manager
       namespace: cert-manager
-    - name: cloudnative-pg-operator
+    - name: cloudnative-pg
+      namespace: database
   interval: 1h
   path: ./kubernetes/apps/database/plugin-barman-cloud/app
   postBuild:
