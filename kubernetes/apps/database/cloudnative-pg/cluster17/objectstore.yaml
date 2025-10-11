@@ -20,3 +20,10 @@ spec:
       compression: bzip2
       maxParallel: 8
   retentionPolicy: 30d
+# Maybe fixes https://github.com/cloudnative-pg/plugin-barman-cloud/issues/393
+  instanceSidecarConfiguration:
+    env:
+      - name: AWS_REQUEST_CHECKSUM_CALCULATION
+        value: when_required
+      - name: AWS_RESPONSE_CHECKSUM_VALIDATION
+        value: when_required
