@@ -21,13 +21,13 @@ spec:
   dependsOn:
     - name: volsync
       namespace: volsync
-  components:
-    - ../../../../components/volsync
+#  components:
+#    - ../../../../components/volsync
   postBuild:
     substitute:
       APP: *app
-      VOLSYNC_CLAIM: open-webui-pipelines-data
-      VOLSYNC_CAPACITY: 1Gi
-      VOLSYNC_CACHE_CAPACITY: 1Gi
+#      VOLSYNC_CLAIM: open-webui-pipelines-data
+#      VOLSYNC_CAPACITY: 1Gi
+#      VOLSYNC_CACHE_CAPACITY: 1Gi
   retryInterval: 1m
   timeout: 15m
