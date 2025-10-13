@@ -10,11 +10,11 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  dependsOn:
-    - name: internal-ingress-nginx
-      namespace: network
-    - name: external-ingress-nginx
-      namespace: network
+#  dependsOn:
+#    - name: internal-ingress-nginx
+#      namespace: network
+#    - name: external-ingress-nginx
+#      namespace: network
   path: ./kubernetes/apps/storage/minio/app
   prune: true
   sourceRef:
