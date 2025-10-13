@@ -92,9 +92,10 @@ spec:
         controller: minio
         ports:
           http:
-            port: 9001
+            primary: true
+            port: &consolePort 9001
           s3:
-            port: 9000
+            port: &apiPort 9000
     serviceMonitor:
       app:
         serviceName: minio
@@ -104,29 +105,53 @@ spec:
             path: /minio/v2/metrics/cluster
             interval: 1m
             scrapeTimeout: 10s
-    ingress:
+#    ingress:
+#      app:
+#        enabled: true
+#        className: internal
+#        annotations:
+#          external-dns.alpha.kubernetes.io/target: internal.davidstewen.com
+#        hosts:
+#          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+#            paths:
+#              - path: /
+#                service:
+#                  identifier: app
+#                  port: http
+#          - host: &s3Host s3.${SECRET_DOMAIN}
+#            paths:
+#              - path: /
+#                service:
+#                  identifier: app
+#                  port: s3
+#        tls:
+#          - hosts:
+#              - *host
+#              - *s3Host
+
+    route:
       app:
-        enabled: true
-        className: internal
-        annotations:
-          external-dns.alpha.kubernetes.io/target: internal.davidstewen.com
-        hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
-          - host: &s3Host s3.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: s3
-        tls:
-          - hosts:
-              - *host
-              - *s3Host
+        hostnames: ["minio.${SECRET_DOMAIN_0}"]
+        parentRefs:
+          - name: internal
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *consolePort
+      s3:
+        hostnames: ["s3.${SECRET_DOMAIN_0}"]
+        parentRefs:
+          - name: internal
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *apiPort
+
+
     persistence:
       data:
         enabled: true
