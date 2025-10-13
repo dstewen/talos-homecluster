@@ -131,7 +131,7 @@ spec:
 
     route:
       app:
-        hostnames: ["minio.${SECRET_DOMAIN_0}"]
+        hostnames: ["minio.davidstewen.com"]
         parentRefs:
           - name: internal
             namespace: kube-system
@@ -141,7 +141,7 @@ spec:
               - identifier: app
                 port: *consolePort
       s3:
-        hostnames: ["s3.${SECRET_DOMAIN_0}"]
+        hostnames: ["s3.davidstewen.com"]
         parentRefs:
           - name: internal
             namespace: kube-system
