@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
 #  - ./config-map.yaml
   - ./helmrelease.yaml
+  - ./ocirepository.yaml
 configMapGenerator:
   - name: openwrt-interface-dashboard
     files:
