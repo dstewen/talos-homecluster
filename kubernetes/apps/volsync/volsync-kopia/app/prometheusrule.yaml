@@ -3,10 +3,10 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: volsync-rules
+  name: volsync-kopia-rules
 spec:
   groups:
-    - name: volsync.rules
+    - name: volsync-kopia.rules
       rules:
         - alert: VolSyncComponentAbsent
           annotations:
