@@ -9,4 +9,3 @@ resources:
   # Flux-Kustomizations
   - ./kopia/ks.yaml
 #  - ./volsync/ks.yaml
-#  - ./volsync-kopia/ks.yaml

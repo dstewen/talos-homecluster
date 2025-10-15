@@ -5,25 +5,10 @@ kind: HelmRelease
 metadata:
   name: volsync
 spec:
-  interval: 30m
-  chart:
-    spec:
-      chart: volsync
-      version: 0.13.1
-      sourceRef:
-        kind: HelmRepository
-        name: backube
-        namespace: flux-system
-  maxHistory: 2
-  install:
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      retries: 3
-  uninstall:
-    keepHistory: false
+  chartRef:
+    kind: OCIRepository
+    name: volsync
+  interval: 1h
   values:
 #    affinity:
 #      nodeAffinity:
@@ -42,13 +27,17 @@ spec:
 #              operator: In
 #              values:
 #              - worker
+    fullnameOverride: volsync # Required for volsync-perfectra1n fork
     manageCRDs: true
-    image:
-      repository: &image ghcr.io/home-operations/volsync
-      tag: &tag 0.12.1
-    restic:
-      repository: *image
-      tag: *tag
+    image: &image
+      repository: ghcr.io/perfectra1n/volsync
+      tag: v0.16.12
+    kopia: *image
+    rclone: *image
+    restic: *image
+    rsync: *image
+    rsync-tls: *image
+    syncthing: *image
     metrics:
       disableAuth: true
     resources:
@@ -57,3 +46,7 @@ spec:
       requests:
         cpu: 15m
         memory: 64M
+    podSecurityContext:
+      runAsNonRoot: true
+      runAsUser: 1000
+      runAsGroup: 1000
