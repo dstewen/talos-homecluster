@@ -9,7 +9,7 @@ metadata:
 spec:
   trigger:
     manual: restore-once
-  restic:
+  kopia:
     copyMethod: Snapshot
     repository: "${APP}-volsync-minio"
     cacheStorageClassName: "${VOLSYNC_CACHE_SNAPSHOTCLASS:-openebs-hostpath}"
