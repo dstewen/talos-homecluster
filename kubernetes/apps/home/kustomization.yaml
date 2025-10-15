@@ -7,7 +7,7 @@ components:
   - ../../components/common
 resources:
   # Flux-Kustomizations
-  - ./audiobookshelf/ks.yaml
+#  - ./audiobookshelf/ks.yaml
   - ./esphome/ks.yaml
   - ./frigate/ks.yaml
   - ./home-assistant/ks.yaml
