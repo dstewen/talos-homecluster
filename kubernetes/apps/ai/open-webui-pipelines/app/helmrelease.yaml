@@ -21,6 +21,10 @@ spec:
     - name: rook-ceph-cluster
       namespace: rook-ceph
   values:
+
+    global:
+      fullnameOverride: pipelines
+
     controllers:
       open-webui-pipelines:
         annotations:
@@ -34,8 +38,6 @@ spec:
 
         containers:
           app:
-
-            fullnameOverride: pipelines
 
             image:
               repository: ghcr.io/open-webui/pipelines
