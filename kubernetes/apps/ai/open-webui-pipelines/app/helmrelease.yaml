@@ -45,7 +45,7 @@ spec:
 
             env:
               PIPELINES_REQUIREMENTS_PATH: /tmp/pipelines_requirements/deepresearch_requirements.txt
-
+              PIPELINES_DIR: "/app/scripts"
             probes:
               liveness:
                 enabled: true
