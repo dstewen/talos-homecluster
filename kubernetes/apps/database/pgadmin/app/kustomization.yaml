@@ -7,11 +7,11 @@ resources:
   - helmrelease.yaml
 #  - volsync-backblazeb2-source.yaml
 #  - volsync-config.yaml
-  - pvc.yaml
-configMapGenerator:
-  - name: servers-json
-    files:
-      - config/servers.json
+#  - pvc.yaml
+#configMapGenerator:
+#  - name: servers-json
+#    files:
+#      - config/servers.json
 generatorOptions:
   disableNameSuffixHash: true
   annotations:

@@ -18,9 +18,17 @@ spec:
   dependsOn:
     - name: external-secrets-stores
       namespace: external-secrets
-#    - name: system-volsync
+    - name: volsync
+      namespace: volsync
   prune: true
   wait: false
   interval: 30m
   retryInterval: 1m
   timeout: 5m
+  postBuild:
+    substitute:
+      APP: *app
+      VOLSYNC_CAPACITY: 500Mi
+      VOLSYNC_CLAIM: pgadmin-config-v1
+      VOLSYNC_GID: "5050"
+      VOLSYNC_UID: "5050"

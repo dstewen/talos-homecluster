@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -37,15 +37,7 @@ spec:
                 - worker
     controllers:
       pgadmin:
-        type: statefulset
-        statefulset:
-          volumeClaimTemplates:
-            - name: config
-              accessMode: ReadWriteOnce
-              size: 1Gi
-              storageClass: local-hostpath
-              globalMounts:
-                - path: /var/lib/pgadmin
+        strategy: Recreate
         annotations:
           reloader.stakater.com/auto: "true"
 #          secret.reloader.stakater.com/reload: authelia-secret
@@ -84,34 +76,50 @@ spec:
         controller: *app
         ports:
           http:
-            port: 80
+            port: &httpPort 80
 
-    ingress:
+#    ingress:
+#      app:
+#        enabled: true
+#        className: internal
+#        annotations:
+#          hajimari.io/icon: mdi:database
+#          hajimari.io/enable: "true"
+#          hajimari.io/group: Databases
+#          hajimari.io/appName: pgAdmin
+#        hosts:
+#          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+#            paths:
+#              - path: /
+#                pathType: Prefix
+#                service:
+#                  identifier: app
+#                  port: http
+#        tls:
+#          - hosts:
+#              - *host
+
+    route:
       app:
-        enabled: true
-        className: internal
-        annotations:
-          hajimari.io/icon: mdi:database
-          hajimari.io/enable: "true"
-          hajimari.io/group: Databases
-          hajimari.io/appName: pgAdmin
-        hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  identifier: app
-                  port: http
-        tls:
-          - hosts:
-              - *host
+        hostnames: ["{{ .Release.Name }}.davidstewen.com"]
+        parentRefs:
+          - name: internal
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - name: *app
+                port: *httpPort
 
     persistence:
-      server-json:
-        enabled: true
-        type: configMap
-        name: servers-json
+      config:
+        existingClaim: "${VOLSYNC_CLAIM}"
         globalMounts:
-          - path: /pgadmin4/servers.json
-            subPath: servers.json
+          - path: /var/lib/pgadmin
+#      server-json:
+#        enabled: true
+#        type: configMap
+#        name: servers-json
+#        globalMounts:
+#          - path: /pgadmin4/servers.json
+#            subPath: servers.json
