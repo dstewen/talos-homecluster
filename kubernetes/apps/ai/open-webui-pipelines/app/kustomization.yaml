@@ -5,10 +5,10 @@ resources:
   - ./helmrelease.yaml
 #  - ./networkpolicy.yaml
   - ./pvc.yaml
-#configMapGenerator:
-#  - name: openwebui-pipelines-requirements-configmap
-#    files:
-#      - config/deepresearch_requirements.txt
+configMapGenerator:
+  - name: openwebui-pipelines-requirements-configmap
+    files:
+      - config/deepresearch_requirements.txt
 #  - name: openwebui-pipelines-scripts-configmap
 #    files:
 #      - scripts/cookies.py
