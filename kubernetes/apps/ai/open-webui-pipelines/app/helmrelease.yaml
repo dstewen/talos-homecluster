@@ -95,9 +95,9 @@ spec:
                 subPath: deepresearch_requirements.txt
 
       pipelines-scripts:
-        type: configMap
-        name: openwebui-pipelines-scripts-configmap
+        existingClaim: pipelines-scripts
         advancedMounts:
           open-webui-pipelines:
             app:
               - path: /app/scripts/
+                readOnly: false
