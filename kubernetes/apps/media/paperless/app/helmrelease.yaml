@@ -54,7 +54,7 @@ spec:
               # Configure application
               PAPERLESS_APPS: allauth.socialaccount.providers.openid_connect
               PAPERLESS_REDIS_PREFIX: pngx
-              PAPERLESS_URL: https://paperless.${SECRET_DOMAIN}
+              PAPERLESS_URL: https://paperless.davidstewen.com
               PAPERLESS_PORT: "8000"
               PAPERLESS_TIME_ZONE: Australia/Victoria
               PAPERLESS_WEBSERVER_WORKERS: "2"
