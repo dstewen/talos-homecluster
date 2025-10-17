@@ -56,6 +56,7 @@ spec:
               PGADMIN_DISABLE_POSTFIX: "true"
               PGADMIN_LISTEN_PORT: &httpPort 80
               TZ: "${TIMEZONE}"
+              PGADMIN_CONFIG_STORAGE_DIR: ""
             envFrom:
               - secretRef:
                   name: pgadmin-secret
