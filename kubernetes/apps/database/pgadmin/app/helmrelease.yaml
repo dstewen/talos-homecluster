@@ -55,10 +55,12 @@ spec:
             env:
               PGADMIN_DISABLE_POSTFIX: "true"
               PGADMIN_LISTEN_PORT: &httpPort 80
-
+              TZ: "${TIMEZONE}"
             envFrom:
               - secretRef:
                   name: pgadmin-secret
+              - secretRef:
+                  name: cluster-secrets
             resources:
               requests:
                 cpu: 15m
@@ -101,6 +103,15 @@ spec:
         existingClaim: pgadmin-config-v1
         globalMounts:
           - path: /var/lib/pgadmin
+
+      nfs:
+        type: nfs
+        server: ${NAS_IP:=temp}
+        path: /volume2/piNFS01/flux-cluster/postgres/pgadmin_backups
+        globalMounts:
+          - path: /nfs
+            readOnly: false
+
 #      server-json:
 #        enabled: true
 #        type: configMap
