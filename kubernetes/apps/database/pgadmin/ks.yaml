@@ -34,3 +34,6 @@ spec:
       VOLSYNC_CLAIM: pgadmin-config-v1
       VOLSYNC_GID: "5050"
       VOLSYNC_UID: "5050"
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
