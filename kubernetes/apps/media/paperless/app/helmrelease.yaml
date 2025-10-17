@@ -156,7 +156,7 @@ spec:
 
     route:
       app:
-        hostnames: ["{{ .Release.Name }}.davidstewen.com"]
+        hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
         parentRefs:
           - name: internal
             namespace: kube-system
