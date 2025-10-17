@@ -78,27 +78,6 @@ spec:
           http:
             port: &httpPort 80
 
-#    ingress:
-#      app:
-#        enabled: true
-#        className: internal
-#        annotations:
-#          hajimari.io/icon: mdi:database
-#          hajimari.io/enable: "true"
-#          hajimari.io/group: Databases
-#          hajimari.io/appName: pgAdmin
-#        hosts:
-#          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
-#            paths:
-#              - path: /
-#                pathType: Prefix
-#                service:
-#                  identifier: app
-#                  port: http
-#        tls:
-#          - hosts:
-#              - *host
-
     route:
       app:
         hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
