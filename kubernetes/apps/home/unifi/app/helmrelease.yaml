@@ -68,6 +68,9 @@ spec:
               UNIFI_STDOUT: "true"
               # JVM_INIT_HEAP_SIZE: null
               JVM_MAX_HEAP_SIZE: 1024M
+            envFrom:
+              - secretRef:
+                  name: cluster-secrets
             resources:
               requests:
                 memory: 512Mi
@@ -98,7 +101,7 @@ spec:
         type: LoadBalancer
         externalTrafficPolicy: Cluster
         annotations:
-          external-dns.alpha.kubernetes.io/hostname: unifitalos.davidstewen.com
+          external-dns.alpha.kubernetes.io/hostname: "unifitalos.${SECRET_DOMAIN}"
           lbipam.cilium.io/ips: "10.200.15.227"
         ports:
           http:
@@ -154,7 +157,7 @@ spec:
 
     route:
       app:
-        hostnames: ["unifitalos.davidstewen.com"]
+        hostnames: ["unifitalos.${SECRET_DOMAIN}"]
         parentRefs:
           - name: internal
             namespace: kube-system
