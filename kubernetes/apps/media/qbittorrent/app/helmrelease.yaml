@@ -115,26 +115,6 @@ spec:
             enabled: true
             port: *torrentPort
             protocol: TCP
-#    ingress:
-#      app:
-#        annotations:
-#          gethomepage.dev/enabled: "true"
-#          gethomepage.dev/group: Downloads
-#          gethomepage.dev/name: qBittorrent
-#          gethomepage.dev/icon: qbittorrent.png
-#          gethomepage.dev/widget.type: qbittorrent
-#          gethomepage.dev/widget.url: http://qbittorrent.media
-#          gethomepage.dev/widget.user: "{{`{{HOMEPAGE_VAR_QBITTORRENT_USER}}`}}"
-#          gethomepage.dev/widget.password: "{{`{{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}`}}"
-#          external-dns.alpha.kubernetes.io/target: internal.davidstewen.com
-#        className: internal
-#        hosts:
-#          - host: qb.davidstewen.com
-#            paths:
-#              - path: /
-#                service:
-#                  identifier: app
-#                  port: http
 
     route:
       app:

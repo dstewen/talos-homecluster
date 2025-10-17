@@ -86,26 +86,6 @@ spec:
         ports:
           http:
             port: *port
-#    ingress:
-#      app:
-#        annotations:
-#          gethomepage.dev/enabled: "true"
-#          gethomepage.dev/group: Downloads
-#          gethomepage.dev/name: Overseerr
-#          gethomepage.dev/icon: overseerr.png
-#          gethomepage.dev/description: Media Request Management
-#          gethomepage.dev/widget.type: overseerr
-#          gethomepage.dev/widget.url: http://overseerr.media:80
-#          gethomepage.dev/widget.key: "{{`{{HOMEPAGE_VAR_OVERSEERR_TOKEN}}`}}"
-#          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
-#        className: internal
-#        hosts:
-#          - host: requests.${SECRET_DOMAIN}
-#            paths:
-#              - path: /
-#                service:
-#                  identifier: app
-#                  port: http
 
     route:
       app:

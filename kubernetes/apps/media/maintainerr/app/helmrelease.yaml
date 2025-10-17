@@ -75,27 +75,6 @@ spec:
               limits:
                 memory: 512Mi
 
-#    ingress:
-#      app:
-#        annotations:
-#          gethomepage.dev/enabled: "true"
-#          gethomepage.dev/group: Downloads
-#          gethomepage.dev/name: Maintainerr
-#          gethomepage.dev/icon: maintainerr.png
-#          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
-#        className: internal
-#        hosts:
-#          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
-#            paths:
-#              - path: /
-#                pathType: Prefix
-#                service:
-#                  identifier: app
-#                  port: http
-#        tls:
-#          - hosts:
-#              - *host
-
     service:
       app:
         controller: maintainerr

@@ -102,25 +102,6 @@ spec:
         ports:
           http:
             port: *port
-#    ingress:
-#      app:
-#        annotations:
-#          gethomepage.dev/enabled: "true"
-#          gethomepage.dev/group: Downloads
-#          gethomepage.dev/name: Lidarr
-#          gethomepage.dev/icon: lidarr.png
-#          gethomepage.dev/widget.type: lidarr
-#          gethomepage.dev/widget.url: http://lidarr.media
-#          gethomepage.dev/widget.key: "{{`{{HOMEPAGE_VAR_LIDARR_TOKEN}}`}}"
-#          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
-#        className: internal
-#        hosts:
-#          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
-#            paths:
-#              - path: /
-#                service:
-#                  identifier: app
-#                  port: http
 
     route:
       app:
