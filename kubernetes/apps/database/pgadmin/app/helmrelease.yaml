@@ -113,7 +113,8 @@ spec:
 
     persistence:
       config:
-        existingClaim: "${VOLSYNC_CLAIM}"
+#        existingClaim: "${VOLSYNC_CLAIM}"
+        existingClaim: pgadmin-config-v1
         globalMounts:
           - path: /var/lib/pgadmin
 #      server-json:
