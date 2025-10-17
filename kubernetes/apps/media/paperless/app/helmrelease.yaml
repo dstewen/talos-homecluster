@@ -78,7 +78,7 @@ spec:
               PAPERLESS_OCR_LANGUAGES: eng
               PAPERLESS_OCR_LANGUAGE: eng
               # Configure redis integration
-              PAPERLESS_REDIS: redis://dragonfly.database.svc.cluster.local:6379
+              PAPERLESS_REDIS: redis://dragonfly.database.svc.cluster.local:6379/8
               # Configure user permissions
               USERMAP_GID: "65542"
             envFrom:
