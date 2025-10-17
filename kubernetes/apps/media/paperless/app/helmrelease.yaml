@@ -54,8 +54,6 @@ spec:
             envFrom:
               - secretRef:
                   name: paperless-dbinit-secret
-              - secretRef:
-                  name: cluster-secrets
 
         containers:
           app:

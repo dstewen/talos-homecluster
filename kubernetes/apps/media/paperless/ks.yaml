@@ -35,3 +35,6 @@ spec:
       APP_GID: "1000"
       VOLSYNC_CLAIM: paperless-config
       VOLSYNC_CAPACITY: 5Gi
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
