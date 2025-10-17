@@ -39,3 +39,6 @@ spec:
       APP_GID: "568"
       VOLSYNC_CLAIM: actual-data
       VOLSYNC_CAPACITY: 1Gi
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
