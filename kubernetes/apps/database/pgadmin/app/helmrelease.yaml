@@ -54,6 +54,8 @@ spec:
               tag: 9.8@sha256:d115bcd737940a6cfb61a54439d50de8b850e0782e2363102c9fa761f4022f49
             env:
               PGADMIN_DISABLE_POSTFIX: "true"
+              PGADMIN_LISTEN_PORT: &httpPort 80
+
             envFrom:
               - secretRef:
                   name: pgadmin-secret
@@ -64,21 +66,22 @@ spec:
               limits:
                 memory: 500M
             probes:
-              liveness:
+              liveness: &probes
                 enabled: true
-                port: 80
-              readiness:
-                enabled: true
-                port: 80
-              startup:
-                enabled: true
-                port: 80
+                custom: true
+                spec:
+                  httpGet:
+                    path: /misc/ping
+                    port: *httpPort
+                  failureThreshold: 10
+              readiness: *probes
+              startup: *probes
     service:
       app:
         controller: *app
         ports:
           http:
-            port: &httpPort 80
+            port: *httpPort
 
     route:
       app:
