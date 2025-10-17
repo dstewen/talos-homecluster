@@ -82,10 +82,10 @@ spec:
               # Configure user permissions
               USERMAP_GID: "65542"
             envFrom:
-            - secretRef:
-                name: paperless-secret
-            - secretRef:
-                name: cluster-secrets
+              - secretRef:
+                  name: paperless-secret
+              - secretRef:
+                  name: cluster-secrets
             resources:
               requests:
                 cpu: 15m
@@ -121,7 +121,7 @@ spec:
         controller: *app
         ports:
           http:
-            port: 8000
+            port: &port 8000
 #    ingress:
 #      app:
 #        className: internal
@@ -142,7 +142,17 @@ spec:
 #              identifier: app
 #              port: http
 
-
+    route:
+      app:
+        hostnames: ["{{ .Release.Name }}.davidstewen.com"]
+        parentRefs:
+          - name: internal
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
 
     persistence:
       config:
