@@ -80,34 +80,6 @@ spec:
             runAsNonRoot: true
             fsGroup: 1000
             fsGroupChangePolicy: OnRootMismatch
-#    ingress:
-#      app:
-#        enabled: true
-#        className: internal
-#        annotations:
-#          hajimari.io/icon: cib:node-red
-#          hajimari.io/group: Home
-#          hajimari.io/appName: node-red
-#          hajimari.io/url: https://nr.${SECRET_DOMAIN}
-#          gethomepage.dev/enabled: "true"
-#          gethomepage.dev/group: Home
-#          gethomepage.dev/name: node-red
-#          gethomepage.dev/icon: node-red.png
-#          gethomepage.dev/href: https://nr.${SECRET_DOMAIN}
-##          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-#        hosts:
-#          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
-#            paths: &paths
-#              - path: /
-#                service:
-#                  identifier: app
-#                  port: http
-#          - host: &customHost nr.${SECRET_DOMAIN}
-#            paths: *paths
-#        tls:
-#          - hosts:
-#              - *host
-#              - *customHost
 
     service:
       app:
