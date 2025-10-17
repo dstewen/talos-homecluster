@@ -91,6 +91,8 @@ spec:
               PAPERLESS_REDIS: redis://dragonfly.database.svc.cluster.local:6379/8
               # Configure user permissions
               USERMAP_GID: "65542"
+              # Configure DB
+              PAPERLESS_DBENGINE: postgresql
             envFrom:
               - secretRef:
                   name: paperless-secret
