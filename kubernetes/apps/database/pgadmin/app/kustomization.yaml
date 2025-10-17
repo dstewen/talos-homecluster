@@ -5,9 +5,6 @@ kind: Kustomization
 resources:
   - ./externalsecret.yaml
   - ./helmrelease.yaml
-#  - volsync-backblazeb2-source.yaml
-#  - volsync-config.yaml
-#  - pvc.yaml
 #configMapGenerator:
 #  - name: servers-json
 #    files:

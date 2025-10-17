@@ -54,9 +54,8 @@ spec:
               tag: 9.9@sha256:5d9624a93634d1c5e595619cc57b1d330758120d1baf445fa97300c0c1fc3c0a
             env:
               PGADMIN_DISABLE_POSTFIX: "true"
-              PGADMIN_LISTEN_PORT: &httpPort 80
+              PGADMIN_LISTEN_PORT: &httpPort 5050
               TZ: "${TIMEZONE}"
-              PGADMIN_CONFIG_STORAGE_DIR: ""
             envFrom:
               - secretRef:
                   name: pgadmin-secret
@@ -100,8 +99,7 @@ spec:
 
     persistence:
       config:
-#        existingClaim: "${VOLSYNC_CLAIM}"
-        existingClaim: pgadmin-config-v1
+        existingClaim: pgadmin-config
         globalMounts:
           - path: /var/lib/pgadmin
 
