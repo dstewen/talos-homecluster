@@ -84,6 +84,8 @@ spec:
             envFrom:
             - secretRef:
                 name: paperless-secret
+            - secretRef:
+                name: cluster-secrets
             resources:
               requests:
                 cpu: 15m
@@ -120,25 +122,28 @@ spec:
         ports:
           http:
             port: 8000
-    ingress:
-      app:
-        className: internal
-        annotations:
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/group: Home
-          gethomepage.dev/name: Paperless
-          gethomepage.dev/icon: paperless.png
-          gethomepage.dev/description: Document OCR Software
-#          gethomepage.dev/widget.type: paperlessngx
-#          gethomepage.dev/widget.url: http://paperless.media.svc.cluster.local:8000
-#          gethomepage.dev/widget.key: "834c5259ed37fc041ba31a32f8d9bd608fb9a2ab"
-        hosts:
-        - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
-          paths:
-          - path: /
-            service:
-              identifier: app
-              port: http
+#    ingress:
+#      app:
+#        className: internal
+#        annotations:
+#          gethomepage.dev/enabled: "true"
+#          gethomepage.dev/group: Home
+#          gethomepage.dev/name: Paperless
+#          gethomepage.dev/icon: paperless.png
+#          gethomepage.dev/description: Document OCR Software
+##          gethomepage.dev/widget.type: paperlessngx
+##          gethomepage.dev/widget.url: http://paperless.media.svc.cluster.local:8000
+##          gethomepage.dev/widget.key: "834c5259ed37fc041ba31a32f8d9bd608fb9a2ab"
+#        hosts:
+#        - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
+#          paths:
+#          - path: /
+#            service:
+#              identifier: app
+#              port: http
+
+
+
     persistence:
       config:
         existingClaim: ${VOLSYNC_CLAIM}
