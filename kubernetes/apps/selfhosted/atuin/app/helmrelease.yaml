@@ -44,7 +44,11 @@ spec:
               ATUIN_METRICS__HOST: 0.0.0.0
               ATUIN_METRICS__PORT: &metricsPort 8080
               ATUIN_TLS__ENABLE: "false"
-            envFrom: *envFrom
+            envFrom:
+              - secretRef:
+                  name: atuin-secret
+              - secretRef:
+                  name: cluster-secrets
             args: ["server", "start"]
             probes:
               liveness: &probes
@@ -95,7 +99,7 @@ spec:
 
     route:
       app:
-        hostnames: ["sh.davidstewen.com"]
+        hostnames: ["sh.${SECRET_DOMAIN}"]
         parentRefs:
           - name: internal
             namespace: kube-system
