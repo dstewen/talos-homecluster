@@ -38,3 +38,6 @@ spec:
       APP_GID: "1000"
       VOLSYNC_CLAIM: node-red
       VOLSYNC_CAPACITY: 5Gi
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
