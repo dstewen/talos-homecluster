@@ -120,10 +120,10 @@ spec:
             path: /sys/firmware/efi/efivars
             type: ""
           name: efivars
-        - configMap:
-            defaultMode: 448
-            name: ssh-dir
-          name: ssh-dir
+#        - configMap:
+#            defaultMode: 448
+#            name: ssh-dir
+#          name: ssh-dir
   updateStrategy:
     rollingUpdate:
       maxSurge: 0
