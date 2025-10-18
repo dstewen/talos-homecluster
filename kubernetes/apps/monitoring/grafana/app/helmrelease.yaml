@@ -360,7 +360,8 @@ spec:
           # renovate: depName="Cilium Network Monitoring"
           gnetId: 24056
           revision: 1
-          datasource: Prometheus
+          datasource:
+            - { name: DS_PROMETHEUS, value: Prometheus }
       etcd:
         etcd-cluster-overview:
           # renovate: depName="Etcd Cluster Overview"
