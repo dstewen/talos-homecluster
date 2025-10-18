@@ -319,6 +319,30 @@ spec:
           gnetId: 5342
           revision: 9
           datasource: Prometheus
+        ceph-cluster-dash:
+          # renovate: depName="Ceph Cluster Dashboard"
+          gnetId: 23159
+          revision: 1
+          datasource:
+            - { name: DS_PROMETHEUS, value: Prometheus }
+        ceph-fs:
+          # renovate: depName="Ceph - CephFS Dashboard"
+          gnetId: 9340
+          revision: 1
+          datasource:
+            - { name: DS_CEPH-PROMETHEUS, value: Prometheus }
+        ceph-fs-mds:
+          # renovate: depName="Ceph - CephFS MDS Dashboard"
+          gnetId: 12701
+          revision: 3
+          datasource:
+            - { name: DS_PROMETHEUS, value: Prometheus }
+        ceph-usage:
+          # renovate: depName="Ceph - Usage Dashboard"
+          gnetId: 23246
+          revision: 1
+          datasource:
+            - { name: DS_PROMETHEUS, value: Prometheus }
         host-overview:
           url: https://raw.githubusercontent.com/ceph/ceph/main/monitoring/ceph-mixin/dashboards_out/hosts-overview.json
           datasource: Prometheus
@@ -332,12 +356,23 @@ spec:
         hubble-dashboard:
           url: https://raw.githubusercontent.com/cilium/cilium/1.14.1/install/kubernetes/cilium/files/hubble/dashboards/hubble-dashboard.json
           datasource: Prometheus
+        cilium-network-monitoring:
+          # renovate: depName="Cilium Network Monitoring"
+          gnetId: 24056
+          revision: 1
+          datasource: Prometheus
       etcd:
         etcd-cluster-overview:
           # renovate: depName="Etcd Cluster Overview"
           gnetId: 15308
           revision: 1
           datasource: Prometheus
+        etcd-storage:
+          # renovate: depName="etcd"
+          gnetId: 22236
+          revision: 4
+          datasource:
+            - { name: DS_VICTORIAMETRICS, value: Prometheus }
       flux:
         flux-cluster:
           url: https://raw.githubusercontent.com/fluxcd/flux2-monitoring-example/main/monitoring/configs/dashboards/cluster.json
@@ -388,7 +423,8 @@ spec:
           # renovate: depName="Kubernetes PVC Stats"
           gnetId: 23233
           revision: 6
-          datasource: Prometheus
+          datasource:
+            - { name: DS_PROMETHEUS, value: Prometheus }
         kubernetes-volumes:
           # renovate: depName="K8s / Storage / Volumes / Cluster"
           gnetId: 11454
@@ -699,6 +735,12 @@ spec:
           datasource:
             - { name: DS_PROMETHEUS, value: Prometheus }
       prometheus:
+        alerts:
+          # renovate: depName="Alerts"
+          gnetId: 16420
+          revision: 5
+          datasource:
+            - { name: DS_PROMETHEUS, value: Prometheus }
         prometheus:
           # renovate: depName="Prometheus"
           gnetId: 19105
@@ -725,6 +767,12 @@ spec:
           revision: 4
           datasource:
             - { name: DS_PROMETHEUS, value: Prometheus }
+        cluster-pod-node-issues:
+          # renovate: depName="Cluster Pod & Node Issues"
+          gnetId: 24119
+          revision: 1
+          datasource:
+            - { name: DS_PROMETHEUS, value: Prometheus }
         dragonfly-dashboard:
           url: https://raw.githubusercontent.com/dragonflydb/dragonfly-operator/main/monitoring/grafana-dashboard.json
           datasource:
@@ -733,6 +781,12 @@ spec:
           # renovate: depName="Frigate Dashboard"
           gnetId: 18226
           revision: 9
+          datasource:
+            - { name: DS_PROMETHEUS, value: Prometheus }
+        frigate-monitoring-dashboard:
+          # renovate: depName="Frigate Monitoring Dashboard"
+          gnetId: 24165
+          revision: 1
           datasource:
             - { name: DS_PROMETHEUS, value: Prometheus }
         grafana-internals:
@@ -783,6 +837,13 @@ spec:
           revision: 3
           datasource:
             - { name: DS_PROMETHEUS, value: Prometheus }
+        qdrant:
+          # renovate: depName="Qdrant"
+          gnetId: 24074
+          revision: 1
+          datasource:
+            - { name: DS_PROMETHEUS, value: Prometheus }
+            - { name: DS_LOKI, value: Loki }
         redis:
           # renovate: depName="Redis"
           gnetId: 11835
@@ -816,30 +877,6 @@ spec:
       testing:
         arc-autoscaling-runner-set-monitoring:
           url: https://raw.githubusercontent.com/actions/actions-runner-controller/master/docs/gha-runner-scale-set-controller/samples/grafana-dashboard/ARC-Autoscaling-Runner-Set-Monitoring_1692627561838.json
-          datasource:
-            - { name: DS_PROMETHEUS, value: Prometheus }
-        ceph-cluster:
-          # renovate: depName="Ceph Cluster Dashboard"
-          gnetId: 23159
-          revision: 1
-          datasource:
-            - { name: DS_PROMETHEUS, value: Prometheus }
-        ceph-fs:
-          # renovate: depName="Ceph - CephFS Dashboard"
-          gnetId: 9340
-          revision: 1
-          datasource:
-            - { name: DS_CEPH-PROMETHEUS, value: Prometheus }
-        ceph-fs-mds:
-          # renovate: depName="Ceph - CephFS MDS Dashboard"
-          gnetId: 12701
-          revision: 3
-          datasource:
-            - { name: DS_PROMETHEUS, value: Prometheus }
-        ceph-usage:
-          # renovate: depName="Ceph - Usage Dashboard"
-          gnetId: 23246
-          revision: 1
           datasource:
             - { name: DS_PROMETHEUS, value: Prometheus }
       thanos:
