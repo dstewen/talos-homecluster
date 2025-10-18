@@ -33,9 +33,9 @@ spec:
               name: run-containerd
             - mountPath: /var/log/pods
               name: var-log-pods
-            - mountPath: /root/.ssh/authorized_keys
-              name: ssh-dir
-              subPath: authorized_keys
+#            - mountPath: /root/.ssh/authorized_keys
+#              name: ssh-dir
+#              subPath: authorized_keys
             - mountPath: /var/lib/kubelet
               mountPropagation: Bidirectional
               name: kubelet-dir
