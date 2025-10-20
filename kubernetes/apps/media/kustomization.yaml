@@ -17,7 +17,7 @@ resources:
   - ./maintainerr/ks.yaml
   - ./overseerr/ks.yaml
   - ./paperless/ks.yaml
-  - ./paperless-scan/ks.yaml
+#  - ./paperless-scan/ks.yaml
   - ./plex/ks.yaml
   - ./prowlarr/ks.yaml
 #  - ./qbittorrent/ks.yaml
