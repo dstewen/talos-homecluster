@@ -30,7 +30,7 @@ spec:
               MODEL: MFC-L2880DW
               RESOLUTION: 300
               IPADDRESS: 192.168.10.81 # IP Address of your scanner
-              HOST_IPADDRESS: &ip 10.200.15.243
+              HOST_IPADDRESS: 10.200.15.243
               WEBSERVER: true
               DISABLE_GUI_SCANTOEMAIL: true
               DISABLE_GUI_SCANTOIMAGE: true
@@ -64,7 +64,7 @@ spec:
       brother:
         type: LoadBalancer
         annotations:
-          lbipam.cilium.io/ips: *ip
+          lbipam.cilium.io/ips: 10.200.15.243
         ports:
           scan-udp:
             port: 54925
