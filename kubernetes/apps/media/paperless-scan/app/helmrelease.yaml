@@ -38,8 +38,6 @@ spec:
             envFrom:
               - secretRef:
                   name: cluster-secrets
-            args:
-              - --local-only=false
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: false
