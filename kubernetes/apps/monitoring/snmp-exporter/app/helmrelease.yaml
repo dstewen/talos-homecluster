@@ -67,7 +67,7 @@ spec:
           auth: [public_v2]
           module: [if_mib]
           target: 192.168.10.15
-        - name: T1500G-10MPS
+        - name: t1500g10mps
           auth: [public_v2]
           module: [if_mib]
           target: 192.168.10.20
