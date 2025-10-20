@@ -67,6 +67,10 @@ spec:
           auth: [public_v2]
           module: [if_mib]
           target: 192.168.10.15
+        - name: T1500G-10MPS
+          auth: [public_v2]
+          module: [if_mib]
+          target: 192.168.10.20
       scrapeTimeout: 10s
       relabelings:
         - { sourceLabels: ["__param_target"], targetLabel: instance }
