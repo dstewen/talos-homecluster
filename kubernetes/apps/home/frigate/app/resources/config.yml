@@ -117,7 +117,7 @@ cameras:
       output_args:
         record: preset-record-generic-audio-aac
     onvif:
-      host: 192.168.10.81
+      host: 192.168.10.86
       port: 80
       user: '{FRIGATE_RTSP_USER_WYZE3}'
       password: '{FRIGATE_RTSP_PASSWORD_WYZE3}'
