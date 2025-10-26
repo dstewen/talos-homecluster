@@ -17,5 +17,6 @@ resources:
   - ./kubernetes-sigs-nfd.yaml
 #  - ./prometheus-community.yaml
   - ./openebs.yaml
+  - ./pihole-charts.yaml
   - ./piraeus.yaml
   - ./rook-ceph.yaml

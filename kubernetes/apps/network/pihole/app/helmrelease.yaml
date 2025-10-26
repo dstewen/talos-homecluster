@@ -1,0 +1,169 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: pihole
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://mojo2600.github.io/pihole-kubernetes
+      chart: pihole
+      version: 2.31.0
+      sourceRef:
+        kind: HelmRepository
+        name: pihole-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 1
+          preference:
+            matchExpressions:
+            - key: kubernetes.io/arch
+              operator: In
+              values:
+              - arm64
+
+    monitoring:
+      podMonitor:
+        enabled: false
+      sidecar:
+        enabled: true
+        image:
+          pullPolicy: "IfNotPresent"
+          repository: "ekofr/pihole-exporter"
+          tag: "v1.0.1"
+          port: 9617
+        resources:
+          limits:
+            memory: "128Mi"
+
+    # -- default upstream DNS 1 server to use
+    DNS1: "1.1.1.1"
+    # -- default upstream DNS 2 server to use
+    DNS2: "1.0.0.1"
+
+    doh:
+      enabled: false
+      name: "cloudflared"
+      repository: "crazymax/cloudflared"
+      tag: "2021.5.7"
+    serviceDhcp:
+      enabled: false
+    serviceDns:
+      type: LoadBalancer
+#      externalTrafficPolicy: Local
+#      loadBalancerIP: ${SVC_PIHOLE_IP}
+      annotations:
+        lbipam.cilium.io/ips: 10.200.15.196
+    serviceWeb:
+      type: LoadBalancer
+#      externalTrafficPolicy: Local
+#      loadBalancerIP: ${SVC_PIHOLE_IP}
+      annotations:
+        lbipam.cilium.io/ips: 10.200.15.196
+    virtualHost: "piholek.davidstewen.com"
+#    ingress:
+#      enabled: true
+#      ingressClassName: internal
+##      annotations:
+##        kubernetes.io/tls-acme: "true"
+##        cert-manager.io/cluster-issuer: letsencrypt-prod
+##        nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}"
+##        nginx.ingress.kubernetes.io/auth-url: "http://authelia.kube-system.svc.cluster.local/api/authz/auth-request"
+#      path: /
+#      hosts:
+#        - &host "piholek.davidstewen.com"
+#      tls:
+#        - hosts:
+#            - *host
+    persistentVolumeClaim:
+      enabled: true
+#    tolerations:
+#      - key: "arm"
+#        operator: "Exists"
+    replicaCount: 1
+#    topologySpreadConstraints:
+#      - maxSkew: 1
+#        topologyKey: kubernetes.io/arch
+#        whenUnsatisfiable: DoNotSchedule
+#        labelSelector:
+#          matchLabels:
+#            release: pihole
+#      - maxSkew: 1
+#        topologyKey: kubernetes.io/hostname
+#        whenUnsatisfiable: DoNotSchedule
+#        labelSelector:
+#          matchLabels:
+#            release: pihole
+#    adminPassword: ${PIHOLE_PASSWORD}
+    extraEnvVars:
+      RATE_LIMIT: "0/0"
+    podDnsConfig:
+      enabled: true
+      policy: "None"
+      nameservers:
+      - 127.0.0.1
+      - 1.1.1.1
+
+    adlists:
+      # DEFAULT LISTS
+      - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+      - https://mirror1.malwaredomains.com/files/justdomains
+      - https://s3.amazonaws.com/lists.disconnect.me/simple_tracking.txt
+      - https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
+      # Additional List
+      - https://dbl.oisd.nl
+      # SUSPICIOUS
+      - https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt
+      - https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Spam/hosts
+      - https://v.firebog.net/hosts/static/w3kbl.txt
+      - https://raw.githubusercontent.com/matomo-org/referrer-spam-blacklist/master/spammers.txt
+      - https://someonewhocares.org/hosts/zero/hosts
+      - https://raw.githubusercontent.com/VeleSila/yhosts/master/hosts
+      - https://winhelp2002.mvps.org/hosts.txt
+      - https://v.firebog.net/hosts/neohostsbasic.txt
+      - https://raw.githubusercontent.com/RooneyMcNibNug/pihole-stuff/master/SNAFU.txt
+      - https://paulgb.github.io/BarbBlock/blacklists/hosts-file.txt
+      # Advertizing
+      - https://adaway.org/hosts.txt
+      - https://v.firebog.net/hosts/AdguardDNS.txt
+      - https://v.firebog.net/hosts/Admiral.txt
+      - https://raw.githubusercontent.com/anudeepND/blacklist/master/adservers.txt
+      - https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
+      - https://v.firebog.net/hosts/Easylist.txt
+      - https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0&mimetype=plaintext
+      - https://raw.githubusercontent.com/FadeMind/hosts.extras/master/UncheckyAds/hosts
+      - https://raw.githubusercontent.com/bigdargon/hostsVN/master/hosts
+      - https://raw.githubusercontent.com/jdlingyu/ad-wars/master/hosts
+      # Tracking and Telemetry
+      - https://v.firebog.net/hosts/Easyprivacy.txt
+      - https://v.firebog.net/hosts/Prigent-Ads.txt
+      - https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.2o7Net/hosts
+      - https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/spy.txt
+      - https://hostfiles.frogeye.fr/firstparty-trackers-hosts.txt
+      - https://www.github.developerdan.com/hosts/lists/ads-and-tracking-extended.txt
+      - https://raw.githubusercontent.com/Perflyst/PiHoleBlocklist/master/android-tracking.txt
+      - https://raw.githubusercontent.com/Perflyst/PiHoleBlocklist/master/SmartTV.txt
+      - https://raw.githubusercontent.com/Perflyst/PiHoleBlocklist/master/AmazonFireTV.txt
+      - https://gitlab.com/quidsup/notrack-blocklists/raw/master/notrack-blocklist.txt
+      # Malicious
+      - https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareHosts.txt
+      - https://osint.digitalside.it/Threat-Intel/lists/latestdomains.txt
+      - https://s3.amazonaws.com/lists.disconnect.me/simple_malvertising.txt
+      - https://v.firebog.net/hosts/Prigent-Crypto.txt
+      - https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Risk/hosts
+      - https://bitbucket.org/ethanr/dns-blacklists/raw/8575c9f96e5b4a1308f2f12394abd86d0927a4a0/bad_lists/Mandiant_APT1_Report_Appendix_D.txt
+      - https://phishing.army/download/phishing_army_blocklist_extended.txt
+      - https://malware-filter.gitlab.io/malware-filter/phishing-filter-hosts.txt
+      - https://gitlab.com/quidsup/notrack-blocklists/raw/master/notrack-malware.txt
+      - https://v.firebog.net/hosts/RPiList-Malware.txt
+      - https://v.firebog.net/hosts/RPiList-Phishing.txt
+      - https://raw.githubusercontent.com/Spam404/lists/master/main-blacklist.txt
+      - https://raw.githubusercontent.com/AssoEchap/stalkerware-indicators/master/generated/hosts
+      - https://urlhaus.abuse.ch/downloads/hostfile/
+      - https://v.firebog.net/hosts/Prigent-Malware.txt
