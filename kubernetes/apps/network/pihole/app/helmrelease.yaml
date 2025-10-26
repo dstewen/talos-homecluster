@@ -56,16 +56,16 @@ spec:
       enabled: false
     serviceDns:
       type: LoadBalancer
-#      externalTrafficPolicy: Local
-#      loadBalancerIP: ${SVC_PIHOLE_IP}
+      externalTrafficPolicy: Local
+      loadBalancerIP: 10.200.15.196
       annotations:
         lbipam.cilium.io/ips: 10.200.15.196
     serviceWeb:
-      type: LoadBalancer
+      type: ClusterIP
 #      externalTrafficPolicy: Local
-#      loadBalancerIP: ${SVC_PIHOLE_IP}
-      annotations:
-        lbipam.cilium.io/ips: 10.200.15.196
+#      loadBalancerIP: 10.200.15.196
+#      annotations:
+#        lbipam.cilium.io/ips: 10.200.15.196
     virtualHost: "piholek.davidstewen.com"
 #    ingress:
 #      enabled: true
