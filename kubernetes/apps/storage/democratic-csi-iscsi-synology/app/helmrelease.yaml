@@ -52,7 +52,7 @@ spec:
       enabled: true
       image: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.16.0
     csiProxy:
-      image: ghcr.io/democratic-csi/csi-grpc-proxy:v0.5.6
+      image: ghcr.io/democratic-csi/csi-grpc-proxy:v0.5.7
     controller:
       resources:
         requests:
