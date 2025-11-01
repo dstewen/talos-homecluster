@@ -56,6 +56,8 @@ spec:
         ingestion_burst_size_mb: 16
       storage:
         type: filesystem
+        bucketNames:
+          chunks: chunks
       schemaConfig:
         configs:
           - from: "2024-04-01" # quote
