@@ -25,19 +25,16 @@ spec:
             env:
               UID: 1000
               GID: 1000
-              TZ: ${TIMEZONE}
+              TZ: Australia/Victoria
               NAME: Scanner
               MODEL: MFC-L2880DW
               RESOLUTION: 300
               IPADDRESS: 192.168.10.81 # IP Address of your scanner
-              HOST_IPADDRESS: 10.200.15.243
+              HOST_IPADDRESS: &ip 10.200.15.243
               WEBSERVER: true
               DISABLE_GUI_SCANTOEMAIL: true
               DISABLE_GUI_SCANTOIMAGE: true
               DISABLE_GUI_SCANTOOCR: true
-            envFrom:
-              - secretRef:
-                  name: cluster-secrets
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: false
@@ -64,7 +61,7 @@ spec:
       brother:
         type: LoadBalancer
         annotations:
-          lbipam.cilium.io/ips: 10.200.15.243
+          lbipam.cilium.io/ips: *ip
         ports:
           scan-udp:
             port: 54925
@@ -96,7 +93,7 @@ spec:
 
     route:
       app:
-        hostnames: ["scan.${SECRET_DOMAIN}"]
+        hostnames: ["scan.davidstewen.com"]
         parentRefs:
           - name: internal
             namespace: kube-system
@@ -109,7 +106,7 @@ spec:
     persistence:
       nas:
         type: nfs
-        server: ${NAS_IP:=temp}
+        server: 192.168.10.15
         path: /volume2/piNFS01/flux-cluster/media/paperless/consume
         globalMounts:
           - path: /scans
