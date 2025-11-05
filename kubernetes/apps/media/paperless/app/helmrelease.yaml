@@ -123,7 +123,7 @@ spec:
               tag: 8.24.0@sha256:b116a40a1c24917e2bf3e153692da5acd2e78e7cd67e1b2d243b47c178f31c90
             resources:
               limits:
-                memory: 30Mi
+                memory: 128Mi
               requests:
                 cpu: 10m
                 memory: 30Mi
