@@ -50,7 +50,7 @@ spec:
       data:
         INHERITED_ANNOTATIONS: kyverno.io/ignore
     monitoring:
-      podMonitorEnabled: true
+      podMonitorEnabled: false
       grafanaDashboard:
         create: true
 #    nodeSelector:
