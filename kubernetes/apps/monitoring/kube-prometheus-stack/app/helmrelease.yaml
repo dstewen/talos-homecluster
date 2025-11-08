@@ -483,6 +483,9 @@ spec:
             gethomepage.dev/group: Infrastructure
             gethomepage.dev/name: Prometheus
             gethomepage.dev/icon: prometheus.svg
+            gethomepage.dev/pod-selector: app.kubernetes.io/name=prometheus
+            gethomepage.dev/widget.type: prometheus
+            gethomepage.dev/widget.url: "https://prometheus.davidstewen.com"
           enabled: true
           hostnames: ["prometheus.${SECRET_DOMAIN}"]
           parentRefs:
