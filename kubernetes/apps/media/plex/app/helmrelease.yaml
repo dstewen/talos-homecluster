@@ -99,11 +99,10 @@ spec:
           gethomepage.dev/name: Plex
           gethomepage.dev/icon: plex.png
           gethomepage.dev/description: Media Player
+          gethomepage.dev/pod-selector: app.kubernetes.io/name=plex
           gethomepage.dev/widget.type: plex
           gethomepage.dev/widget.url: http://plex.media:32400
-          gethomepage.dev/widget.key: "{{`{{HOMEPAGE_VAR_PLEX_TOKEN}}`}}"
-#          gethomepage.dev/pod-selector: >-
-#            app.kubernetes.io/name in (plex)
+          gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_PLEX_TOKEN}}"
 
         hostnames: ["plex.${SECRET_DOMAIN}"]
         parentRefs:
