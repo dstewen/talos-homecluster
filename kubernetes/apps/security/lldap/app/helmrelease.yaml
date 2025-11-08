@@ -108,6 +108,13 @@ spec:
 
     route:
       app:
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/icon: lldap.png
+          gethomepage.dev/name: LLDAP
+          gethomepage.dev/group: Infrastructure
+          gethomepage.dev/description: OIDC User Management
+          gethomepage.dev/pod-selector: app.kubernetes.io/name=lldap
         hostnames: ["lldap.${SECRET_DOMAIN}"]
         parentRefs:
           - name: internal
