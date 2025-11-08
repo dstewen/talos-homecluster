@@ -126,6 +126,14 @@ spec:
 
     route:
       app:
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Infrastructure
+          gethomepage.dev/name: Frigate
+          gethomepage.dev/icon: frigate.svg
+          gethomepage.dev/pod-selector: app.kubernetes.io/name=frigate
+          gethomepage.dev/widget.type: frigate
+          gethomepage.dev/widget.url: "http://10.200.15.238:5000"
         hostnames: ["video.davidstewen.com"]
         parentRefs:
           - name: internal
