@@ -35,6 +35,7 @@ spec:
             gethomepage.dev/group: Infrastructure
             gethomepage.dev/name: AlertManager
             gethomepage.dev/icon: prometheus.svg
+            gethomepage.dev/pod-selector: app.kubernetes.io/name=alertmanager
           enabled: true
           hostnames: ["alertmanager.${SECRET_DOMAIN}"]
           parentRefs:
