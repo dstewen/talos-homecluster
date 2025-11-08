@@ -32,7 +32,7 @@ spec:
         main:
           annotations:
             gethomepage.dev/enabled: "true"
-            gethomepage.dev/group: Infrastructure
+            gethomepage.dev/group: Monitoring
             gethomepage.dev/name: AlertManager
             gethomepage.dev/icon: prometheus.svg
             gethomepage.dev/pod-selector: app.kubernetes.io/name=alertmanager
@@ -481,7 +481,7 @@ spec:
         main:
           annotations:
             gethomepage.dev/enabled: "true"
-            gethomepage.dev/group: Infrastructure
+            gethomepage.dev/group: Monitoring
             gethomepage.dev/name: Prometheus
             gethomepage.dev/icon: prometheus.svg
             gethomepage.dev/pod-selector: app.kubernetes.io/name=prometheus
