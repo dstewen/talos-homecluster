@@ -80,6 +80,13 @@ spec:
 
     route:
       app:
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/icon: n8n.png
+          gethomepage.dev/name: n8n
+          gethomepage.dev/group: Infrastructure
+          gethomepage.dev/description: N8N Workflow Automation
+          gethomepage.dev/pod-selector: app.kubernetes.io/name=n8n
         hostnames: ["n8n.${SECRET_DOMAIN}"]
         parentRefs:
           - name: internal
