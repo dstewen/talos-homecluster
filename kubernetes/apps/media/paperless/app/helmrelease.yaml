@@ -145,7 +145,7 @@ spec:
           gethomepage.dev/description: Paperless
           gethomepage.dev/pod-selector: app.kubernetes.io/name=paperless
           gethomepage.dev/widget.type: paperlessngx
-          gethomepage.dev/widget.url: http://authentik-server.security.svc.cluster.local
+          gethomepage.dev/widget.url: http://paperless.media.svc.cluster.local:8000
           gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_PAPERLESS_TOKEN}}"
         hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
         parentRefs:
