@@ -139,7 +139,7 @@ spec:
       app:
         annotations:
           gethomepage.dev/enabled: "true"
-          gethomepage.dev/icon: paperlessngx.png
+          gethomepage.dev/icon: paperless-ngx.png
           gethomepage.dev/name: Paperless
           gethomepage.dev/group: Media
           gethomepage.dev/description: Paperless
