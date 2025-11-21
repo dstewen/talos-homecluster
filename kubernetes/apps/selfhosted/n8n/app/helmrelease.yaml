@@ -43,7 +43,9 @@ spec:
               EXECUTIONS_DATA_MAX_AGE: 7
               EXECUTIONS_DATA_PRUNE_MAX_COUNT: 50000
               GENERIC_TIMEZONE: ${TIMEZONE}
+              N8N_BLOCK_ENV_ACCESS_IN_NODE: true
               N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: true
+              N8N_GIT_NODE_DISABLE_BARE_REPOS: true
               N8N_PROTOCOL: "https"
               N8N_PORT: &port 8080
               N8N_HOST: &hostName "n8n.${SECRET_DOMAIN}"
