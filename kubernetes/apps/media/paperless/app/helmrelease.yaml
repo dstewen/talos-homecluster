@@ -41,7 +41,6 @@ spec:
 #                - worker
     controllers:
       paperless:
-        type: statefulset
 
         annotations:
           reloader.stakater.com/auto: "true"
