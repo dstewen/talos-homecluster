@@ -75,8 +75,13 @@ spec:
             port: &port 3000
     route:
       app:
-        hostnames:
-          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/icon: si-paperlessngx
+          gethomepage.dev/name: Paperless AI
+          gethomepage.dev/group: AI
+          gethomepage.dev/description: Paperless AI
         parentRefs:
           - name: internal
             namespace: kube-system
