@@ -35,7 +35,7 @@ spec:
           app:
             image:
               repository: ghcr.io/home-operations/whisparr
-              tag: 2.0.0.1750@sha256:36e32bfa6783f9a79ecb6de7ecbbdfe4a44da2ff68280301f47f80a12b57a60c
+              tag: 2.0.0.1750@sha256:0752f69f4c93e5435d51c9ba7b785fa748dd360ddb4c77a542e4b2171c8f6e71
             env:
               WHISPARR__APP__INSTANCENAME: Whisparr
               WHISPARR__APP__THEME: dark
@@ -79,23 +79,23 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
         supplementalGroups: [10000]
         seccompProfile: { type: RuntimeDefault }
-#      affinity:
-#        nodeAffinity:
-#          requiredDuringSchedulingIgnoredDuringExecution:
-#            nodeSelectorTerms:
-#            - matchExpressions:
-#              - key: node-role.kubernetes.io/worker
-#                operator: In
-#                values:
-#                - worker
-#          preferredDuringSchedulingIgnoredDuringExecution:
-#          - weight: 1
-#            preference:
-#              matchExpressions:
-#              - key: kubernetes.io/arch
-#                operator: In
-#                values:
-#                - arm64
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/worker
+                operator: In
+                values:
+                - worker
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - arm64
 
     service:
       app:
