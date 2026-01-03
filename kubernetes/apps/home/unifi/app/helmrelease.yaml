@@ -157,6 +157,14 @@ spec:
 
     route:
       app:
+#        annotations:
+#          gethomepage.dev/enabled: "true"
+#          gethomepage.dev/group: Home
+#          gethomepage.dev/name: "Unifi Controller Talos"
+#          gethomepage.dev/icon: sh-ubiquiti-unifi
+#          gethomepage.dev/description: "Unifi Controller Talos"
+#          gethomepage.dev/widget.type: unifi
+#          gethomepage.dev/widget.url: http://unifitalos:8080
         hostnames: ["unifitalos.${SECRET_DOMAIN}"]
         parentRefs:
           - name: internal
