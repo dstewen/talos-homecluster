@@ -113,7 +113,7 @@ spec:
           gethomepage.dev/icon: radarr.png
           gethomepage.dev/widget.type: radarr
           gethomepage.dev/widget.url: http://radarr.media
-          gethomepage.dev/widget.key: "{{`{{RADARR__AUTH__APIKEY}}`}}"
+          gethomepage.dev/widget.key: "{{`{{HOMEPAGE_VAR_RADARR_API_KEY}}`}}"
 #          gethomepage.dev/widget.enableQueue: true
         hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
         parentRefs:
