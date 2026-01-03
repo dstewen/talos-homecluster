@@ -109,6 +109,12 @@ spec:
 
     route:
       app:
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Home
+          gethomepage.dev/name: SearXNG
+          gethomepage.dev/icon: sh-searxng
+          gethomepage.dev/description: SearXNG
         hostnames: ["search.${SECRET_DOMAIN}"]
         parentRefs:
           - name: internal
