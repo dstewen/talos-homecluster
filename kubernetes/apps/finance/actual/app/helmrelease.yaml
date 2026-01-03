@@ -95,7 +95,7 @@ spec:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: Finance
           gethomepage.dev/name: Actual
-          gethomepage.dev/icon: si-actualbudget
+          gethomepage.dev/icon: sh-actual-budget
         hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
         parentRefs:
           - name: internal
