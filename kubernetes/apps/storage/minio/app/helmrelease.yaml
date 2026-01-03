@@ -133,6 +133,12 @@ spec:
 
     route:
       app:
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Storage
+          gethomepage.dev/name: Minio
+          gethomepage.dev/icon: sh-minio
+          gethomepage.dev/description: "Minio on Talos"
         hostnames: ["minio.${SECRET_DOMAIN}"]
         parentRefs:
           - name: internal
