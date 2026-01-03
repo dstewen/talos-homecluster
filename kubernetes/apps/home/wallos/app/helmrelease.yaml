@@ -98,6 +98,15 @@ spec:
 #                  identifier: main
     route:
       app:
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Home
+          gethomepage.dev/name: Wallos
+          gethomepage.dev/icon: sh-wallos
+          gethomepage.dev/description: Wallos
+#          gethomepage.dev/widget.type: wallos
+#          gethomepage.dev/widget.url: http://wallos.home
+#          gethomepage.dev/widget.key: apikeyapikeyapikeyapikeyapikey
         hostnames: ["wallos.davidstewen.com"]
         parentRefs:
           - name: internal
