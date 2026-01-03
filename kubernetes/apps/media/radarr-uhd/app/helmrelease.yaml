@@ -106,6 +106,15 @@ spec:
 
     route:
       app:
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Downloads
+          gethomepage.dev/name: Radarr-UHD
+          gethomepage.dev/icon: radarr.png
+          gethomepage.dev/widget.type: radarr
+          gethomepage.dev/widget.url: http://radarr-uhd.media
+          gethomepage.dev/widget.key: "{{`{{HOMEPAGE_VAR_RADARR_UHD_API_KEY}}`}}"
+#          gethomepage.dev/widget.enableQueue: true
         hostnames: ["radarr-uhd.${SECRET_DOMAIN}"]
         parentRefs:
           - name: internal
