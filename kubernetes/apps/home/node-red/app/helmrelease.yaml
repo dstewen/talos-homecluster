@@ -91,6 +91,12 @@ spec:
 
     route:
       app:
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Home
+          gethomepage.dev/name: Node-RED
+          gethomepage.dev/icon: sh-node-red
+          gethomepage.dev/description: Node-RED
         hostnames: ["nr.${SECRET_DOMAIN}"]
         parentRefs:
           - name: internal
