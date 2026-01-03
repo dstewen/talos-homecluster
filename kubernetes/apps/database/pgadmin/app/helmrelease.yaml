@@ -87,6 +87,12 @@ spec:
 
     route:
       app:
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Database
+          gethomepage.dev/name: pgAdmin
+          gethomepage.dev/icon: postgresql.png
+          gethomepage.dev/href: https://pgadmin.${SECRET_DOMAIN}
         hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
         parentRefs:
           - name: internal
