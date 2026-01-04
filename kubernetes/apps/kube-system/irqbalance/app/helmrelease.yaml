@@ -31,6 +31,8 @@ spec:
     defaultPodOptions:
       hostIPC: true
       hostPID: true
+      nodeSelector:
+        kubernetes.io/arch: amd64
     persistence:
       run:
         type: emptyDir
