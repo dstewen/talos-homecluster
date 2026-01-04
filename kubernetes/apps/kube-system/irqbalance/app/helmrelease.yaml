@@ -1,0 +1,38 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: irqbalance
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+  dependsOn: []
+  interval: 15m
+  values:
+    controllers:
+      irqbalance:
+        type: daemonset
+        containers:
+          app:
+            image:
+              repository: ghcr.io/home-operations/irqbalance
+              tag: 1.9.4@sha256:8cdc867dcc9bcd5b8c5252c5a2c69deed3035253f13d2fa1648f28788cff9427
+            env:
+              IRQBALANCE_BANNED_CPULIST: 12-19 # 12-19 are E-cores
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 32Mi
+            securityContext:
+              privileged: true
+    defaultPodOptions:
+      hostIPC: true
+      hostPID: true
+    persistence:
+      run:
+        type: emptyDir
+        globalMounts:
+          - path: /run/irqbalance
