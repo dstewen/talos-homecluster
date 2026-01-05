@@ -28,7 +28,7 @@ spec:
           app:
             image:
               repository: docker.io/sakowicz/actual-budget-prometheus-exporter
-              tag: 1.2.7@sha256:12bad0f867ea6123f226f1f1e98080429247e31a8a65c7f233bfa73756c8a68c
+              tag: 1.2.8@sha256:58491955c9a76b452df831c6b20a4c90c34afb9f0bfaa22c62427d281c0721db
             env:
               TZ: "${TIMEZONE}"
             envFrom:
