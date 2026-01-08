@@ -35,7 +35,7 @@ spec:
           app:
             image:
               repository: ghcr.io/home-operations/whisparr
-              tag: 2.0.0.1953@sha256:5ef5e13d24e5456dc7fcbefc9b85291a1ee8e7da9c9bf13c1ba29a6c1a76da5e
+              tag: 2.0.0.2081@sha256:2416ff7fa9c467e3ecffd6851333eca6a9ba75dff1482756695c8f54aec27221
             env:
               WHISPARR__APP__INSTANCENAME: Whisparr
               WHISPARR__APP__THEME: dark
