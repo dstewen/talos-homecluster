@@ -3,10 +3,10 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: postgres17
+  name: postgres18
 spec:
   instances: 3
-  imageName: ghcr.io/cloudnative-pg/postgresql:17.5-5
+  imageName: ghcr.io/cloudnative-pg/postgresql:18.1
   primaryUpdateStrategy: unsupervised
   storage:
     size: 20Gi
