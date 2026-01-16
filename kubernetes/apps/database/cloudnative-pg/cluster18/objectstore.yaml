@@ -8,7 +8,7 @@ spec:
   configuration:
     data:
       compression: bzip2
-    destinationPath: s3://cnpg-backups/
+    destinationPath: s3://cnpg-v18-backups/
     endpointURL: http://192.168.10.198:9000
     s3Credentials:
       accessKeyId:

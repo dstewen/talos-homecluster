@@ -3,10 +3,10 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
-  name: postgres17
+  name: postgres18
 spec:
   selector:
     matchLabels:
-      cnpg.io/cluster: postgres17
+      cnpg.io/cluster: postgres18
   podMetricsEndpoints:
   - port: metrics
