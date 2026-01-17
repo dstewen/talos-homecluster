@@ -8,4 +8,4 @@ components:
 resources:
   # Flux-Kustomizations
   - ./actual/ks.yaml
-#  - ./firefly-iii/ks.yaml
+  - ./firefly-iii/ks.yaml
