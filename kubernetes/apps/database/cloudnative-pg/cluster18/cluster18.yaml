@@ -46,7 +46,7 @@ spec:
       isWALArchiver: true
       parameters: &parameters
         barmanObjectName: minio
-        serverName: postgres18-v1
+        serverName: postgres18-v2
 
 #  backup:
 #    retentionPolicy: 30d
