@@ -68,7 +68,7 @@ spec:
 #          key: aws-secret-access-key
 # Note: externalClusters is needed when recovering from an existing cnpg cluster
   externalClusters:
-    - name: source
+    - name: postgres18-v1
       plugin:
         name: barman-cloud.cloudnative-pg.io
         parameters: *parameters
