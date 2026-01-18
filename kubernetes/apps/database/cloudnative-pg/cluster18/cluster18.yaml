@@ -15,9 +15,11 @@ spec:
     name: cloudnative-pg-secret
   enableSuperuserAccess: true
 # Note: Bootstrap is needed when recovering from an existing cnpg cluster
-#  bootstrap:
-#    recovery:
-#      source: &previousCluster postgres17-v2
+  bootstrap:
+    recovery:
+      source: &previousCluster source
+      recoveryTarget:
+        targetTime: "2026-01-18T10:30:00+11:00"
 #    initdb:
 #      import:
 #        type: monolith
