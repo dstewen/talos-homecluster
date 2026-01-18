@@ -17,9 +17,9 @@ spec:
 # Note: Bootstrap is needed when recovering from an existing cnpg cluster
   bootstrap:
     recovery:
-      source: &previousCluster postgres18-v1
-      recoveryTarget:
-        targetTime: "2026-01-17T00:00:00+00:00"
+      source: &previousCluster postgres17-v3
+#      recoveryTarget:
+#        targetTime: "2026-01-17T00:00:00+00:00"
 #    initdb:
 #      import:
 #        type: monolith
