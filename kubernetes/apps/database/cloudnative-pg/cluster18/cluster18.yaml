@@ -19,7 +19,7 @@ spec:
     recovery:
       source: &previousCluster postgres18-v1
       recoveryTarget:
-        targetTime: "2026-01-18T00:00:00+11:00"
+        targetTime: "2026-01-18T00:00:00+00:00"
 #    initdb:
 #      import:
 #        type: monolith
