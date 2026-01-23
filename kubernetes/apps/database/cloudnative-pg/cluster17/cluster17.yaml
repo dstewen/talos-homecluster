@@ -17,7 +17,7 @@ spec:
 # Note: Bootstrap is needed when recovering from an existing cnpg cluster
   bootstrap:
     recovery:
-      source: &previousCluster postgres17-v3
+      source: source
 #    initdb:
 #      import:
 #        type: monolith
