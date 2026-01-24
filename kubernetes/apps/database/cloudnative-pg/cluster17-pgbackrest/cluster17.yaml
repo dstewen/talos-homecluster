@@ -49,10 +49,10 @@ spec:
 #        serverName: postgres17-v3
 
   # pgBackRest Plugin for backups (B2 + R2 dual destination)
-  plugins:
-    - name: pgbackrest.dalibo.com
-      parameters:
-        repositoryRef: postgres17-pgbackrest-repository
+#  plugins:
+#    - name: pgbackrest.dalibo.com
+#      parameters:
+#        repositoryRef: postgres17-pgbackrest-repository
 
 #  backup:
 #    retentionPolicy: 30d
