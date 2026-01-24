@@ -1,6 +1,6 @@
 ---
 apiVersion: pgbackrest.dalibo.com/v1
-kind: Stanza
+kind: stanza
 metadata:
   name: postgres17-pgbackrest-repository
   namespace: database
