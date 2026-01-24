@@ -114,7 +114,7 @@ spec:
         server: ${NAS_IP:=temp}
         path: /volume2/piNFS01/flux-cluster/postgres/pgadmin_backups
         globalMounts:
-          - path: /nfs
+          - path: /mnt/nfs
             readOnly: false
 
 #      server-json:
