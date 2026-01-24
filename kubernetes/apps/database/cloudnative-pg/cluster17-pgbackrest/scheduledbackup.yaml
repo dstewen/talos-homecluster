@@ -1,0 +1,37 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/datreeio/CRDs-catalog/refs/heads/main/postgresql.cnpg.io/scheduledbackup_v1.json
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: postgres17-pgbackrest-daily-b2
+spec:
+  schedule: "0 0 2 * * *"   # Daily, 2:00 UTC
+  target: primary  # This is the key
+  immediate: true
+  backupOwnerReference: self
+  cluster:
+    name: postgres17-pgbackrest
+  method: plugin
+  pluginConfiguration:
+    name: pgbackrest.dalibo.com
+    parameters:
+      selectedRepository: "1"
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/datreeio/CRDs-catalog/refs/heads/main/postgresql.cnpg.io/scheduledbackup_v1.json
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: postgres17-pgbackrest-daily-minio-synology
+spec:
+  # Offset by 1 hour from B2 backup to avoid concurrent runs
+  schedule: "0 0 3 * * *"   # Daily, 3:00 UTC
+  target: primary
+  immediate: false
+  backupOwnerReference: self
+  cluster:
+    name: postgres17-pgbackrest
+  method: plugin
+  pluginConfiguration:
+    name: pgbackrest.dalibo.com
+    parameters:
+      selectedRepository: "2"

@@ -1,0 +1,57 @@
+---
+apiVersion: pgbackrest.dalibo.com/v1
+kind: Repository
+metadata:
+  name: postgres17-pgbackrest-repository
+  namespace: database
+spec:
+  repoConfiguration:
+    stanza: postgres17-pgbackrest
+    archive:
+      async: true
+      getQueueMax: 128MiB
+      pushQueueMax: 1GiB
+    processMax: 4
+    s3Repositories:
+      # Primary: Backblaze B2
+      - bucket: postgres17-pgbackrest-repository
+        endpoint: s3.us-west-002.backblazeb2.com
+        region: us-east-002
+        repoPath: /postgres17-pgbackrest
+        uriStyle: path
+        verifyTLS: true
+        retentionPolicy:
+          full: 14
+          fullType: count
+          diff: 30
+          archive: 7
+          archiveType: full
+          history: 30
+        secretRef:
+          accessKeyId:
+            name: cloudnative-pg-secret
+            key: b2-access-key-id
+          secretAccessKey:
+            name: cloudnative-pg-secret
+            key: b2-secret-access-key
+      # Secondary: Minio on Synology
+      - bucket: postgres17-pgbackrest-repository
+        endpoint: http://192.168.10.198:9000
+        region: auto
+        repoPath: /postgres17-pgbackrest
+        uriStyle: path
+        verifyTLS: false
+        retentionPolicy:
+          full: 14
+          fullType: count
+          diff: 30
+          archive: 7
+          archiveType: full
+          history: 30
+        secretRef:
+          accessKeyId:
+            name: cloudnative-pg-secret
+            key: minio-access-key-id
+          secretAccessKey:
+            name: cloudnative-pg-secret
+            key: minio-secret-access-key
