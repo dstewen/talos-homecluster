@@ -23,7 +23,7 @@ rules:
   - apiGroups:
       - pgbackrest.dalibo.com
     resources:
-      - repositories
+      - stanzas
     verbs:
       - create
       - delete
@@ -35,13 +35,13 @@ rules:
   - apiGroups:
       - pgbackrest.dalibo.com
     resources:
-      - repositories/finalizers
+      - stanzas/finalizers
     verbs:
       - update
   - apiGroups:
       - pgbackrest.dalibo.com
     resources:
-      - repositories/status
+      - stanzas/status
     verbs:
       - get
       - patch
