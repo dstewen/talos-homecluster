@@ -22,6 +22,8 @@ spec:
 #      namespace: database
     - name: searxng
       namespace: selfhosted
+    - name: qdrant
+      namespace: ai
   prune: true
   sourceRef:
     kind: GitRepository
