@@ -1,11 +1,11 @@
 ---
 apiVersion: pgbackrest.dalibo.com/v1
-kind: Stanzas
+kind: stanza
 metadata:
   name: postgres17-pgbackrest-repository
   namespace: database
 spec:
-  repoConfiguration:
+  stanzaConfiguration:
     stanza: postgres17-pgbackrest
     archive:
       async: true
