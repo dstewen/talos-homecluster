@@ -41,12 +41,12 @@ spec:
   monitoring:
     enablePodMonitor: false
 
-#  plugins:
-#    - name: barman-cloud.cloudnative-pg.io
-#      isWALArchiver: true
-#      parameters:
-#        barmanObjectName: minio
-#        serverName: postgres17-v3
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: minio
+        serverName: postgres17-v4
 
 #  backup:
 #    retentionPolicy: 30d
