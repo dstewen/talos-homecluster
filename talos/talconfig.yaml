@@ -24,10 +24,10 @@ nodes:
     installDiskSelector:
       serial: "1925E20E2038"
     userVolumes:
-      - name: local-hostpath
+      - name: local-hostpath-nvme
         provisioning:
           minSize: 1TB
-          grow: true
+          grow: false
           diskSelector:
             match: disk.model == "WD_BLACK SN770 2TB"
     machineSpec:
@@ -74,10 +74,10 @@ nodes:
     installDiskSelector:
       serial: "220628801124"
     userVolumes:
-      - name: local-hostpath
+      - name: local-hostpath-nvme
         provisioning:
           minSize: 1TB
-          grow: true
+          grow: false
           diskSelector:
             match: disk.model == "WD_BLACK SN770 2TB"
     machineSpec:
@@ -124,10 +124,10 @@ nodes:
     installDiskSelector:
       serial: "22061X806789"
     userVolumes:
-      - name: local-hostpath
+      - name: local-hostpath-nvme
         provisioning:
           minSize: 1TB
-          grow: true
+          grow: false
           diskSelector:
             match: disk.model == "WD_BLACK SN770 2TB"
     machineSpec:
