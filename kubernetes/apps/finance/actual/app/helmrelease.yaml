@@ -46,9 +46,24 @@ spec:
               tag: 26.2.0
             env:
               GENERIC_TIMEZONE: Australia/Victoria
+              ACTUAL_PORT: &port 5006
             envFrom:
               - secretRef:
                   name: cluster-secrets
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: *port
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
             resources:
               requests:
                 cpu: 15m
@@ -66,7 +81,7 @@ spec:
         controller: *app
         ports:
           http:
-            port: &port 5006
+            port: *port
 #    ingress:
 #      app:
 #        className: internal
