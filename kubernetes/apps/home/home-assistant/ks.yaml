@@ -19,7 +19,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   components:
-    - ../../../../components/volsync-kopia
+    - ../../../../components/volsync
   decryption:
     provider: sops
     secretRef:
