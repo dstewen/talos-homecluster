@@ -20,7 +20,7 @@ spec:
       runAsUser: ${APP_UID:-1000}
       runAsGroup: ${APP_GID:-1000}
       fsGroup: ${APP_GID:-1000}
-    repository: "${APP}-volsync-kopia-minio"
+    repository: "${APP}-volsync-kopia-nfs"
     sourceIdentity:
       sourceName: ${APP}-kopia-minio-rsrc
     storageClassName: "${VOLSYNC_STORAGECLASS:-ceph-block}"
