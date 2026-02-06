@@ -28,6 +28,7 @@ nodes:
         provisioning:
           diskSelector:
             match: disk.model == "WD_BLACK SN770 2TB"
+          minSize: 1TB
         filesystem:
           type: xfs
     machineSpec:
@@ -78,6 +79,7 @@ nodes:
         provisioning:
           diskSelector:
             match: disk.model == "WD_BLACK SN770 2TB"
+          minSize: 1TB
         filesystem:
           type: xfs
     machineSpec:
@@ -128,6 +130,7 @@ nodes:
         provisioning:
           diskSelector:
             match: disk.model == "WD_BLACK SN770 2TB"
+          minSize: 1TB
         filesystem:
           type: xfs
     machineSpec:
