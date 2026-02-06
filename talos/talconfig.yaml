@@ -26,10 +26,10 @@ nodes:
     userVolumes:
       - name: local-hostpath-2tb
         provisioning:
-          minSize: 1TB
-          grow: false
           diskSelector:
             match: disk.model == "WD_BLACK SN770 2TB"
+        filesystem:
+          type: xfs
     machineSpec:
       secureboot: false
     talosImageURL: factory.talos.dev/installer/743d942690991fb5b20d07e54b6d33c60b19d7918e14d61173d79e718ebc0b47
@@ -76,10 +76,10 @@ nodes:
     userVolumes:
       - name: local-hostpath-2tb
         provisioning:
-          minSize: 1TB
-          grow: false
           diskSelector:
             match: disk.model == "WD_BLACK SN770 2TB"
+        filesystem:
+          type: xfs
     machineSpec:
       secureboot: false
     talosImageURL: factory.talos.dev/installer/743d942690991fb5b20d07e54b6d33c60b19d7918e14d61173d79e718ebc0b47
@@ -126,10 +126,10 @@ nodes:
     userVolumes:
       - name: local-hostpath-2tb
         provisioning:
-          minSize: 1TB
-          grow: false
           diskSelector:
             match: disk.model == "WD_BLACK SN770 2TB"
+        filesystem:
+          type: xfs
     machineSpec:
       secureboot: false
     talosImageURL: factory.talos.dev/installer/743d942690991fb5b20d07e54b6d33c60b19d7918e14d61173d79e718ebc0b47
