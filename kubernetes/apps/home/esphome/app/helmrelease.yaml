@@ -11,21 +11,26 @@ spec:
     name: esphome
   install:
     remediation:
-      retries: -1
+      retries: 3
   upgrade:
     cleanupOnFail: true
     remediation:
+      strategy: rollback
       retries: 3
-#  dependsOn:
-#    - name: local-path-provisioner
-#      namespace: storage
-#    - name: volsync
-#      namespace: volsync
   values:
     controllers:
       esphome:
-        revisionHistoryLimit: 3
+        annotations:
+          secret.reloader.stakater.com/reload: esphome-secrets
         pod:
+#          annotations:
+#            k8s.v1.cni.cncf.io/networks: |
+#              [{
+#                "name":"multus-iot",
+#                "namespace": "network",
+#                "ips": ["192.168.12.231/22"],
+#                "mac": "92:cf:d7:05:70:84"
+#              }]
           affinity:
             nodeAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:
@@ -43,111 +48,133 @@ spec:
                     operator: In
                     values:
                     - arm64
-          securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
-            fsGroup: 1000
-            fsGroupChangePolicy: OnRootMismatch
-
         containers:
           app:
             image:
               repository: ghcr.io/home-operations/esphome
-              tag: 2026.1.4
-
+              tag: 2026.1.4@sha256:21557eecf87a6a505988f1b7550613c67110c1271adf5e97be6684b4864a61dc
+            # env:
+            #   ESPHOME_DASHBOARD_USE_PING: true
             probes:
               liveness:
-                enabled: true
+                enabled: false
               readiness:
-                enabled: true
+                enabled: false
               startup:
-                enabled: true
-                spec:
-                  failureThreshold: 30
-                  periodSeconds: 5
-
-            securityContext:
-              runAsNonRoot: false
-              readOnlyRootFilesystem: false
-              privileged: true
-              capabilities:
-                add:
-                  - NET_ADMIN
-                  - NET_RAW
-
+                enabled: false
             resources:
               requests:
-                cpu: 20m
-                memory: 64M
+                cpu: 5m
+                memory: 512Mi
               limits:
-                memory: 512M
-
+                memory: 4Gi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop:
+                  - ALL
+          code-server:
+            image:
+              repository: ghcr.io/coder/code-server
+              tag: 4.108.2@sha256:31ad23cda720476e7eb3371a9b02fd7a5738843f6ef43beef97e9edf1960fc47
+            args:
+              - --auth
+              - none
+              - --disable-telemetry
+              - --disable-update-check
+              - --user-data-dir
+              - /config/.code-server
+              - --extensions-dir
+              - /config/.code-server
+              - --port
+              - "12321"
+              - /config
             env:
-              TZ: "${TIMEZONE}"
-              ESPHOME_DASHBOARD_USE_PING: true
-              ESPHOME__INSTANCE_NAME: ESPHome
-              ESPHOME__PORT: &httpPort 6052
-              ESPHOME__APPLICATION_URL: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
-              ESPHOME__LOG_LEVEL: info
-
+              ESPHOME_VERSION: "{{ (split \"@\" .Values.controllers.esphome.containers.app.image.tag)._0 }}"
+              GIT_AUTHOR_NAME: auricom
+            resources:
+              requests:
+                cpu: 10m
+                memory: 64Mi
+              limits:
+                memory: 512Mi
+    defaultPodOptions:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
     service:
       app:
         controller: *app
         ports:
           http:
-            port: 6052
-
-#    ingress:
-#      app:
-#        className: "internal"
-#        annotations:
-#          hajimari.io/enable: "true"
-#          hajimari.io/instance: "admin"
-#          hajimari.io/appName: "ESPHome"
-#          hajimari.io/icon: mdi:chip
-#          hajimari.io/group: "home automation"
-#          gethomepage.dev/enabled: "true"
-#          gethomepage.dev/group: Home
-#          gethomepage.dev/name: esphome
-#          gethomepage.dev/icon: esphome.png
-#          gethomepage.dev/description: ESPHome
-#          gethomepage.dev/widget.type: esphome
-#          gethomepage.dev/widget.url: http://esphome.home:6052
-#          gethomepage.dev/widget.key: "834c5259ed37fc041ba31a32f8d9bd608fb9a2ab"
-#        hosts:
-#          - host: &host "esphome.${SECRET_DOMAIN}"
-#            paths:
-#              - path: /
-#                service:
-#                  identifier: app
-#                  port: http
-#        tls:
-#          - hosts:
-#              - *host
-
+            port: &port 6052
+      code-server:
+        ports:
+          http:
+            port: &code-server-port 12321
     route:
       app:
-        annotations:
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/group: Home
-          gethomepage.dev/name: esphome
-          gethomepage.dev/icon: sh-esphome
-          gethomepage.dev/description: ESPHome
-          gethomepage.dev/widget.type: esphome
-          gethomepage.dev/widget.url: http://esphome.home:6052
-        hostnames: ["esphome.${SECRET_DOMAIN}"]
+        hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
         parentRefs:
           - name: internal
             namespace: kube-system
             sectionName: https
         rules:
           - backendRefs:
-              - name: *app
-                port: *httpPort
+              - name: esphome-app
+                port: *port
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /code/
+            filters:
+              - type: URLRewrite
+                urlRewrite:
+                  path:
+                    type: ReplacePrefixMatch
+                    replacePrefixMatch: /
+            backendRefs:
+              - name: esphome-code-server
+                port: *code-server-port
     persistence:
       config:
-        existingClaim: esphome-config
-      esphome-cache:
-        type: emptyDir
+        existingClaim: *app
+        advancedMounts:
+          esphome:
+            app:
+              - path: /config
+            code-server:
+              - path: /config
+              - path: /mnt/code-server
+                subPath: code-server
+      secrets:
+        type: secret
+        name: esphome-secrets
         globalMounts:
-          - path: /cache
+          - path: /config/secrets.yaml
+            subPath: secrets.yaml
+      buildcache:
+        suffix: buildcache
+        size: 50Gi
+        accessMode: ReadWriteOnce
+        storageClass: openebs-hostpath
+        advancedMounts:
+          esphome:
+            app:
+              - path: /cache
+      tmpfs:
+        type: emptyDir
+        advancedMounts:
+          esphome:
+            app:
+              - path: /tmp
+                subPath: esphome-tmp
+            code-server:
+              - path: /tmp
+                subPath: code-server-tmp
+              - path: /nonexistent
+                subPath: nonexistent
