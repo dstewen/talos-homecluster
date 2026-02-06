@@ -90,12 +90,40 @@ spec:
               ESPHOME__APPLICATION_URL: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
               ESPHOME__LOG_LEVEL: info
 
+          code-server:
+            image:
+              repository: ghcr.io/coder/code-server
+              tag: 4.105.1@sha256:2d48970bd2084aa34a522d772b6a437981ea80407465b3bf7958553985c570e1
+            args:
+              - --auth
+              - none
+              - --disable-telemetry
+              - --disable-update-check
+              - --user-data-dir
+              - /config/.code-server
+              - --extensions-dir
+              - /config/.code-server
+              - --port
+              - "12321"
+              - /config
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 512Mi
+
+
     service:
       app:
-        controller: *app
+        forceRename: "{{.Release.Name}}"
         ports:
           http:
-            port: 6052
+            port: &esphome-port 6052
+
+      code-server:
+        ports:
+          http:
+            port: &code-server-port 12321
 
 #    ingress:
 #      app:
@@ -142,12 +170,50 @@ spec:
             sectionName: https
         rules:
           - backendRefs:
-              - name: *app
-                port: *httpPort
+              - name: app
+                port: *esphome-port
+
+      code-server:
+        hostnames: ["esphomecode.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: internal
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - name: code-server
+                port: *code-server-port
+
     persistence:
       config:
         existingClaim: esphome-config
-      esphome-cache:
-        type: emptyDir
+#      esphome-cache:
+#        type: emptyDir
+#        globalMounts:
+#          - path: /cache
+
+
+      buildcache:
+        suffix: buildcache
+        size: 50Gi
+        accessMode: ReadWriteOnce
+        advancedMounts:
+          esphome:
+            app:
+              - path: /cache
+
+      secrets:
+        type: secret
+        name: esphome-secrets
         globalMounts:
-          - path: /cache
+          - path: /config/secrets.yaml
+            subPath: secrets.yaml
+      tmpfs:
+        type: emptyDir
+        advancedMounts:
+          esphome:
+            code-server:
+              - path: /tmp
+                subPath: code-server-tmp
+              - path: /nonexistent
+                subPath: nonexistent
