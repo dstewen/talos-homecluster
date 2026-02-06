@@ -23,6 +23,13 @@ nodes:
     ipAddress: "10.200.15.51"
     installDiskSelector:
       serial: "1925E20E2038"
+    userVolumes:
+      - name: local-hostpath-2tb
+        provisioning:
+          minSize: 1TB
+          grow: false
+          diskSelector:
+            match: disk.model == "WD_BLACK SN770 2TB"
     machineSpec:
       secureboot: false
     talosImageURL: factory.talos.dev/installer/743d942690991fb5b20d07e54b6d33c60b19d7918e14d61173d79e718ebc0b47
@@ -66,6 +73,13 @@ nodes:
     ipAddress: "10.200.15.52"
     installDiskSelector:
       serial: "220628801124"
+    userVolumes:
+      - name: local-hostpath-2tb
+        provisioning:
+          minSize: 1TB
+          grow: false
+          diskSelector:
+            match: disk.model == "WD_BLACK SN770 2TB"
     machineSpec:
       secureboot: false
     talosImageURL: factory.talos.dev/installer/743d942690991fb5b20d07e54b6d33c60b19d7918e14d61173d79e718ebc0b47
@@ -109,6 +123,13 @@ nodes:
     ipAddress: "10.200.15.53"
     installDiskSelector:
       serial: "22061X806789"
+    userVolumes:
+      - name: local-hostpath-2tb
+        provisioning:
+          minSize: 1TB
+          grow: false
+          diskSelector:
+            match: disk.model == "WD_BLACK SN770 2TB"
     machineSpec:
       secureboot: false
     talosImageURL: factory.talos.dev/installer/743d942690991fb5b20d07e54b6d33c60b19d7918e14d61173d79e718ebc0b47
