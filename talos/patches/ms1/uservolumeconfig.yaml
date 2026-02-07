@@ -1,6 +1,6 @@
 apiVersion: v1alpha1
 kind: UserVolumeConfig
-name: local-hostpath-1tb
+name: local-hostpath-2tb
 provisioning:
   diskSelector:
     match: "disk.model.startsWith('WD_BLACK')"
