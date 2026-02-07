@@ -46,7 +46,7 @@ spec:
       isWALArchiver: true
       parameters:
         barmanObjectName: minio
-        serverName: postgres17-v5
+        serverName: postgres17-v6
 
 #  backup:
 #    retentionPolicy: 30d
