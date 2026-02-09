@@ -49,13 +49,13 @@ nodes:
         #bond0
       - interface: bond0
         bond:
-          mode: 802.3ad
+#          mode: 802.3ad
           deviceSelectors:
-            - hardwareAddr: "58:47:ca:77:cf:*"
+            - hardwareAddr: "58:47:ca:77:cf:36"
               driver: i40e
-          xmitHashPolicy: layer3+4
-          lacpRate: fast
-          miimon: 1000
+#          xmitHashPolicy: layer3+4
+#          lacpRate: fast
+#          miimon: 1000
         dhcp: false
         addresses:
           - "10.200.15.51/24"
@@ -103,13 +103,13 @@ nodes:
         #bond0
       - interface: bond0
         bond:
-          mode: 802.3ad
+#          mode: 802.3ad
           deviceSelectors:
-            -  hardwareAddr: "58:47:ca:78:f1:*"
+            -  hardwareAddr: "58:47:ca:78:f1:32"
                driver: i40e
-          xmitHashPolicy: layer3+4
-          lacpRate: fast
-          miimon: 1000
+#          xmitHashPolicy: layer3+4
+#          lacpRate: fast
+#          miimon: 1000
         dhcp: false
         addresses:
           - "10.200.15.52/24"
@@ -157,13 +157,13 @@ nodes:
         #bond0
       - interface: bond0
         bond:
-          mode: 802.3ad
+#          mode: 802.3ad
           deviceSelectors:
             -  hardwareAddr: "58:47:ca:78:f8:*"
                driver: i40e
-          xmitHashPolicy: layer3+4
-          lacpRate: fast
-          miimon: 1000
+#          xmitHashPolicy: layer3+4
+#          lacpRate: fast
+#          miimon: 1000
         dhcp: false
         addresses:
           - "10.200.15.53/24"
