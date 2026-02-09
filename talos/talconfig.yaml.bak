@@ -299,74 +299,14 @@ nodes:
             mountPath: /usr/local/etc/nut/upsmon.conf
 # Global patches
 patches:
-#  - "@./patches/global/machine-files.yaml"
-#  - "@./patches/global/machine-files-nfs.yaml"
-#  - "@./patches/global/machine-hostdns.yaml"
-#  - "@./patches/global/machine-kubelet.yaml"
-#  - "@./patches/global/machine-network.yaml"
-#  - "@./patches/global/machine-sysctls.yaml"
-#  - "@./patches/global/machine-time.yaml"
+  - "@./patches/global/machine-files.yaml"
+  - "@./patches/global/machine-files-nfs.yaml"
+  - "@./patches/global/machine-hostdns.yaml"
+  - "@./patches/global/machine-kubelet.yaml"
+  - "@./patches/global/machine-network.yaml"
+  - "@./patches/global/machine-sysctls.yaml"
+  - "@./patches/global/machine-time.yaml"
 #  - "@./patches/global/openebs-local.yaml"
-
-
-
-# Configure NFS mount options
-  - |-
-    machine:
-      features:
-        hostDNS:
-          enabled: true
-          resolveMemberNames: true
-          forwardKubeDNSToHost: false
-
-
-
-      files:
-        # Configure nfs mount options
-        - op: overwrite
-          path: /etc/nfsmount.conf
-          permissions: 0o644
-          content: |
-            [ NFSMount_Global_Options ]
-            nfsvers=4.1
-            hard=True
-            nconnect=16
-            noatime=True
-
-        # configure containerd for spegel
-        - content: |
-            [plugins."io.containerd.cri.v1.images"]
-              discard_unpacked_layers = false
-          path: /etc/cri/conf.d/20-customization.part
-          permissions: 0o644
-          op: create
-
-
-      kubelet:
-        extraConfig:
-          serializeImagePulls: false
-        nodeIP:
-          validSubnets:
-            - 10.200.15.0/24
-
-      network:
-        disableSearchDomain: true
-        nameservers:
-          - 192.168.10.195
-          - 1.1.1.1
-
-      sysctls:
-        fs.inotify.max_user_watches: "1048576" # Watchdog
-        fs.inotify.max_user_instances: "8192"  # Watchdog
-        net.core.rmem_max: "7500000" # Cloudflared | QUIC
-        net.core.wmem_max: "7500000" # Cloudflared | QUIC
-
-      time:
-        disabled: false
-        servers:
-          - 162.159.200.1
-          - 162.159.200.123
-
 
 # Controller patches
 controlPlane:
@@ -380,61 +320,13 @@ controlPlane:
           - siderolabs/intel-ucode      # Intel ucode
           - siderolabs/mei
           - siderolabs/thunderbolt      # Thunderbolt networking
-      extraKernelArgs:
-        - -selinux # apparently needed for talos 1.10.x
-        - -init_on_alloc # Less security, more speed
-        - -init_on_free # Less security, more speed
-        - apparmor=0 # Less security, more speed
-        - i915.enable_guc=3                   # Meteor Lake CPU / iGPU
-        - init_on_alloc=0                     # Less security, faster puter
-        - init_on_free=0                      # Less security, faster puter
-        - intel_iommu=on # PCI Passthrough
-        - iommu=pt # PCI Passthrough
-        - mitigations=off # Less security, more speed
-        - security=none # Less security, more speed
-        - talos.auditd.disabled=1 # Less security, more speed
-  #      - net.ifnames=1 # Enable predictable NIC naming
+
   patches:
-#    - "@./patches/controller/admission-controller-patch.yaml"
-#    - "@./patches/controller/cluster.yaml"
-#    - "@./patches/controller/enable-talos-api.yaml"
-#    - "@./patches/controller/machine-install.yaml"
+    - "@./patches/controller/admission-controller-patch.yaml"
+    - "@./patches/controller/cluster.yaml"
+    - "@./patches/controller/enable-talos-api.yaml"
+    - "@./patches/controller/machine-install.yaml"
 
-    # Enable K8s Talos API Access
-    - |-
-      machine:
-        features:
-          kubernetesTalosAPIAccess:
-            enabled: true
-            allowedRoles:
-              - os:admin
-            allowedKubernetesNamespaces:
-              - actions-runner-system
-              - system-upgrade
-
-    # Cluster Configuration
-    - |-
-      cluster:
-        allowSchedulingOnControlPlanes: true
-        apiServer:
-          # disable default API server admission plugins
-          admissionControl:
-            $$patch: delete
-        controllerManager:
-          extraArgs:
-            bind-address: 0.0.0.0
-        coreDNS:
-          disabled: true
-        etcd:
-          extraArgs:
-            listen-metrics-urls: http://0.0.0.0:2381
-          advertisedSubnets:
-            - 10.200.15.0/24
-        proxy:
-          disabled: true
-        scheduler:
-          extraArgs:
-            bind-address: 0.0.0.0
 
     # Custom sysfs settings
     - |-
