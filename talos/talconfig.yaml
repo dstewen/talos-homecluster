@@ -159,7 +159,7 @@ nodes:
         bond:
 #          mode: 802.3ad
           deviceSelectors:
-            -  hardwareAddr: "58:47:ca:78:f8:*"
+            -  hardwareAddr: "58:47:ca:78:f8:4a"
                driver: i40e
 #          xmitHashPolicy: layer3+4
 #          lacpRate: fast
