@@ -50,6 +50,7 @@ nodes:
       - interface: bond0
         bond:
 #          mode: 802.3ad
+          mode: active-backup
           deviceSelectors:
             - hardwareAddr: "58:47:ca:77:cf:36"
               driver: i40e
@@ -104,6 +105,7 @@ nodes:
       - interface: bond0
         bond:
 #          mode: 802.3ad
+          mode: active-backup
           deviceSelectors:
             -  hardwareAddr: "58:47:ca:78:f1:32"
                driver: i40e
@@ -158,6 +160,7 @@ nodes:
       - interface: bond0
         bond:
 #          mode: 802.3ad
+          mode: active-backup
           deviceSelectors:
             -  hardwareAddr: "58:47:ca:78:f8:4a"
                driver: i40e
